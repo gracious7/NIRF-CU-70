@@ -1,0 +1,39 @@
+services:
+  backend:
+    restart: always
+    build: ./nirf_backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./nirf_backend:/backend
+    command: bash -c "python manage.py migrate &&
+                      pip install -r requirements.txt &&
+                      python manage.py runserver 0.0.0.0:8000"
+
+  frontend:
+    restart: always
+    build: ./nirf_frontend
+    ports:
+      - "3000:3000"
+    volumes:
+      - "./nirf_frontend:/frontend"
+      - "/frontend/node_modules"
+    command: > 
+      bash -c "cp -rfu /cache/node_modules/. /frontend/node_modules/  
+      && npm start"
+    # depends_on:
+    #   - backend
+    # stdin_open: true
+    environment:
+      - WATCHPACK_POLLING=true
+
+  # db:
+  #   image: postgres
+  #   volumes:
+  #     - ./db:/var/lib/postgresql/data
+  #   ports:
+  #     - "5432:5432"
+  #   environment:
+  #     - POSTGRES_DB=postgres
+  #     - POSTGRES_USER=postgres
+  #     - POSTGRES_PASSWORD=postgres
