@@ -40,6 +40,7 @@ import {
   FaTwitter,
 } from "react-icons/fa";
 import { IoDocumentsSharp } from "react-icons/io5";
+import SearchBar from "./LandingSb";
 
 function LandingPage() {
   const { colorMode } = useColorMode();
@@ -51,6 +52,15 @@ function LandingPage() {
   const borderProfileColor = useColorModeValue("white", "transparent");
   const emailColor = useColorModeValue("gray.400", "gray.300");
 
+  //College Array
+  const colleges = [
+    { id: 1, name: 'Harvard University' },
+    { id: 2, name: 'Stanford University' },
+    { id: 3, name: 'MIT' },
+    // Add more colleges to the array
+  ];
+
+  //Academic Years for NIRF Ranking 
   const dateAndLink = [
     {
       date:"2016",
@@ -89,7 +99,6 @@ function LandingPage() {
   return (
     <Flex direction="column" pt={{ base: "120px", md: "75px", lg: "100px" }}>
       <Flex
-        direction={{ sm: "column", md: "row" }}
         mb="24px"
         maxH="330px"
         justifyContent={{ sm: "center", md: "space-between" }}
@@ -102,91 +111,8 @@ function LandingPage() {
         p="24px"
         borderRadius="20px"
       >
-        <Flex
-          align="center"
-          mb={{ sm: "10px", md: "0px" }}
-          direction={{ sm: "column", md: "row" }}
-          w={{ sm: "100%" }}
-          textAlign={{ sm: "center", md: "start" }}
-        >
-          <Avatar
-            me={{ md: "22px" }}
-            src={avatar5}
-            w="80px"
-            h="80px"
-            borderRadius="15px"
-          />
-          <Flex direction="column" maxWidth="100%" my={{ sm: "14px" }}>
-            <Text
-              fontSize={{ sm: "lg", lg: "xl" }}
-              color={textColor}
-              fontWeight="bold"
-              ms={{ sm: "8px", md: "0px" }}
-            >
-              Alec Thompson
-            </Text>
-            <Text
-              fontSize={{ sm: "sm", md: "md" }}
-              color={emailColor}
-              fontWeight="semibold"
-            >
-              alec@simmmple.com
-            </Text>
-          </Flex>
-        </Flex>
-        <Flex
-          direction={{ sm: "column", lg: "row" }}
-          w={{ sm: "100%", md: "50%", lg: "auto" }}
-        >
-          <Button p="0px" bg="transparent" variant="no-effects">
-            <Flex
-              align="center"
-              w={{ sm: "100%", lg: "135px" }}
-              bg={colorMode === "dark" ? "navy.900" : "#fff"}
-              borderRadius="8px"
-              justifyContent="center"
-              py="10px"
-              boxShadow="0px 2px 5.5px rgba(0, 0, 0, 0.06)"
-              cursor="pointer"
-            >
-              <Icon color={textColor} as={FaCube} me="6px" />
-              <Text fontSize="xs" color={textColor} fontWeight="bold">
-                OVERVIEW
-              </Text>
-            </Flex>
-          </Button>
-          <Button p="0px" bg="transparent" variant="no-effects">
-            <Flex
-              align="center"
-              w={{ lg: "135px" }}
-              borderRadius="15px"
-              justifyContent="center"
-              py="10px"
-              mx={{ lg: "1rem" }}
-              cursor="pointer"
-            >
-              <Icon color={textColor} as={IoDocumentsSharp} me="6px" />
-              <Text fontSize="xs" color={textColor} fontWeight="bold">
-                TEAMS
-              </Text>
-            </Flex>
-          </Button>
-          <Button p="0px" bg="transparent" variant="no-effects">
-            <Flex
-              align="center"
-              w={{ lg: "135px" }}
-              borderRadius="15px"
-              justifyContent="center"
-              py="10px"
-              cursor="pointer"
-            >
-              <Icon color={textColor} as={FaPenFancy} me="6px" />
-              <Text fontSize="xs" color={textColor} fontWeight="bold">
-                PROJECTS
-              </Text>
-            </Flex>
-          </Button>
-        </Flex>
+      <SearchBar/>
+      <button>Search</button>
       </Flex>
       <div className="year-heading">NIRF Rankings by Academic Year</div>
       <Grid templateColumns={{ sm: "1fr", md:"repeat(3, 1fr)", xl: "repeat(4, 1fr)" }} gap="22px">
