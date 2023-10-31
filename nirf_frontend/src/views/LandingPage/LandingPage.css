@@ -1,0 +1,11 @@
+.year {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.year-heading {
+    text-align: center;
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
