@@ -3,6 +3,8 @@
 # from sklearn.model_selection import train_test_split
 import pandas as pd
 from sklearn.ensemble import RandomForestRegressor
+import os
+from nirf_backend.settings import BASE_DIR
 
 weightage = {
   'TLR': 0.30, 
@@ -40,3 +42,20 @@ def rank_prediction(features):
   features['Predicted_Rank'] = predictions
   rank = features['Predicted_Rank2'].values[0]
   return rank
+
+
+def find_college_data(college):
+  college = college.upper()
+  college = college.replace(",", "")
+  file_path = os.path.join(BASE_DIR, 'main/data/nirf/2023.csv')
+  df = pd.read_csv(file_path)
+
+  df['Name'] = df['Name'].str.upper()
+  df['Name'] = df['Name'].str.replace(",", "")
+  df = df[df['Name'] == college].to_dict(orient='records')
+
+  if len(df) == 0:
+    return [-1, -1]
+  else:
+    df = df[0]
+    return [df['Rank'], df['Score']]

@@ -14,6 +14,9 @@ import {
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
+import axios from 'axios';
+import { useHistory } from "react-router-dom";
+
 // Assets
 import signInImage from "assets/img/signInImage.png";
 import { FaApple, FaFacebook, FaGoogle } from "react-icons/fa";
@@ -28,17 +31,45 @@ function SignIn() {
   const bgIconsHover = useColorModeValue("gray.50", "whiteAlpha.100");
   const [form, setForm] = useState({
     "username": "",
-    "password": ""
+    "password": "",
+    "admin": ""
   });
 
+  const [college_data, set_college_data] = useState({});
+  const history = useHistory();
+
+  const token = localStorage.getItem('token');
+  const rank = localStorage.getItem('rank');
+  const score = localStorage.getItem('score');
+
+  if (token && rank && score) {
+    history.push('/admin/dashboard');
+  }
+
   const handle = (e) => {
-    const tmp = {...form}
-    tmp[e.target.name] = e.target.value;
+    const tmp = { ...form }
+    if (e.target.name === "admin") {
+      tmp[e.target.name] = String(e.target.checked);
+    }
+    else {
+      tmp[e.target.name] = e.target.value;
+    }
     setForm(tmp);
   }
-  
-  const submit = () => {
-    console.log(form);
+
+  const submit = async () => {
+    const response = await axios.post("http://localhost:8000/api/login", form, {
+      headers: {
+        'Content-type': 'application/json'
+      }
+    });
+    const data = await response.data;
+    if (data.ok) {
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('rank', data.college_data.rank);
+      localStorage.setItem('score', data.college_data.score);
+    }
+    history.push('/admin/dashboard');
   }
   return (
     <Flex position='relative' mb='40px'>
@@ -179,12 +210,12 @@ function SignIn() {
                 name="password"
                 onChange={(e) => handle(e)}
               />
-              {/* <FormControl display='flex' alignItems='center' mb='24px'>
-                <Switch id='remember-login' colorScheme='blue' me='10px' />
+              <FormControl display='flex' alignItems='center' mb='24px'>
+                <Switch id='remember-login' colorScheme='blue' me='10px' name="admin" onChange={(e) => handle(e)} />
                 <FormLabel htmlFor='remember-login' mb='0' fontWeight='normal'>
-                  Remember me
+                  NIRF Admin
                 </FormLabel>
-              </FormControl> */}
+              </FormControl>
               <Button
                 fontSize='10px'
                 variant='dark'
@@ -193,7 +224,7 @@ function SignIn() {
                 h='45'
                 mb='24px'
                 onClick={submit}
-                >
+              >
                 SIGN IN
               </Button>
             </FormControl>
