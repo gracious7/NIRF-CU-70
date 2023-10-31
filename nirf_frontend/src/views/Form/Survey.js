@@ -81,8 +81,6 @@ import {
       <div>
         <CollegeSearch colleges={colleges}/>
       </div>
-      
-         
  
          <Grid templateColumns={{ sm: "1fr", xl: "repeat(3, 1fr)" }} gap="22px">
          <Card p="16px">
