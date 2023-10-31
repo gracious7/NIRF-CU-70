@@ -8,6 +8,8 @@ import Profile from "views/Dashboard/Profile.js";
 import SignIn from "views/Pages/SignIn.js";
 import SignUp from "views/Pages/SignUp.js";
 
+import Survey from "views/Form/Survey.js";
+
 import {
   HomeIcon,
   StatsIcon,
@@ -22,7 +24,7 @@ import LandingPage from "views/LandingPage/LandingPage";
 var dashRoutes = [
   {
     path: "/landingpage",
-    name: "LandingPage",
+    name: "Home",
     rtlName: "لوحة القيادة",
     icon: <HomeIcon color="inherit" />,
     component: LandingPage,
@@ -42,6 +44,14 @@ var dashRoutes = [
     rtlName: "لوحة القيادة",
     icon: <StatsIcon color="inherit" />,
     component: Tables,
+    layout: "/admin",
+  },
+  {
+    path: "/survey",
+    name: "Survey",
+    rtlName: "Hehe",
+    icon: <CreditIcon color="inherit" />,
+    component: Survey,
     layout: "/admin",
   },
   {
@@ -95,3 +105,16 @@ var dashRoutes = [
   },
 ];
 export default dashRoutes;
+
+// var AllRoutes = [
+//   {
+//     path: "/F",
+//     name: "Sign Up",
+//     rtlName: "لوحة القيادة",
+//     icon: <RocketIcon color="inherit" />,
+//     component: SignUp,
+//     layout: "/auth",
+//   }
+// ];
+
+// export default AllRoutes;
