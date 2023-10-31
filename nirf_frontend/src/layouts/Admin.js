@@ -108,7 +108,7 @@ export default function Dashboard(props) {
   return (
     <Box>
       <Box
-        minH='100vh'
+        minH='100'
         w='100%'
         position='absolute'
         bgImage={colorMode === "light" ? bgAdmin : "none"}
