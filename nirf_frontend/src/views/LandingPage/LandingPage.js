@@ -95,7 +95,7 @@ function LandingPage() {
             <div style={{ textAlign: 'center', marginLeft: '500px' }}>
               <div style={searchBoxStyles}>
                 {/* <img  alt="Search Icon" style={searchIconStyles} /> */}
-                <input type="text" placeholder="Institute Name" style={inputStyles} />
+                <input className="search-bar" type="text" placeholder="Institute Name" style={inputStyles} />
               </div>
             </div>
            
@@ -179,7 +179,7 @@ function LandingPage() {
           </Flex>
         </Flex>
 
-        {/* <Grid templateColumns={{ sm: "1fr", xl: "repeat(3, 1fr)" }} gap="22px">
+        <Grid templateColumns={{ sm: "1fr", xl: "repeat(3, 1fr)" }} gap="22px">
         <Card p="16px">
           <CardHeader p="12px 5px" mb="12px">
             <Text fontSize="lg" color={textColor} fontWeight="bold">
@@ -511,7 +511,7 @@ function LandingPage() {
             </Flex>
           </CardBody>
         </Card>
-      </Grid> */}
+      </Grid>
         {/* <Card p="16px" my="24px">
         <CardHeader p="12px 5px" mb="12px">
           <Flex direction="column">
