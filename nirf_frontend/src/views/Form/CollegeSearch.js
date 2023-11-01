@@ -1,12 +1,14 @@
 import React, { useState, useRef, useEffect } from "react";
 import collegesData from "../../assets/data/colleges.json"; // Import your college data
 import "./CollegeSearch.css";
+import { useColorMode } from "@chakra-ui/system";
 
 const CollegeSearch = ({ setClgName }) => {
   const [searchText, setSearchText] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const inputRef = useRef(null);
   const containerRef = useRef(null);
+  const theme = useColorMode();
 
   const handleInputChange = (e) => {
     const text = e.target.value;
@@ -54,9 +56,10 @@ const CollegeSearch = ({ setClgName }) => {
         value={searchText}
         onChange={handleInputChange}
         ref={inputRef}
+        style={{backgroundColor: theme.colorMode === 'light' ? 'white' : '#0f183c'}}
       />
       {suggestions.length > 0 && (
-        <div className="suggestions">
+        <div className="suggestions" style={{backgroundColor: theme.colorMode === 'light' ? 'white' : '#0f183c'}}>
           {suggestions.map((college) => (
             <div
               key={college.id}

@@ -21,6 +21,7 @@ import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { tablesProjectData, tablesTableData } from "variables/general";
 import axios from 'axios';
+import CollegeSearch from "views/Form/CollegeSearch";
 
 function Tables() {
   const textColor = useColorModeValue("gray.700", "white");
@@ -31,7 +32,9 @@ function Tables() {
   const rank = localStorage.getItem('rank');
   const score = localStorage.getItem('score');
   const [graphs, setGraphs] = useState({});
-  const [reqFeatures, setReqFeatures] = useState({'TLR': 0, 'RPC': 0, 'GO': 0, 'OI': 0, 'PR': 0})
+  const [reqFeatures, setReqFeatures] = useState({ 'TLR': 0, 'RPC': 0, 'GO': 0, 'OI': 0, 'PR': 0 })
+  const [compare, setCompare] = useState("");
+  const [comparisonResult, setComparisonResult] = useState([]);
 
   const notAuth = !token || !rank || !score;
 
@@ -40,12 +43,12 @@ function Tables() {
   }
 
   const get_overall_performance = async (features) => {
-    const response = await axios.post('http://localhost:8000/api/get_overall_performance', { token: token, reqFeatures: features});
+    const response = await axios.post('http://localhost:8000/api/get_overall_performance', { token: token, reqFeatures: features });
     setGraphs(response.data.graphs);
   }
 
   useEffect(() => {
-    get_overall_performance({'TLR': 1, 'RPC': 1, 'GO': 1, 'OI': 1, 'PR': 1});
+    get_overall_performance({ 'TLR': 1, 'RPC': 1, 'GO': 1, 'OI': 1, 'PR': 1 });
   }, []);
 
   const handle = (e) => {
@@ -56,8 +59,80 @@ function Tables() {
     get_overall_performance(reqFeatures);
   }
 
+  const compare_college = async () => {
+    const response = await axios.post('http://localhost:8000/api/compare_college', { token: token, compare: compare }, {
+      headers: {
+        'Content-type': 'application/json'
+      }
+    });
+    console.log(response.data.message);
+    setComparisonResult(response.data.message);
+  }
+
   return (
     <Flex direction="column" pt={{ base: "120px", md: "75px" }}>
+      <Card
+        my="22px"
+        // overflowX={{ sm: "scroll", xl: "hidden" }}
+        pb="0px"
+      >
+        <CardHeader p="6px 0px 22px 0px">
+          <Flex direction="column">
+            <Text fontSize="lg" color={textColor} fontWeight="bold" pb=".5rem">
+              Compare your college
+            </Text>
+          </Flex>
+        </CardHeader>
+        <CardBody>
+          <Flex direction="row">
+            <div>
+              Your College VS
+              <CollegeSearch setClgName={setCompare} />
+            </div>
+            <div>
+              <Button onClick={compare_college}>Compare</Button>
+            </div>
+          </Flex>
+          <ul>
+            {comparisonResult.map(result => (
+              <li>
+                {result}
+              </li>
+            ))}
+          </ul>
+        </CardBody>
+      </Card>
+      <Card
+        my="22px"
+        // overflowX={{ sm: "scroll", xl: "hidden" }}
+        pb="0px"
+      >
+        <CardHeader p="6px 0px 22px 0px">
+          <Flex direction="column">
+            <Text fontSize="lg" color={textColor} fontWeight="bold" pb=".5rem">
+              Compare your college
+            </Text>
+          </Flex>
+        </CardHeader>
+        <CardBody>
+          <Flex direction="row">
+            <div>
+              Your College VS
+              <CollegeSearch setClgName={setCompare} />
+            </div>
+            <div>
+              <Button onClick={compare_college}>Compare</Button>
+            </div>
+          </Flex>
+          <ul>
+            {comparisonResult.map(result => (
+              <li>
+                {result}
+              </li>
+            ))}
+          </ul>
+        </CardBody>
+      </Card>
       <Card pb="0px">
         <CardHeader p="6px 0px 22px 0px">
           <div style={{ display: "flex", gap: '100px' }}>
@@ -85,87 +160,9 @@ function Tables() {
           </Text>
         </CardHeader>
         <CardBody>
-          <Box minH="300px">
+          <Box minH="300px" width='fit-content'>
             {graphs.all_features !== "" && <img src={`data:image/png;base64,${graphs.all_features}`} />}
-            {/* <LineChart
-              chartData={lineChartData}
-              chartOptions={lineChartOptions}
-            /> */}
           </Box>
-          {/* <Table variant="simple" color={textColor}>
-            <Thead>
-              <Tr my=".8rem" pl="0px" color="gray.400" >
-                <Th pl="0px" borderColor={borderColor} color="gray.400" >
-                  Author
-                </Th>
-                <Th borderColor={borderColor} color="gray.400" >Function</Th>
-                <Th borderColor={borderColor} color="gray.400" >Status</Th>
-                <Th borderColor={borderColor} color="gray.400" >Employed</Th>
-                <Th borderColor={borderColor}></Th>
-              </Tr>
-            </Thead>
-            <Tbody>
-              {tablesTableData.map((row, index, arr) => {
-                return (
-                  <TablesTableRow
-                    name={row.name}
-                    logo={row.logo}
-                    email={row.email}
-                    subdomain={row.subdomain}
-                    domain={row.domain}
-                    status={row.status}
-                    date={row.date}
-                    isLast={index === arr.length - 1 ? true : false}
-                    key={index}
-                  />
-                );
-              })}
-            </Tbody>
-          </Table> */}
-
-        </CardBody>
-      </Card>
-      <Card
-        my="22px"
-        overflowX={{ sm: "scroll", xl: "hidden" }}
-        pb="0px"
-      >
-        <CardHeader p="6px 0px 22px 0px">
-          <Flex direction="column">
-            <Text fontSize="lg" color={textColor} fontWeight="bold" pb=".5rem">
-              Projects Table
-            </Text>
-          </Flex>
-        </CardHeader>
-        <CardBody>
-          <Table variant="simple" color={textColor}>
-            <Thead>
-              <Tr my=".8rem" pl="0px">
-                <Th pl="0px" color="gray.400" borderColor={borderColor}>
-                  Companies
-                </Th>
-                <Th color="gray.400" borderColor={borderColor}>Budget</Th>
-                <Th color="gray.400" borderColor={borderColor}>Status</Th>
-                <Th color="gray.400" borderColor={borderColor}>Completion</Th>
-                <Th></Th>
-              </Tr>
-            </Thead>
-            <Tbody>
-              {tablesProjectData.map((row, index, arr) => {
-                return (
-                  <TablesProjectRow
-                    name={row.name}
-                    logo={row.logo}
-                    status={row.status}
-                    budget={row.budget}
-                    progression={row.progression}
-                    isLast={index === arr.length - 1 ? true : false}
-                    key={index}
-                  />
-                );
-              })}
-            </Tbody>
-          </Table>
         </CardBody>
       </Card>
     </Flex>
