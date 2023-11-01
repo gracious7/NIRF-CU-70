@@ -18,7 +18,7 @@ weightage = {
 }
 
 def rank_prediction(features):
-  df = pd.read_csv('./nirf/2022.csv')
+  df = pd.read_csv('/backe/nirf/data/2022.csv')
   df['Weighted_Score'] = (
     df['TLR'] * weightage['TLR'] +
     df['RPC'] * weightage['RPC'] +

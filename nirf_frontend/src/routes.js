@@ -47,6 +47,14 @@ var dashRoutes = [
     layout: "/admin",
   },
   {
+    path: "/survey",
+    name: "Survey",
+    rtlName: "Hehe",
+    icon: <CreditIcon color="inherit" />,
+    component: Survey,
+    layout: "/admin",
+  },
+  {
     path: "/rank-predictor",
     name: "Rank Predictor",
     rtlName: "لوحة القيادة",

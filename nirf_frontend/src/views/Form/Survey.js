@@ -81,11 +81,31 @@ function Survey() {
   const [clgname, setClgName] = useState("");
 
   const [formData, setFormData] = useState({
-    TLR: {},
-    RPC: {},
-    GO: {},
-    OI: {},
-    PR: {},
+    TLR: {
+      SS: { NT: 0, totalUGPG: 0, NP: 0, totPhd: 0 },
+      FSR: { F: 0, N: 0 },
+      FQE: { FRA: 0, F1: 0, F2: 0, F3: 0 },
+      FRU: { BC: 0, BO: 0 },
+    },
+    RPC: {
+      PU: { P: 0, FRQ: 0 },
+      QP: { CC: 0, TOP25P: 0 },
+      IPR: { PG: 0, PP: 0 },
+      FPPP: { RF: 0, CF: 0 },
+    },
+    GO: {
+      GPH: { NP: 0, NHS: 0 },
+      GUE: { NG: 0 },
+      GMS: { MS: 0 },
+      GPHD: { NPHD: 0 },
+    },
+    OI: {
+      RD: { OS: 0, OC: 0 },
+      WD: { NWS: 0, NWF: 0 },
+      ESCS: { NESC: 0 },
+      PCS: { totPCS: 0 },
+    },
+    PR: { PU: { Perception: 0 } },
   });
 
   const handleInputChange = (category, subCategory, field, value) => {
@@ -103,11 +123,96 @@ function Survey() {
   };
 
   const handleSubmit = () => {
-    console.log(formData.RPC);
-    formData.RPC.PU = 35 * parseFloat(formData.RPC.PU.P) / parseFloat(formData.RPC.PU.FRQ)
-    formData.RPC.QP = 20 * parseFloat(formData.RPC.PU.P) / parseFloat(formData.RPC.PU.FRQ)
-    console.log(formData.RPC);
+    // You can access the formData object here and do whatever you want with it
+    console.log(formData);
+    const computedMetrics = calculateMetrics(formData);
+    console.log("Matrices are: ");
+    console.log(computedMetrics);
   };
+
+  function calculateMetrics(formData) {
+    const TLR = {};
+    const RPC = {};
+    const GO = {};
+    const OI = {};
+    const PR = {};
+    const result = {};
+
+    // Extract the necessary data from formData
+    const {
+      TLR: TLRData,
+      RPC: RPCData,
+      GO: GOData,
+      OI: OIData,
+      PR: PRData,
+      collegeName,
+    } = formData;
+
+    // TLR calculations
+    const SS =
+      (parseFloat(TLRData.SS.NT) / parseFloat(TLRData.SS.totalUGPG)) * 15 +
+      (parseFloat(TLRData.SS.NP) / parseFloat(TLRData.SS.totPhd)) * 5;
+    const FSR =
+      30 * ((10 * parseFloat(TLRData.FSR.F)) / parseFloat(TLRData.FSR.N));
+    const FQE =
+      10 * (parseFloat(TLRData.FQE.FRA) / 95) +
+      3 * Math.min(3 * parseFloat(TLRData.FQE.F1), 1) +
+      3 * Math.min(3 * parseFloat(TLRData.FQE.F2), 1) +
+      4 * Math.min(3 * parseFloat(TLRData.FQE.F3), 1);
+    const FRU =
+      7.5 *
+        (parseFloat(TLRData.FRU.BC) /
+          (parseFloat(TLRData.FRU.BO) + parseFloat(TLRData.FRU.BC))) +
+      22.5 *
+        (parseFloat(TLRData.FRU.BO) /
+          (parseFloat(TLRData.FRU.BO) + parseFloat(TLRData.FRU.BC)));
+    TLR.TLR = SS + FSR + FQE + FRU;
+
+    // RPC calculations
+    const PU = 35 * (parseFloat(RPCData.PU.P) / parseFloat(RPCData.PU.FRQ));
+    const QP =
+      20 * (parseFloat(RPCData.QP.CC) / parseFloat(RPCData.PU.FRQ)) +
+      (20 * parseFloat(RPCData.QP.TOP25P)) / parseFloat(RPCData.PU.P);
+    const IPR =
+      10 * parseFloat(RPCData.IPR.PG) + 5 * parseFloat(RPCData.IPR.PP);
+    const FPPP =
+      7.5 * parseFloat(RPCData.FPPP.RF) + 2.5 * parseFloat(RPCData.FPPP.CF);
+    RPC.RPC = PU + QP + IPR + FPPP;
+
+    // GO calculations
+    const GPH =
+      (parseFloat(GOData.GPH.NP) / 100 + parseFloat(GOData.GPH.NHS) / 100) * 40;
+    const GUE = 15 * Math.min(parseFloat(GOData.GUE.NG) / 80, 1);
+    const GMS = 25 * parseFloat(GOData.GMS.MS);
+    const GPHD = 20 * parseFloat(GOData.GPHD.NPHD);
+    GO.GO = GPH + GUE + GMS + GPHD;
+
+    // OI calculations
+    const RD =
+      25 * (parseFloat(OIData.RD.OS) / parseFloat(TLRData.FSR.N)) +
+      5 * (parseFloat(OIData.RD.OC) / parseFloat(TLRData.FSR.N));
+    const WD =
+      30 * (parseFloat(OIData.WD.NWS) / parseFloat(TLRData.FSR.N)) +
+      75 * (parseFloat(OIData.WD.NWF) / parseFloat(TLRData.FSR.N));
+    const ESCS =
+      20 * (parseFloat(OIData.ESCS.NESC) / parseFloat(TLRData.FSR.N));
+    const PCS = parseFloat(OIData.PCS.totPCS);
+    OI.OI = RD + WD + ESCS + PCS;
+
+    // PR calculations
+    PR.PR = parseFloat(PRData.PU.Perception);
+
+    result.TLR = TLR;
+    result.RPC = RPC;
+    result.GO = GO;
+    result.OI = OI;
+    result.PR = PR;
+    result.collegeName = collegeName;
+
+    return result;
+  }
+
+  // Example usage:
 
   return (
     <Flex direction="column" pt={{ base: "120px", md: "75px", lg: "100px" }}>
@@ -414,18 +519,15 @@ function Survey() {
                   </div>
 
                   <div>
-                    <div className="label-txt">TOP25P/P</div>
+                    <div className="label-txt">
+                      Citation in top 25%ile avg. over past 3 yrs. (TOP25P)
+                    </div>
                     <input
                       className="ip"
                       type="number"
                       placeholder="Enter value..."
                       onChange={(e) =>
-                        handleInputChange(
-                          "RPC",
-                          "QP",
-                          "TOP25P/P",
-                          e.target.value
-                        )
+                        handleInputChange("RPC", "QP", "TOP25P", e.target.value)
                       }
                     />
                   </div>
@@ -437,7 +539,9 @@ function Survey() {
                 </div>
                 <div className="ip-section">
                   <div>
-                    <div className="label-txt">PG</div>
+                    <div className="label-txt">
+                      No of patents granted in prev 3yrs. (PG)
+                    </div>
                     <input
                       className="ip"
                       type="number"
@@ -448,7 +552,9 @@ function Survey() {
                     />
                   </div>
                   <div>
-                    <div className="label-txt">PP</div>
+                    <div className="label-txt">
+                      Patents published in past 3yrs. (PP)
+                    </div>
                     <input
                       className="ip"
                       type="number"
@@ -466,7 +572,9 @@ function Survey() {
                 </div>
                 <div className="ip-section">
                   <div>
-                    <div className="label-txt">RF</div>
+                    <div className="label-txt">
+                      Avg. annual Research Funding earining (RF)
+                    </div>
                     <input
                       className="ip"
                       type="number"
@@ -477,7 +585,9 @@ function Survey() {
                     />
                   </div>
                   <div>
-                    <div className="label-txt">CF</div>
+                    <div className="label-txt">
+                      Avg. annual consultensy amount/faculty (CF)
+                    </div>
                     <input
                       className="ip"
                       type="number"
@@ -506,7 +616,9 @@ function Survey() {
                 </div>
                 <div className="ip-section">
                   <div>
-                    <div className="label-txt">NP</div>
+                    <div className="label-txt">
+                      % UG&PG students placed past 3yrs.(NP)
+                    </div>
                     <input
                       className="ip"
                       type="number"
@@ -516,26 +628,14 @@ function Survey() {
                       }
                     />
                   </div>
+
                   <div>
                     <div className="label-txt">
-                      <div>
-                        N<sub>p</sub>
-                      </div>
-                    </div>
-                    <input
-                      className="ip"
-                      type="number"
-                      placeholder="Enter value..."
-                      onChange={(e) =>
-                        handleInputChange("GO", "GPH", "NP2", e.target.value)
-                      }
-                    />
-                  </div>
-                  <div>
-                    <div className="label-txt">
+                      % UG&PG opted higher studies past 3yrs. (
                       <div>
                         N<sub>hs</sub>
                       </div>
+                      )
                     </div>
                     <input
                       className="ip"
@@ -576,7 +676,9 @@ function Survey() {
                 </div>
                 <div className="ip-section">
                   <div>
-                    <div className="label-txt">MS</div>
+                    <div className="label-txt">
+                      Median salary grads.(UG/PG) past 3yrs. (MS)
+                    </div>
                     <input
                       className="ip"
                       type="number"
@@ -595,9 +697,11 @@ function Survey() {
                 <div className="ip-section">
                   <div>
                     <div className="label-txt">
+                      Avg. no of PhD grads. past 3 yrs. (
                       <div>
                         N<sub>phd</sub>
                       </div>
+                      )
                     </div>
                     <input
                       className="ip"
@@ -627,28 +731,26 @@ function Survey() {
                 </div>
                 <div className="ip-section">
                   <div>
-                    <div className="label-txt">To calculate</div>
+                    <div className="label-txt">Students from other states.</div>
                     <input
                       className="ip"
                       type="number"
                       placeholder="Enter value..."
                       onChange={(e) =>
-                        handleInputChange("OI", "RD", "TOCAL", e.target.value)
+                        handleInputChange("OI", "RD", "OS", e.target.value)
                       }
                     />
                   </div>
                   <div>
                     <div className="label-txt">
-                      <div>
-                        F<sub>RQ</sub>
-                      </div>
+                      Students from other countries.
                     </div>
                     <input
                       className="ip"
                       type="number"
                       placeholder="Enter value..."
                       onChange={(e) =>
-                        handleInputChange("OI", "RD", "FRQ", e.target.value)
+                        handleInputChange("OI", "RD", "OC", e.target.value)
                       }
                     />
                   </div>
@@ -661,9 +763,11 @@ function Survey() {
                 <div className="ip-section">
                   <div>
                     <div className="label-txt">
+                      No of women students (
                       <div>
                         N<sub>WS</sub>
                       </div>
+                      )
                     </div>
                     <input
                       className="ip"
@@ -676,6 +780,7 @@ function Survey() {
                   </div>
                   <div>
                     <div className="label-txt">
+                      No of women faculty.
                       <div>
                         N<sub>WF</sub>
                       </div>
@@ -698,16 +803,18 @@ function Survey() {
                 <div className="ip-section">
                   <div>
                     <div className="label-txt">
+                      UG students with full fee rembursement. (
                       <div>
                         N<sub>esc</sub>
                       </div>
+                      )
                     </div>
                     <input
                       className="ip"
                       type="number"
                       placeholder="Enter value..."
                       onChange={(e) =>
-                        handleInputChange("OI", "ESCS", "NWS", e.target.value)
+                        handleInputChange("OI", "ESCS", "NESC", e.target.value)
                       }
                     />
                   </div>
@@ -719,13 +826,15 @@ function Survey() {
                 </div>
                 <div className="ip-section">
                   <div>
-                    <div className="label-txt">F</div>
+                    <div className="label-txt">
+                      Facilities for physically challenged st. (PCS)
+                    </div>
                     <input
                       className="ip"
                       type="number"
                       placeholder="Enter value..."
                       onChange={(e) =>
-                        handleInputChange("OI", "PCS", "F", e.target.value)
+                        handleInputChange("OI", "PCS", "totPCS", e.target.value)
                       }
                     />
                   </div>
@@ -748,7 +857,9 @@ function Survey() {
                 </div>
                 <div className="ip-section">
                   <div>
-                    <div className="label-txt">Perception</div>
+                    <div className="label-txt">
+                      Perception (based on survey)
+                    </div>
                     <input
                       className="ip"
                       type="number"
