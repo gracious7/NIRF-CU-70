@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from 'axios';
+import { useColorMode } from "@chakra-ui/system";
 
 const buttonStyles = {
 	backgroundColor: '#0074d9', // Note the single quotes around the color value
@@ -36,7 +37,10 @@ function RankPredictor() {
 		pcs: 0,
 		pr: 0,
 
-	})
+	});
+	const theme = useColorMode();
+	const [predicted_rank, setPredictedRank] = useState(null);
+
 	const handle = (e) => {
 		const tmp = { ...form };
 		tmp[e.target.name] = e.target.value;
@@ -46,11 +50,11 @@ function RankPredictor() {
 
 	const predict = async () => {
 		const features = {'TLR': 0, 'RPC': 0, 'GO': 0, 'OI': 0, 'PR': 0}
-		features['TLR'] = form.ss + form.fsr + form.fqe + form.fru;
-		features['RPC'] = form.pu + form.qp + form.ipr + form.fppp;
-		features['GO'] = form.gph + form.gue + form.gms + form.gphd;
-		features['OI'] = form.rd + form.wd + form.escs + form.pcs;
-		features['PR'] = form.pr;
+		features['TLR'] = parseFloat(form.ss) + parseFloat(form.fsr) + parseFloat(form.fqe) + parseFloat(form.fru);
+		features['RPC'] = parseFloat(form.pu) + parseFloat(form.qp) + parseFloat(form.ipr) + parseFloat(form.fppp);
+		features['GO'] = parseFloat(form.gph) + parseFloat(form.gue) + parseFloat(form.gms) + parseFloat(form.gphd);
+		features['OI'] = parseFloat(form.rd) + parseFloat(form.wd) + parseFloat(form.escs) + parseFloat(form.pcs);
+		features['PR'] = parseFloat(form.pr);
 
 		const token = localStorage.getItem('token');
 
@@ -60,11 +64,12 @@ function RankPredictor() {
 			}
 		});
 		console.log(response);
+		setPredictedRank(response.data.message);
 	}
 	return (
 		<>
 			<center>
-				<div style={{ marginTop: "140px", backgroundColor: "#ffffff", height: "550px", width: "800px", position: "relative", marginRight: "150px" }}>
+				<div style={{ marginTop: "140px", height: "550px", width: "800px", position: "relative", marginRight: "150px", backgroundColor: theme.colorMode === "light" ? "#ffffff" : "#0f183c" }} >
 					<div style={{ fontWeight: "bold", fontSize: "25px" }}>
 						Predict Your Rank
 					</div>
@@ -77,19 +82,19 @@ function RankPredictor() {
 								<div style={{ display: "flex" }}>
 									<div style={{ marginRight: "10px", flex: "1" }}>
 										<label style={{ fontWeight: "bold", fontSize: "10px", display: "block" }}>SS(20)</label>
-										<input type="text" style={{ backgroundColor: "#eeeeee", padding: "5px", width: "100%" }} onChange={(e) => handle(e)} name="ss" />
+										<input type="text" style={{ backgroundColor: "#eeeeee", padding: "5px", width: "100%", color: 'black' }} onChange={(e) => handle(e)} name="ss" />
 									</div>
 									<div style={{ marginRight: "10px", flex: "1" }}>
 										<label style={{ fontWeight: "bold", fontSize: "10px", display: "block" }}>FSR(30)</label>
-										<input type="text" style={{ backgroundColor: "#eeeeee", padding: "5px", width: "100%" }} onChange={(e) => handle(e)} name="fsr" />
+										<input type="text" style={{ backgroundColor: "#eeeeee", padding: "5px", width: "100%", color: 'black' }} onChange={(e) => handle(e)} name="fsr" />
 									</div>
 									<div style={{ marginRight: "10px", flex: "1" }}>
 										<label style={{ fontWeight: "bold", fontSize: "10px", display: "block" }}>FQE(20)</label>
-										<input type="text" style={{ backgroundColor: "#eeeeee", padding: "5px", width: "100%" }} onChange={(e) => handle(e)} name="fqe" />
+										<input type="text" style={{ backgroundColor: "#eeeeee", padding: "5px", width: "100%", color: 'black' }} onChange={(e) => handle(e)} name="fqe" />
 									</div>
 									<div style={{ flex: "1" }}>
 										<label style={{ fontWeight: "bold", fontSize: "10px", display: "block" }}>FRU(30)</label>
-										<input type="text" style={{ backgroundColor: "#eeeeee", padding: "5px", width: "100%" }} onChange={(e) => handle(e)} name="fru" />
+										<input type="text" style={{ backgroundColor: "#eeeeee", padding: "5px", width: "100%", color: 'black' }} onChange={(e) => handle(e)} name="fru" />
 									</div>
 								</div>
 							</div>
@@ -104,19 +109,19 @@ function RankPredictor() {
 								<div style={{ display: "flex" }}>
 									<div style={{ marginRight: "10px", flex: "1" }}>
 										<label style={{ fontWeight: "bold", fontSize: "10px", display: "block" }}>PU(35)</label>
-										<input type="text" style={{ backgroundColor: "#eeeeee", padding: "5px", width: "100%" }} onChange={(e) => handle(e)} name="pu" />
+										<input type="text" style={{ backgroundColor: "#eeeeee", padding: "5px", width: "100%", color: 'black' }} onChange={(e) => handle(e)} name="pu" />
 									</div>
 									<div style={{ marginRight: "10px", flex: "1" }}>
 										<label style={{ fontWeight: "bold", fontSize: "10px", display: "block" }}>QP(40)</label>
-										<input type="text" style={{ backgroundColor: "#eeeeee", padding: "5px", width: "100%" }} onChange={(e) => handle(e)} name="qp" />
+										<input type="text" style={{ backgroundColor: "#eeeeee", padding: "5px", width: "100%", color: 'black' }} onChange={(e) => handle(e)} name="qp" />
 									</div>
 									<div style={{ marginRight: "10px", flex: "1" }}>
 										<label style={{ fontWeight: "bold", fontSize: "10px", display: "block" }}>IPR(15)</label>
-										<input type="text" style={{ backgroundColor: "#eeeeee", padding: "5px", width: "100%" }} onChange={(e) => handle(e)} name="ipr" />
+										<input type="text" style={{ backgroundColor: "#eeeeee", padding: "5px", width: "100%", color: 'black' }} onChange={(e) => handle(e)} name="ipr" />
 									</div>
 									<div style={{ flex: "1" }}>
 										<label style={{ fontWeight: "bold", fontSize: "10px", display: "block" }}>FPPP(10)</label>
-										<input type="text" style={{ backgroundColor: "#eeeeee", padding: "5px", width: "100%" }} onChange={(e) => handle(e)} name="fppp" />
+										<input type="text" style={{ backgroundColor: "#eeeeee", padding: "5px", width: "100%", color: 'black' }} onChange={(e) => handle(e)} name="fppp" />
 									</div>
 								</div>
 							</div>
@@ -131,19 +136,19 @@ function RankPredictor() {
 								<div style={{ display: "flex" }}>
 									<div style={{ marginRight: "10px", flex: "1" }}>
 										<label style={{ fontWeight: "bold", fontSize: "10px", display: "block" }}>GPH(40)</label>
-										<input type="text" style={{ backgroundColor: "#eeeeee", padding: "5px", width: "100%" }} onChange={(e) => handle(e)} name="gph" />
+										<input type="text" style={{ backgroundColor: "#eeeeee", padding: "5px", width: "100%", color: 'black' }} onChange={(e) => handle(e)} name="gph" />
 									</div>
 									<div style={{ marginRight: "10px", flex: "1" }}>
 										<label style={{ fontWeight: "bold", fontSize: "10px", display: "block" }}>GUE(15)</label>
-										<input type="text" style={{ backgroundColor: "#eeeeee", padding: "5px", width: "100%" }} onChange={(e) => handle(e)} name="gue" />
+										<input type="text" style={{ backgroundColor: "#eeeeee", padding: "5px", width: "100%", color: 'black' }} onChange={(e) => handle(e)} name="gue" />
 									</div>
 									<div style={{ marginRight: "10px", flex: "1" }}>
 										<label style={{ fontWeight: "bold", fontSize: "10px", display: "block" }}>GMS(25)</label>
-										<input type="text" style={{ backgroundColor: "#eeeeee", padding: "5px", width: "100%" }} onChange={(e) => handle(e)} name="gms" />
+										<input type="text" style={{ backgroundColor: "#eeeeee", padding: "5px", width: "100%", color: 'black' }} onChange={(e) => handle(e)} name="gms" />
 									</div>
 									<div style={{ flex: "1" }}>
 										<label style={{ fontWeight: "bold", fontSize: "10px", display: "block" }}>GPHD(20)</label>
-										<input type="text" style={{ backgroundColor: "#eeeeee", padding: "5px", width: "100%" }} onChange={(e) => handle(e)} name="gphd" />
+										<input type="text" style={{ backgroundColor: "#eeeeee", padding: "5px", width: "100%", color: 'black' }} onChange={(e) => handle(e)} name="gphd" />
 									</div>
 								</div>
 							</div>
@@ -158,19 +163,19 @@ function RankPredictor() {
 								<div style={{ display: "flex" }}>
 									<div style={{ marginRight: "10px", flex: "1" }}>
 										<label style={{ fontWeight: "bold", fontSize: "10px", display: "block" }}>RD(30)</label>
-										<input type="text" style={{ backgroundColor: "#eeeeee", padding: "5px", width: "100%" }} onChange={(e) => handle(e)} name="ss" />
+										<input type="text" style={{ backgroundColor: "#eeeeee", padding: "5px", width: "100%", color: 'black' }} onChange={(e) => handle(e)} name="rd" />
 									</div>
 									<div style={{ marginRight: "10px", flex: "1" }}>
 										<label style={{ fontWeight: "bold", fontSize: "10px", display: "block" }}>WD(30)</label>
-										<input type="text" style={{ backgroundColor: "#eeeeee", padding: "5px", width: "100%" }} onChange={(e) => handle(e)} name="ss" />
+										<input type="text" style={{ backgroundColor: "#eeeeee", padding: "5px", width: "100%", color: 'black' }} onChange={(e) => handle(e)} name="wd" />
 									</div>
 									<div style={{ marginRight: "10px", flex: "1" }}>
 										<label style={{ fontWeight: "bold", fontSize: "10px", display: "block" }}>ESCS(20)</label>
-										<input type="text" style={{ backgroundColor: "#eeeeee", padding: "5px", width: "100%" }} onChange={(e) => handle(e)} name="ss" />
+										<input type="text" style={{ backgroundColor: "#eeeeee", padding: "5px", width: "100%", color: 'black' }} onChange={(e) => handle(e)} name="escs" />
 									</div>
 									<div style={{ flex: "1" }}>
 										<label style={{ fontWeight: "bold", fontSize: "10px", display: "block" }}>PCS(20)</label>
-										<input type="text" style={{ backgroundColor: "#eeeeee", padding: "5px", width: "100%" }} onChange={(e) => handle(e)} name="ss" />
+										<input type="text" style={{ backgroundColor: "#eeeeee", padding: "5px", width: "100%", color: 'black' }} onChange={(e) => handle(e)} name="pcs" />
 									</div>
 								</div>
 							</div>
@@ -182,13 +187,16 @@ function RankPredictor() {
 								<div style={{ fontWeight: "bold", fontSize: "15px" }}>
 									PR(100)
 								</div>
-								<input type="text" style={{ backgroundColor: "#eeeeee", padding: "5px", width: "25%" }} onChange={(e) => handle(e)} name="ss" />
+								<input type="text" style={{ backgroundColor: "#eeeeee", padding: "5px", width: "25%", color: 'black' }} onChange={(e) => handle(e)} name="pr" />
 							</div>
 						</div>
 					</div>
 					<button onClick={predict} style={buttonStyles}>
 						Submit
 					</button>
+					{predicted_rank !== null && <div>
+						Your predicted rank: {predicted_rank}
+					</div>}
 				</div>
 			</center>
 		</>

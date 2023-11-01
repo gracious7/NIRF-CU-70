@@ -2,7 +2,7 @@ from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 import pandas as pd
-from .controllers import rank_prediction, find_college_data, get_graphs, get_overall_graphs
+from .controllers import rank_prediction, find_college_data, get_graphs, get_overall_graphs, compare
 from .models import College_Admin
 import os
 import jwt
@@ -20,6 +20,7 @@ def predict_rank(request):
 
   # to store all the scores of the five features
   features = data['features']
+  print(features)
   # features['TLR'] = form['ss'] + form['fsr'] + form['fqe'] + form['fru']
   # features['RPC'] = form['pu'] + form['qp'] + form['ipr'] + form['fppp']
   # features['GO'] = form['gph'] + form['gue'] + form['gms'] + form['gphd']
@@ -80,7 +81,6 @@ def get_overall_performance(request):
     college_data = jwt.decode(token, os.environ.get('SECRET_KEY'), algorithms=["HS256"])
     college_name = college_data['college']
     reqFeatures = []
-    print(data['reqFeatures'])
     for i in data['reqFeatures'].keys():
       if data['reqFeatures'][i] == 1:
         reqFeatures.append(i)
@@ -89,3 +89,14 @@ def get_overall_performance(request):
     return Response({'ok': True, 'message': "Graph fetched", 'graphs': graphs})
   except:
     return Response({'ok': False, 'message': "Unauthorized"})
+
+
+@api_view(["POST"])
+def compare_college(request):
+  data = request.data
+  token = data['token']
+  college_data = jwt.decode(token, os.environ.get('SECRET_KEY'), algorithms=["HS256"])
+  college1 = college_data['college']
+
+  comparison = compare(college1, data['compare'])
+  return Response({'ok': True, 'message': comparison})
