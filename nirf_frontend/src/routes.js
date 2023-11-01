@@ -9,6 +9,7 @@ import SignIn from "views/Pages/SignIn.js";
 import SignUp from "views/Pages/SignUp.js";
 import Survey from "views/Form/Survey.js";
 
+import RankPredictor from "views/Dashboard/RankPredictor";
 import {
   HomeIcon,
   StatsIcon,
@@ -23,7 +24,7 @@ import LandingPage from "views/LandingPage/LandingPage";
 var dashRoutes = [
   {
     path: "/landingpage",
-    name: "Home",
+    name: "LandingPage",
     rtlName: "لوحة القيادة",
     icon: <HomeIcon color="inherit" />,
     component: LandingPage,
@@ -46,19 +47,11 @@ var dashRoutes = [
     layout: "/admin",
   },
   {
-    path: "/survey",
-    name: "Survey",
-    rtlName: "Hehe",
-    icon: <CreditIcon color="inherit" />,
-    component: Survey,
-    layout: "/admin",
-  },
-  {
-    path: "/billing",
-    name: "Billing",
+    path: "/rank-predictor",
+    name: "Rank Predictor",
     rtlName: "لوحة القيادة",
-    icon: <CreditIcon color="inherit" />,
-    component: Billing,
+    icon: <StatsIcon color="inherit" />,
+    component: RankPredictor,
     layout: "/admin",
   },
   {
@@ -105,16 +98,3 @@ var dashRoutes = [
 ];
 
 export default dashRoutes;
-
-// var AllRoutes = [
-//   {
-//     path: "/F",
-//     name: "Sign Up",
-//     rtlName: "لوحة القيادة",
-//     icon: <RocketIcon color="inherit" />,
-//     component: SignUp,
-//     layout: "/auth",
-//   }
-// ];
-
-// export default AllRoutes;

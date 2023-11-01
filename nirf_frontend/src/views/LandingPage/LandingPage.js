@@ -25,9 +25,9 @@ import avatar6 from "assets/img/avatars/avatar6.png";
 import ImageArchitect1 from "assets/img/ImageArchitect1.png";
 import ImageArchitect2 from "assets/img/ImageArchitect2.png";
 import ImageArchitect3 from "assets/img/ImageArchitect3.png";
-import nirflogo from "../../assets/img/avatars/nirf_logo.png"
 import GraphImage from "assets/img/graph-img.png";
 import "../LandingPage/LandingPage.css"
+import nirflogo from "../../assets/img/avatars/nirf_logo.png"
 // Custom components
 import Card from "components/Card/Card";
 import CardBody from "components/Card/CardBody";
@@ -188,14 +188,15 @@ function LandingPage() {
         })}
 
       </Grid>
+     
       <Card p="16px" my="24px">
         <CardHeader p="12px 5px" mb="12px">
           <Flex direction="column">
             <Text fontSize="lg" color={textColor} fontWeight="bold">
-              Projects
+              ABOUT NIRF
             </Text>
             <Text fontSize="sm" color="gray.400" fontWeight="400">
-              Architects design houses
+              Education Excellence Index
             </Text>
           </Flex>
         </CardHeader>
