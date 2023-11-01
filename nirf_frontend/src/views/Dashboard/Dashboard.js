@@ -31,7 +31,7 @@ import {
   GlobeIcon,
   WalletIcon,
 } from "components/Icons/Icons.js";
-import React, { useEffect } from "react";
+import React from "react";
 import { useHistory } from "react-router-dom";
 // Variables
 import {
@@ -64,12 +64,6 @@ export default function Dashboard() {
   if (!token || !rank || !score) {
     history.push('/auth/signin');
   }
-
-  // useEffect(() => {
-  //   const getPerformance = async ()  => {
-
-  //   }
-  // })
 
   return (
     <Flex flexDirection="column" pt={{ base: "120px", md: "75px" }}>
