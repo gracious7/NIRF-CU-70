@@ -24,6 +24,9 @@ import Card from "components/Card/Card.js";
 import BarChart from "components/Charts/BarChart";
 import LineChart from "components/Charts/LineChart";
 import IconBox from "components/Icons/IconBox";
+import { jwtDecode } from "react-jwt";
+import axios from 'axios';
+
 // Custom icons
 import {
   CartIcon,
@@ -31,7 +34,7 @@ import {
   GlobeIcon,
   WalletIcon,
 } from "components/Icons/Icons.js";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 // Variables
 import {
@@ -55,6 +58,7 @@ export default function Dashboard() {
   const { colorMode } = useColorMode();
 
   const parameter = ["College Name", "State", "City", "NIRF", "Score"];
+  const [college_graphs, setCollegeGraphs] = useState({ features_scores: "", ranks: "" });
 
   const token = localStorage.getItem('token');
   const rank = localStorage.getItem('rank');
@@ -64,6 +68,19 @@ export default function Dashboard() {
   if (!token || !rank || !score) {
     history.push('/auth/signin');
   }
+
+  useEffect(() => {
+    const getPerformance = async () => {
+      const response = await axios.post("http://localhost:8000/api/get_performance", { token: token }, {
+        headers: {
+          'Content-type': 'application/json'
+        }
+      });
+      setCollegeGraphs(response.data.graphs);
+      console.log(response);
+    }
+    getPerformance();
+  }, []);
 
   return (
     <Flex flexDirection="column" pt={{ base: "120px", md: "75px" }}>
@@ -211,36 +228,39 @@ export default function Dashboard() {
         >
           <Flex direction="column" mb="40px" p="28px 0px 0px 22px">
             <Text color="#fff" fontSize="lg" fontWeight="bold" mb="6px">
-              Sales Overview
+              Latest Feature Scores
             </Text>
-            <Text color="#fff" fontSize="sm">
+            {/* <Text color="#fff" fontSize="sm">
               <Text as="span" color="green.400" fontWeight="bold">
                 (+5) more{" "}
               </Text>
               in 2022
-            </Text>
+            </Text> */}
           </Flex>
           <Box minH="300px">
-            <LineChart
+            {college_graphs.features_scores !== "" && <img src={`data:image/png;base64,${college_graphs.features_scores}`} />}
+            {/* <LineChart
               chartData={lineChartData}
               chartOptions={lineChartOptions}
-            />
+            /> */}
           </Box>
         </Card>
         <Card p="0px" maxW={{ sm: "320px", md: "100%" }}>
           <Flex direction="column" mb="40px" p="28px 0px 0px 22px">
             <Text color="gray.400" fontSize="sm" fontWeight="bold" mb="6px">
-              PERFORMANCE
+              Your Rankings
             </Text>
-            <Text color={textColor} fontSize="lg" fontWeight="bold">
+            {/* <Text color={textColor} fontSize="lg" fontWeight="bold">
               Total orders
-            </Text>
+            </Text> */}
           </Flex>
           <Box minH="300px">
-            <BarChart chartData={barChartData} chartOptions={barChartOptions} />
+            {college_graphs.ranks !== "" && <img src={`data:image/png;base64,${college_graphs.ranks}`} />}
+
+            {/* <BarChart chartData={barChartData} chartOptions={barChartOptions} /> */}
           </Box>
         </Card>
-        <Card p="0px" maxW={{ sm: "320px", md: "100%" }}>
+        {/* <Card p="0px" maxW={{ sm: "320px", md: "100%" }}>
           <Flex direction="column">
             <Flex align="center" justify="space-between" p="22px">
               <Text fontSize="lg" color={textColor} fontWeight="bold">
@@ -319,7 +339,7 @@ export default function Dashboard() {
               </Table>
             </Box>
           </Flex>
-        </Card>
+        </Card> */}
       </Grid>
     </Flex>
   );
