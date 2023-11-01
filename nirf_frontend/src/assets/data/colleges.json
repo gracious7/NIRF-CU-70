@@ -1,0 +1,658 @@
+[
+  {
+    "id": 1,
+    "name": "Indian Institute of Technology Madras"
+  },
+  {
+    "id": 2,
+    "name": "Indian Institute of Technology, Delhi"
+  },
+  {
+    "id": 3,
+    "name": "Indian Institute of Technology, Bombay"
+  },
+  {
+    "id": 4,
+    "name": "Indian Institute of Technology Kanpur"
+  },
+  {
+    "id": 5,
+    "name": "Indian Institute of Technology, Kharagpur"
+  },
+  {
+    "id": 6,
+    "name": "Indian Institute of Technology, Roorkee"
+  },
+  {
+    "id": 7,
+    "name": "Indian Institute of Technology Guwahati"
+  },
+  {
+    "id": 8,
+    "name": "National Institute of Technology, Tiruchirappalli"
+  },
+  {
+    "id": 9,
+    "name": "Indian Institute of Technology Hyderabad"
+  },
+  {
+    "id": 10,
+    "name": "National Institute of Technology Karnataka, Surathkal"
+  },
+  {
+    "id": 11,
+    "name": "Jadavpur University"
+  },
+  {
+    "id": 12,
+    "name": "Vellore Institute of Technology"
+  },
+  {
+    "id": 13,
+    "name": "Indian Institute of Technology (Banaras Hindu University) Varanasi"
+  },
+  {
+    "id": 14,
+    "name": "Indian Institute of Technology (Indian School of Mines)"
+  },
+  {
+    "id": 15,
+    "name": "National Institute of Technology Rourkela"
+  },
+  {
+    "id": 16,
+    "name": "Indian Institute of Technology Indore"
+  },
+  {
+    "id": 17,
+    "name": "Anna University"
+  },
+  {
+    "id": 18,
+    "name": "Institute of Chemical Technology"
+  },
+  {
+    "id": 19,
+    "name": "Amrita Vishwa Vidyapeetham"
+  },
+  {
+    "id": 20,
+    "name": "Indian Institute of Technology, Mandi"
+  },
+  {
+    "id": 21,
+    "name": "National Institute of Technology Warangal"
+  },
+  {
+    "id": 22,
+    "name": "Indian Institute of Technology Ropar"
+  },
+  {
+    "id": 23,
+    "name": "Indian Institute of Technology, Gandhinagar"
+  },
+  {
+    "id": 24,
+    "name": "S.R.M. Institute of Science and Technology"
+  },
+  {
+    "id": 25,
+    "name": "Amity University"
+  },
+  {
+    "id": 26,
+    "name": "Jamia Millia Islamia, New Delhi"
+  },
+  {
+    "id": 27,
+    "name": "Siksha `O` Anusandhan"
+  },
+  {
+    "id": 28,
+    "name": "Thapar Institute of Engineering and Technology"
+  },
+  {
+    "id": 29,
+    "name": "Birla Institute of Technology & Science - Pilani"
+  },
+  {
+    "id": 30,
+    "name": "Indian Institute of Technology Jodhpur"
+  },
+  {
+    "id": 31,
+    "name": "National Institute of Technology, Calicut"
+  },
+  {
+    "id": 32,
+    "name": "Visvesvaraya National Institute of Technology, Nagpur"
+  },
+  {
+    "id": 33,
+    "name": "Indian Institute of Technology, Patna"
+  },
+  {
+    "id": 34,
+    "name": "National Institute of Technology Durgapur"
+  },
+  {
+    "id": 35,
+    "name": "Delhi Technological University"
+  },
+  {
+    "id": 36,
+    "name": "Indian Institute of Technology Bhubaneswar"
+  },
+  {
+    "id": 37,
+    "name": "Aligarh Muslim University"
+  },
+  {
+    "id": 38,
+    "name": "National Institute of Technology, Silchar"
+  },
+  {
+    "id": 39,
+    "name": "Kalasalingam Academy of Research and Education"
+  },
+  {
+    "id": 40,
+    "name": "Indian Institute of Engineering Science and Technology, Shibpur"
+  },
+  {
+    "id": 41,
+    "name": "Shanmugha Arts Science Technology & Research Academy"
+  },
+  {
+    "id": 42,
+    "name": "Kalinga Institute of Industrial Technology"
+  },
+  {
+    "id": 43,
+    "name": "Indian Institute of Space Science and Technology"
+  },
+  {
+    "id": 44,
+    "name": "Koneru Lakshmaiah Education Foundation University (K L College of Engineering)"
+  },
+  {
+    "id": 45,
+    "name": "Chandigarh University"
+  },
+  {
+    "id": 46,
+    "name": "Malaviya National Institute of Technology"
+  },
+  {
+    "id": 47,
+    "name": "Motilal Nehru National Institute of Technology"
+  },
+  {
+    "id": 48,
+    "name": "Sri Sivasubramaniya Nadar College of Engineering"
+  },
+  {
+    "id": 49,
+    "name": "Visvesvaraya Technological University"
+  },
+  {
+    "id": 50,
+    "name": "National Institute of Technology Kurukshetra"
+  },
+  {
+    "id": 51,
+    "name": "Lovely Professional University"
+  },
+  {
+    "id": 52,
+    "name": "Dr. B R Ambedkar National Institute of Technology, Jalandhar"
+  },
+  {
+    "id": 53,
+    "name": "Birla Institute of Technology"
+  },
+  {
+    "id": 54,
+    "name": "Sathyabama Institute of Science and Technology"
+  },
+  {
+    "id": 55,
+    "name": "Manipal Institute of Technology"
+  },
+  {
+    "id": 56,
+    "name": "Indian Institute of Technology, Tirupati"
+  },
+  {
+    "id": 57,
+    "name": "PSG College of Technology"
+  },
+  {
+    "id": 58,
+    "name": "Sardar Vallabhbhai National Institute of Technology"
+  },
+  {
+    "id": 59,
+    "name": "Banasthali Vidyapith"
+  },
+  {
+    "id": 60,
+    "name": "National Institute of Technology Meghalaya"
+  },
+  {
+    "id": 61,
+    "name": "University of Petroleum and Energy Studies"
+  },
+  {
+    "id": 62,
+    "name": "International Institute of Information Technology Hyderabad"
+  },
+  {
+    "id": 63,
+    "name": "National Institute of Technology, Patna"
+  },
+  {
+    "id": 64,
+    "name": "Graphic Era University"
+  },
+  {
+    "id": 65,
+    "name": "National Institute of Technology, Raipur"
+  },
+  {
+    "id": 66,
+    "name": "National Institute of Technology Srinagar"
+  },
+  {
+    "id": 67,
+    "name": "M. S. Ramaiah Institute of Technology"
+  },
+  {
+    "id": 68,
+    "name": "Indian Institute of Technology Palakkad"
+  },
+  {
+    "id": 69,
+    "name": "Indraprastha Institute of Information Technology Delhi"
+  },
+  {
+    "id": 70,
+    "name": "Maulana Azad National Institute of Technology"
+  },
+  {
+    "id": 71,
+    "name": "Defence Institute of Advanced Technology"
+  },
+  {
+    "id": 72,
+    "name": "College of Engineering, Pune"
+  },
+  {
+    "id": 73,
+    "name": "Sri Krishna College of Engineering and Technology"
+  },
+  {
+    "id": 74,
+    "name": "Guru Gobind Singh Indraprastha University"
+  },
+  {
+    "id": 75,
+    "name": "Manipal University, Jaipur"
+  },
+  {
+    "id": 76,
+    "name": "Jawaharlal Nehru Technological University"
+  },
+  {
+    "id": 77,
+    "name": "AU College of Engineering (A)"
+  },
+  {
+    "id": 78,
+    "name": "Atal Bihari Vajpayee Indian Institute of Information Technology and Management"
+  },
+  {
+    "id": 79,
+    "name": "Netaji Subhas University of Technology (NSUT)"
+  },
+  {
+    "id": 80,
+    "name": "National Institute of Technology Agartala"
+  },
+  {
+    "id": 81,
+    "name": "International Institute of Information Technology Bangalore"
+  },
+  {
+    "id": 82,
+    "name": "Pandit Dwarka Prasad Mishra Indian Institute of Information Technology, Design and Manufacturing (IIITDM) Jabalpur"
+  },
+  {
+    "id": 83,
+    "name": "B.M.S. College of Engineering"
+  },
+  {
+    "id": 84,
+    "name": "Vel Tech Rangarajan Dr. Sagunthala R & D Institute of Science and Technology"
+  },
+  {
+    "id": 85,
+    "name": "Thiagarajar College of Engineering"
+  },
+  {
+    "id": 86,
+    "name": "National Institute of Food Technology, Entrepreneurship and Management - Thanjavur (NIFTEM - Thanjavur)"
+  },
+  {
+    "id": 87,
+    "name": "Punjab Engineering College (Deemed to be University), Chandigarh"
+  },
+  {
+    "id": 88,
+    "name": "National Institute of Technology Goa"
+  },
+  {
+    "id": 89,
+    "name": "R.V. College of Engineering"
+  },
+  {
+    "id": 90,
+    "name": "National Institute of Technology, Jamshedpur"
+  },
+  {
+    "id": 91,
+    "name": "SR University"
+  },
+  {
+    "id": 92,
+    "name": "Panjab University"
+  },
+  {
+    "id": 93,
+    "name": "Indian Institute of Information Technology Allahabad"
+  },
+  {
+    "id": 94,
+    "name": "Jaypee Institute of Information Technology"
+  },
+  {
+    "id": 95,
+    "name": "Rajalakshmi Engineering College"
+  },
+  {
+    "id": 96,
+    "name": "The Northcap University"
+  },
+  {
+    "id": 97,
+    "name": "Siddaganga Institute of Technology"
+  },
+  {
+    "id": 98,
+    "name": "C.V. Raman Global University, Odisha"
+  },
+  {
+    "id": 99,
+    "name": "Vignan's Foundation for Science, Technology and Research"
+  },
+  {
+    "id": 100,
+    "name": "PES University"
+  },
+  {
+    "id": 101,
+    "name": "Shri Mata Vaishno Devi University"
+  },
+  {
+    "id": 102,
+    "name": "Gandhi Institute of Technology and Management"
+  },
+  {
+    "id": 103,
+    "name": "B. S. Abdur Rahman Crescent Institute of Science and Technology"
+  },
+  {
+    "id": 104,
+    "name": "Coimbatore Institute of Technology"
+  },
+  {
+    "id": 105,
+    "name": "Manav Rachna International Institute of Research & Studies"
+  },
+  {
+    "id": 106,
+    "name": "Pandit Deendayal Energy University"
+  },
+  {
+    "id": 107,
+    "name": "Karunya Institute of Technology and Sciences"
+  },
+  {
+    "id": 108,
+    "name": "Kumaraguru College of Technology"
+  },
+  {
+    "id": 109,
+    "name": "National Institute of Technology Manipur"
+  },
+  {
+    "id": 110,
+    "name": "College of Engineering, Trivandrum"
+  },
+  {
+    "id": 111,
+    "name": "Veer Surendra Sai University of Technology"
+  },
+  {
+    "id": 112,
+    "name": "Indian Institute of Information Technology Guwahati"
+  },
+  {
+    "id": 113,
+    "name": "Vallurupalli Nageswara Rao Vignana Jyothi Institute of Engineering and Technology"
+  },
+  {
+    "id": 114,
+    "name": "Amity University Haryana, Gurgaon"
+  },
+  {
+    "id": 115,
+    "name": "Jain University, Bangalore"
+  },
+  {
+    "id": 116,
+    "name": "Dr. Vishwanath Karad MIT World Peace University"
+  },
+  {
+    "id": 117,
+    "name": "University College of Engineering"
+  },
+  {
+    "id": 118,
+    "name": "Kongu Engineering College"
+  },
+  {
+    "id": 119,
+    "name": "Veermata Jijabai Technological Institute (VJTI, Mumbai)"
+  },
+  {
+    "id": 120,
+    "name": "Dayalbagh Educational Institute"
+  },
+  {
+    "id": 121,
+    "name": "New Horizon College of Engineering"
+  },
+  {
+    "id": 122,
+    "name": "Sri Krishna College of Technology"
+  },
+  {
+    "id": 123,
+    "name": "Tezpur University"
+  },
+  {
+    "id": 124,
+    "name": "PSG Institute of Technology and Applied Research"
+  },
+  {
+    "id": 125,
+    "name": "Nirma University"
+  },
+  {
+    "id": 126,
+    "name": "Shoolini University of Biotechnology and Management Sciences"
+  },
+  {
+    "id": 127,
+    "name": "National Institute of Food Technology, Enterprenurship & Management"
+  },
+  {
+    "id": 128,
+    "name": "National Institute of Technology, Hamirpur"
+  },
+  {
+    "id": 129,
+    "name": "Mepco Schlenk Engineering College"
+  },
+  {
+    "id": 130,
+    "name": "Jawaharlal Nehru Technological University"
+  },
+  {
+    "id": 131,
+    "name": "Bharati Vidyapeeth Deemed University College of Engineering"
+  },
+  {
+    "id": 132,
+    "name": "National Institute of Technology Uttarakhand"
+  },
+  {
+    "id": 133,
+    "name": "Amity University, Jaipur"
+  },
+  {
+    "id": 134,
+    "name": "Dhirubhai Ambani Institute of Information and Communication Technology"
+  },
+  {
+    "id": 135,
+    "name": "SVKM`s Narsee Monjee Institute of Management Studies"
+  },
+  {
+    "id": 136,
+    "name": "National Institute of Technology Puducherry"
+  },
+  {
+    "id": 137,
+    "name": "P E S College of Engineering, Mandya"
+  },
+  {
+    "id": 138,
+    "name": "Jaypee University of Information Technology"
+  },
+  {
+    "id": 139,
+    "name": "Chandigarh Engineering College"
+  },
+  {
+    "id": 140,
+    "name": "Anurag University"
+  },
+  {
+    "id": 141,
+    "name": "Velagapudi Ramakrishna Siddhartha Engineering College"
+  },
+  {
+    "id": 142,
+    "name": "Vishwakarma Institute of Technology"
+  },
+  {
+    "id": 143,
+    "name": "J. C. Bose University of Science and Technology, YMCA"
+  },
+  {
+    "id": 144,
+    "name": "Chitkara University"
+  },
+  {
+    "id": 145,
+    "name": "Noida Institute of Engineering & Technology"
+  },
+  {
+    "id": 146,
+    "name": "Shri Ramdeobaba College of Engineering and Management"
+  },
+  {
+    "id": 147,
+    "name": "Galgotias University"
+  },
+  {
+    "id": 148,
+    "name": "Goka Raju Ranga Raju Institute of Engineering & Technology"
+  },
+  {
+    "id": 149,
+    "name": "Maharaja Sayajirao University of Baroda"
+  },
+  {
+    "id": 150,
+    "name": "National Institute of Advanced Manufacturing Technology, Ranchi"
+  },
+  {
+    "id": 151,
+    "name": "Pondicherry Engineering College"
+  },
+  {
+    "id": 152,
+    "name": "Hindustan Institute of Technology and Science (HITS)"
+  },
+  {
+    "id": 153,
+    "name": "Amity University, Gwalior"
+  },
+  {
+    "id": 154,
+    "name": "R.M.K. Engineering College"
+  },
+  {
+    "id": 155,
+    "name": "Maharishi Markandeshwar"
+  },
+  {
+    "id": 156,
+    "name": "Galgotias College of Engineering & Technology"
+  },
+  {
+    "id": 157,
+    "name": "Dr. D. Y. Patil Institute of Technology"
+  },
+  {
+    "id": 158,
+    "name": "National Institute of Technology Delhi"
+  },
+  {
+    "id": 159,
+    "name": "G. L. Bajaj Institute of Technology and Management"
+  },
+  {
+    "id": 160,
+    "name": "KLE Technological University"
+  },
+  {
+    "id": 161,
+    "name": "Shri Vile Parle Kelavani Mandal`s Dwarkadas J. Sanghvi College of Engineering"
+  },
+  {
+    "id": 162,
+    "name": "Sri Venkateswara College of Engineering and Technology"
+  },
+  {
+    "id": 163,
+    "name": "BMS Institute of Technology & Management"
+  },
+  {
+    "id": 164,
+    "name": "Vidya Jyothi Institute of Technology"
+  }
+]

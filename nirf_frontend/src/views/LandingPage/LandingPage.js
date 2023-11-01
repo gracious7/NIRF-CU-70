@@ -14,6 +14,9 @@ import {
   useColorMode,
   useColorModeValue,
 } from "@chakra-ui/react";
+import axios from 'axios';
+import { useHistory } from 'react-router-dom';
+
 // Assets
 import avatar2 from "assets/img/avatars/avatar2.png";
 import avatar3 from "assets/img/avatars/avatar3.png";
@@ -44,6 +47,11 @@ import SearchBar from "./LandingSb";
 
 function LandingPage() {
   const { colorMode } = useColorMode();
+  let cardColor = "#ffffff";
+
+  if (colorMode === "dark") {
+    cardColor = "#0f183c";
+  }
 
   // Chakra color mode
   const textColor = useColorModeValue("gray.700", "white");
@@ -63,38 +71,46 @@ function LandingPage() {
   //Academic Years for NIRF Ranking 
   const dateAndLink = [
     {
-      date:"2016",
+      date: "2016",
       link: "#"
     },
     {
-      date:"2017",
+      date: "2017",
       link: "#"
     },
     {
-      date:"2018",
+      date: "2018",
       link: "#"
     },
     {
-      date:"2019",
+      date: "2019",
       link: "#"
     },
     {
-      date:"2020",
+      date: "2020",
       link: "#"
     },
     {
-      date:"2021",
+      date: "2021",
       link: "#"
     },
     {
-      date:"2022",
+      date: "2022",
       link: "#"
     },
     {
-      date:"2023",
+      date: "2023",
       link: "#"
     },
   ];
+
+  const history = useHistory();
+  const getRank = async (year) => {
+    console.log(year);
+    const response = await axios.get(`http://localhost:8000/api/get_ranks?year=${year}`);
+    const rows = response.data.message;
+    history.push('/table', { rows: rows, name: year });
+  }
 
   return (
     <Flex direction="column" pt={{ base: "120px", md: "75px", lg: "100px" }}>
@@ -111,45 +127,46 @@ function LandingPage() {
         p="24px"
         borderRadius="20px"
       >
-      <SearchBar/>
-      <button>Search</button>
+        <SearchBar />
+        <button>Search</button>
       </Flex>
       <div className="year-heading">NIRF Rankings by Academic Year</div>
-      <Grid templateColumns={{ sm: "1fr", md:"repeat(3, 1fr)", xl: "repeat(4, 1fr)" }} gap="22px">
-        {dateAndLink.map((el, key)=>{
+      <Grid templateColumns={{ sm: "1fr", md: "repeat(3, 1fr)", xl: "repeat(4, 1fr)" }} gap="22px">
+        {dateAndLink.map((el, key) => {
           return (
-            <a key={key} href={`${el.link}`}>
-            <Card
-              p="16px"
-              bg={`url(${GraphImage}), #ffffff`}
+            <a key={key} style={{cursor: 'pointer'}}>
+              <Card
+                p="16px"
+                bg={`url(${GraphImage}), ${cardColor}`}
 
-              backgroundSize="contain" // Set the background size to contain
-              backgroundRepeat="no-repeat" // Prevent background image from repeating
-              // You can also set a fixed height for the Card to control its size
-              minHeight="20px"
-              transition="transform 0.2s, box-shadow 0.2s" // Add a transition effect
+                backgroundSize="contain" // Set the background size to contain
+                backgroundRepeat="no-repeat" // Prevent background image from repeating
+                // You can also set a fixed height for the Card to control its size
+                minHeight="20px"
+                transition="transform 0.2s, box-shadow 0.2s" // Add a transition effect
 
                 _hover={{
                   transform: "scale(1.05)", // Increase size on hover
                   boxShadow: "0px 8px 20px rgba(0, 0, 0, 0.2)", // Increase shadow on hover
                 }}
-             >
-            <CardHeader p="12px 5px">
-              <div className="year">
-                <Text fontSize="2xl" color="#555555" fontWeight="bold">
-                  {el.date}
-                </Text>
-              </div>
-            </CardHeader>
-            {/* <CardBody px="5px">
+                onClick={() => getRank(el.date)}
+              >
+                <CardHeader p="12px 5px">
+                  <div className="year">
+                    <Text fontSize="2xl" color={colorMode === "light" ? "#555555": "#ffffff"} fontWeight="bold">
+                      {el.date}
+                    </Text>
+                  </div>
+                </CardHeader>
+                {/* <CardBody px="5px">
                 
             </CardBody> */}
-          </Card>
-          </a>
+              </Card>
+            </a>
           )
 
         })}
-       
+
       </Grid>
       <Card p="16px" my="24px">
         <CardHeader p="12px 5px" mb="12px">

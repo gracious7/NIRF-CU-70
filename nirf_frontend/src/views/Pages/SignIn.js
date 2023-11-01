@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 // Chakra imports
 import {
   Box,
@@ -14,6 +14,9 @@ import {
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
+import axios from 'axios';
+import { useHistory } from "react-router-dom";
+
 // Assets
 import signInImage from "assets/img/signInImage.png";
 import { FaApple, FaFacebook, FaGoogle } from "react-icons/fa";
@@ -26,6 +29,48 @@ function SignIn() {
   const colorIcons = useColorModeValue("gray.700", "white");
   const bgIcons = useColorModeValue("trasnparent", "navy.700");
   const bgIconsHover = useColorModeValue("gray.50", "whiteAlpha.100");
+  const [form, setForm] = useState({
+    "username": "",
+    "password": "",
+    "admin": ""
+  });
+
+  const [college_data, set_college_data] = useState({});
+  const history = useHistory();
+
+  const token = localStorage.getItem('token');
+  const rank = localStorage.getItem('rank');
+  const score = localStorage.getItem('score');
+
+  if (token && rank && score) {
+    history.push('/admin/dashboard');
+  }
+
+  const handle = (e) => {
+    const tmp = { ...form }
+    if (e.target.name === "admin") {
+      tmp[e.target.name] = String(e.target.checked);
+    }
+    else {
+      tmp[e.target.name] = e.target.value;
+    }
+    setForm(tmp);
+  }
+
+  const submit = async () => {
+    const response = await axios.post("http://localhost:8000/api/login", form, {
+      headers: {
+        'Content-type': 'application/json'
+      }
+    });
+    const data = await response.data;
+    if (data.ok) {
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('rank', data.college_data.rank);
+      localStorage.setItem('score', data.college_data.score);
+    }
+    history.push('/admin/dashboard');
+  }
   return (
     <Flex position='relative' mb='40px'>
       <Flex
@@ -58,15 +103,15 @@ function SignIn() {
               "0px 5px 14px rgba(0, 0, 0, 0.05)",
               "unset"
             )}>
-            <Text
+            {/* <Text
               fontSize='xl'
               color={textColor}
               fontWeight='bold'
               textAlign='center'
               mb='22px'>
               Register With
-            </Text>
-            <HStack spacing='15px' justify='center' mb='22px'>
+            </Text> */}
+            {/* <HStack spacing='15px' justify='center' mb='22px'>
               <Flex
                 justify='center'
                 align='center'
@@ -127,18 +172,18 @@ function SignIn() {
                   />
                 </Link>
               </Flex>
-            </HStack>
-            <Text
+            </HStack> */}
+            {/* <Text
               fontSize='lg'
               color='gray.400'
               fontWeight='bold'
               textAlign='center'
               mb='22px'>
               or
-            </Text>
+            </Text> */}
             <FormControl>
               <FormLabel ms='4px' fontSize='sm' fontWeight='normal'>
-                Name
+                Username
               </FormLabel>
               <Input
                 variant='auth'
@@ -148,6 +193,8 @@ function SignIn() {
                 placeholder='Your full name'
                 mb='24px'
                 size='lg'
+                name="username"
+                onChange={(e) => handle(e)}
               />
               <FormLabel ms='4px' fontSize='sm' fontWeight='normal'>
                 Password
@@ -160,11 +207,13 @@ function SignIn() {
                 placeholder='Your password'
                 mb='24px'
                 size='lg'
+                name="password"
+                onChange={(e) => handle(e)}
               />
               <FormControl display='flex' alignItems='center' mb='24px'>
-                <Switch id='remember-login' colorScheme='blue' me='10px' />
+                <Switch id='remember-login' colorScheme='blue' me='10px' name="admin" onChange={(e) => handle(e)} />
                 <FormLabel htmlFor='remember-login' mb='0' fontWeight='normal'>
-                  Remember me
+                  NIRF Admin
                 </FormLabel>
               </FormControl>
               <Button
@@ -173,11 +222,13 @@ function SignIn() {
                 fontWeight='bold'
                 w='100%'
                 h='45'
-                mb='24px'>
-                SIGN UP
+                mb='24px'
+                onClick={submit}
+              >
+                SIGN IN
               </Button>
             </FormControl>
-            <Flex
+            {/* <Flex
               flexDirection='column'
               justifyContent='center'
               alignItems='center'
@@ -194,7 +245,7 @@ function SignIn() {
                   Sign In
                 </Link>
               </Text>
-            </Flex>
+            </Flex> */}
           </Flex>
         </Flex>
         <Box
