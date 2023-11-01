@@ -13,8 +13,8 @@ import {
   useColorMode,
   useColorModeValue,
 } from "@chakra-ui/react";
-import axios from 'axios';
-import { useHistory } from 'react-router-dom';
+import axios from "axios";
+import { useHistory } from "react-router-dom";
 
 // Assets
 import avatar2 from "assets/img/avatars/avatar2.png";
@@ -26,13 +26,13 @@ import ImageArchitect1 from "assets/img/ImageArchitect1.png";
 import ImageArchitect2 from "assets/img/ImageArchitect2.png";
 import ImageArchitect3 from "assets/img/ImageArchitect3.png";
 import GraphImage from "assets/img/graph-img.png";
-import "../LandingPage/LandingPage.css"
-import nirflogo from "../../assets/img/avatars/nirf_logo.png"
+import "../LandingPage/LandingPage.css";
+import nirflogo from "../../assets/img/avatars/nirf_logo.png";
 // Custom components
 import Card from "components/Card/Card";
 import CardBody from "components/Card/CardBody";
 import CardHeader from "components/Card/CardHeader";
-import React from "react";
+import React, { useState } from "react";
 import "../../styles.css";
 import {
   FaCube,
@@ -62,55 +62,62 @@ function LandingPage() {
 
   //College Array
   const colleges = [
-    { id: 1, name: 'Harvard University' },
-    { id: 2, name: 'Stanford University' },
-    { id: 3, name: 'MIT' },
+    { id: 1, name: "Harvard University" },
+    { id: 2, name: "Stanford University" },
+    { id: 3, name: "MIT" },
     // Add more colleges to the array
   ];
 
-  //Academic Years for NIRF Ranking 
+  //Academic Years for NIRF Ranking
   const dateAndLink = [
     {
       date: "2016",
-      link: "#"
+      link: "#",
     },
     {
       date: "2017",
-      link: "#"
+      link: "#",
     },
     {
       date: "2018",
-      link: "#"
+      link: "#",
     },
     {
       date: "2019",
-      link: "#"
+      link: "#",
     },
     {
       date: "2020",
-      link: "#"
+      link: "#",
     },
     {
       date: "2021",
-      link: "#"
+      link: "#",
     },
     {
       date: "2022",
-      link: "#"
+      link: "#",
     },
     {
       date: "2023",
-      link: "#"
+      link: "#",
     },
   ];
 
   const history = useHistory();
   const getRank = async (year) => {
     console.log(year);
-    const response = await axios.get(`http://localhost:8000/api/get_ranks?year=${year}`);
+    const response = await axios.get(
+      `http://localhost:8000/api/get_ranks?year=${year}`
+    );
     const rows = response.data.message;
-    history.push('/table', { rows: rows, name: year });
-  }
+    history.push("/table", { rows: rows, name: year });
+  };
+
+  const [clgName, setClgName] = useState("oj");
+  const handleSearch = () => {
+    console.log(clgName);
+  };
 
   return (
     <Flex direction="column" pt={{ base: "120px", md: "75px", lg: "100px" }}>
@@ -127,16 +134,27 @@ function LandingPage() {
         p="24px"
         borderRadius="20px"
       >
-        <SearchBar />
-        <button>Search</button>
+        <SearchBar setClgName={setClgName} />
+        <button onClick={adshandleSearch}>Search</button>
       </Flex>
       <div style={{ marginTop: "20px" }}>
         <Card p="4">
           <Flex alignItems="center">
-            <Image src={nirflogo} alt="About NIRF" boxSize="200px" objectFit="contain" mr="8" ml="4" />
+            <Image
+              src={nirflogo}
+              alt="About NIRF"
+              boxSize="200px"
+              objectFit="contain"
+              mr="8"
+              ml="4"
+            />
 
             <Box>
-              <Text fontSize="lg" color={textColor} style={{fontWeight: "bold", fontSize: "25px"}}>
+              <Text
+                fontSize="lg"
+                color={textColor}
+                style={{ fontWeight: "bold", fontSize: "25px" }}
+              >
                 ABOUT NIRF
               </Text>
               <Text fontSize="sm" color="gray.400" fontWeight="400">
@@ -144,27 +162,44 @@ function LandingPage() {
               </Text>
 
               <Text mt="4">
-                The National Institutional Ranking Framework (NIRF) is an initiative by the Government of India to rank higher education institutions in the country. Launched in 2015, NIRF evaluates institutions based on parameters like teaching, learning, research, and overall excellence. It aims to provide valuable insights to students, parents, and policymakers, helping them make informed decisions about educational institutions. NIRF rankings cover various categories such as universities, engineering, management, pharmacy, and overall institutions. By promoting healthy competition among institutions, NIRF encourages academic excellence, fosters innovation, and contributes to the overall growth and quality enhancement of higher education in India.
+                The National Institutional Ranking Framework (NIRF) is an
+                initiative by the Government of India to rank higher education
+                institutions in the country. Launched in 2015, NIRF evaluates
+                institutions based on parameters like teaching, learning,
+                research, and overall excellence. It aims to provide valuable
+                insights to students, parents, and policymakers, helping them
+                make informed decisions about educational institutions. NIRF
+                rankings cover various categories such as universities,
+                engineering, management, pharmacy, and overall institutions. By
+                promoting healthy competition among institutions, NIRF
+                encourages academic excellence, fosters innovation, and
+                contributes to the overall growth and quality enhancement of
+                higher education in India.
               </Text>
             </Box>
           </Flex>
         </Card>
       </div>
       <div className="year-heading">NIRF Rankings by Academic Year</div>
-      <Grid templateColumns={{ sm: "1fr", md: "repeat(3, 1fr)", xl: "repeat(4, 1fr)" }} gap="22px">
+      <Grid
+        templateColumns={{
+          sm: "1fr",
+          md: "repeat(3, 1fr)",
+          xl: "repeat(4, 1fr)",
+        }}
+        gap="22px"
+      >
         {dateAndLink.map((el, key) => {
           return (
-            <a key={key} style={{ cursor: 'pointer' }}>
+            <a key={key} style={{ cursor: "pointer" }}>
               <Card
                 p="16px"
                 bg={`url(${GraphImage}), ${cardColor}`}
-
                 backgroundSize="contain" // Set the background size to contain
                 backgroundRepeat="no-repeat" // Prevent background image from repeating
                 // You can also set a fixed height for the Card to control its size
                 minHeight="20px"
                 transition="transform 0.2s, box-shadow 0.2s" // Add a transition effect
-
                 _hover={{
                   transform: "scale(1.05)", // Increase size on hover
                   boxShadow: "0px 8px 20px rgba(0, 0, 0, 0.2)", // Increase shadow on hover
@@ -173,7 +208,11 @@ function LandingPage() {
               >
                 <CardHeader p="12px 5px">
                   <div className="year">
-                    <Text fontSize="2xl" color={colorMode === "light" ? "#555555" : "#ffffff"} fontWeight="bold">
+                    <Text
+                      fontSize="2xl"
+                      color={colorMode === "light" ? "#555555" : "#ffffff"}
+                      fontWeight="bold"
+                    >
                       {el.date}
                     </Text>
                   </div>
@@ -183,12 +222,10 @@ function LandingPage() {
             </CardBody> */}
               </Card>
             </a>
-          )
-
+          );
         })}
-
       </Grid>
-     
+
       <Card p="16px" my="24px">
         <CardHeader p="12px 5px" mb="12px">
           <Flex direction="column">

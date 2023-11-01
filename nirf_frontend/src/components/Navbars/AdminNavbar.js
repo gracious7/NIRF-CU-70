@@ -75,7 +75,7 @@ export default function AdminNavbar(props) {
       setScrolled(false);
     }
   };
-  
+
   return (
     <Flex
       position={navbarPosition}
@@ -124,13 +124,13 @@ export default function AdminNavbar(props) {
           <Breadcrumb>
             <BreadcrumbItem color={mainText}>
               <BreadcrumbLink href="/" color={secondaryText}>
-                 {/* Pages */}
-                 <center>
+                {/* Pages */}
+                <center>
                   <h1>NIRF 2.0</h1>
-                 </center>
+                </center>
               </BreadcrumbLink>
             </BreadcrumbItem>
-            
+
             <BreadcrumbItem color={mainText}>
               <BreadcrumbLink href="#" color={mainText}>
                 {brandText}

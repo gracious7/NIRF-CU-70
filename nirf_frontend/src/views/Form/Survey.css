@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
+
 .survey-container {
   max-width: 800px;
   margin: 0 auto;
@@ -69,6 +71,7 @@
   transition: all 0.3s ease; /* Added transition for smooth effect */
   border-right: 1px solid #ccc;
   letter-spacing: 1.5px;
+  cursor: pointer;
 }
 
 .tog-opt:last-child {
@@ -84,17 +87,20 @@
 /* Add more styles for RPC, GO, and OI forms as needed */
 
 .form{
-  display: flex;
-  flex-direction: column;
+  /* display: flex; */
+  /* flex-direction: column; */
+  font-family: Poppins;
   text-align: center;
   justify-content: center;
+  width: 100%;
 }
 
 .opt-name{
   color:rgb(62, 62, 62);
   font-size: 26px;
   font-weight: 600;
-  margin-bottom: 1.5rem;
+  margin-top: 2rem;
+
 }
 
 .tooltip {
@@ -133,14 +139,20 @@
 }
 .subopt-txt{
   font-size: 18px;
+  margin-left: 2rem;
+  /* margin-top: 2rem; */
 }
 
 .ip-section{
   margin-bottom: 2rem;
   display: flex;
-  /* justify-content: space-between; */
-  margin-left: 4rem;
-  margin-right: 4rem;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin: 0 6rem ;
+  
+
+ 
+  
   
 }
 
@@ -149,8 +161,9 @@
   font-size: 14px;
   color:#6a6a6a;
   font-weight: 600;
-  justify-self: flex-start;
-  /* margin-left: 1rem; */
+  margin: 0.5rem 0;
+  
+
   
   
 }
@@ -159,8 +172,11 @@
   border-radius: 7px;
   border:#c1c1c1 solid 1px;
   padding: 0.5rem;
-  width: 17rem;
-  margin-right: 3rem;
+  /* width: 100%; */
+  /* margin: 0 6rem; */
+  width: 22rem;
+  margin-bottom: 2rem;
+
   
   
 }

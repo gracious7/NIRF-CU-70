@@ -1,0 +1,25 @@
+.chart-img{
+   border-radius: 10px;
+   
+   margin-top: 6rem;
+   
+}
+.right-chart-bg{
+
+   height: 100%;
+
+   margin: 1.4rem;
+   background-color: #fff;
+   
+}
+
+.your-ranking{
+   margin-top: 1rem;
+   text-align: center;
+   font-weight:900;
+   font-size: 19px;
+   margin-top: 2.3rem;
+   font-family: Poppins;
+   color: rgb(61, 61, 61);
+   background-color: #fff;
+}

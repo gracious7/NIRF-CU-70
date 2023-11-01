@@ -55,8 +55,8 @@ var dashRoutes = [
     layout: "/admin",
   },
   {
-    path: "/billing",
-    name: "Billing",
+    path: "/rank-predictor",
+    name: "Rank Predictor",
     rtlName: "لوحة القيادة",
     icon: <CreditIcon color="inherit" />,
     component: Billing,

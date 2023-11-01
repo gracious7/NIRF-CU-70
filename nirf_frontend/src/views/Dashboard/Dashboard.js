@@ -45,7 +45,7 @@ import {
 } from "variables/charts";
 import { pageVisits, socialTraffic } from "variables/general";
 import LandingPage from "views/LandingPage/LandingPage";
-
+import "./dashboard.css";
 export default function Dashboard() {
   // Chakra Color Mode
   const iconBlue = useColorModeValue("blue.500", "blue.500");
@@ -83,8 +83,8 @@ export default function Dashboard() {
           },
         }
       );
-      setCollegeGraphs(response.data.graphs);
       console.log(response);
+      setCollegeGraphs(response.data.graphs);
     };
     getPerformance();
   }, []);
@@ -224,54 +224,53 @@ export default function Dashboard() {
         templateRows={{ lg: "repeat(2, auto)" }}
         gap="20px"
       >
-        <Card
-          bg={
-            colorMode === "dark"
-              ? "navy.800"
-              : "linear-gradient(81.62deg, #313860 2.25%, #151928 79.87%)"
-          }
-          p="0px"
-          maxW={{ sm: "320px", md: "100%" }}
-        >
-          <Flex direction="column" mb="40px" p="28px 0px 0px 22px">
-            <Text color="#fff" fontSize="lg" fontWeight="bold" mb="6px">
-              Latest Feature Scores
-            </Text>
-            {/* <Text color="#fff" fontSize="sm">
+        {/* <Card
+        //   bg={
+        //     colorMode === "dark"
+        //       ? "navy.800"
+        //       : "linear-gradient(81.62deg, #313860 2.25%, #151928 79.87%)"
+        //   }
+        //   p="0px"
+        //   maxW={{ sm: "320px", md: "100%" }}
+        // >
+        //   <Flex direction="column" mb="40px" p="28px 0px 0px 22px">
+        //     <Text color="#fff" fontSize="lg" fontWeight="bold" mb="6px">
+        //       Latest Feature Scores
+        //     </Text> */}
+        {/* <Text color="#fff" fontSize="sm">
               <Text as="span" color="green.400" fontWeight="bold">
                 (+5) more{" "}
               </Text>
               in 2022
             </Text> */}
-          </Flex>
-          <Box minH="300px">
-            {college_graphs.features_scores !== "" && (
-              <img
-                src={`data:image/png;base64,${college_graphs.features_scores}`}
-              />
-            )}
-            {/* <LineChart
+        {/* </Flex>
+          <Box minH="300px"> */}
+
+        {/* <LineChart
               chartData={lineChartData}
               chartOptions={lineChartOptions}
             /> */}
-          </Box>
+        {/* </Box>
+        </Card> */}
+        <Card>
+          {college_graphs.features_scores !== "" && (
+            <img
+              src={`data:image/png;base64,${college_graphs.features_scores}`}
+            />
+          )}
         </Card>
         <Card p="0px" maxW={{ sm: "320px", md: "100%" }}>
-          <Flex direction="column" mb="40px" p="28px 0px 0px 22px">
-            <Text color="gray.400" fontSize="sm" fontWeight="bold" mb="6px">
-              Your Rankings
-            </Text>
-            {/* <Text color={textColor} fontSize="lg" fontWeight="bold">
-              Total orders
-            </Text> */}
-          </Flex>
-          <Box minH="300px">
+          <div className="right-chart-bg">
+            <div className="your-ranking">Your Ranking</div>
             {college_graphs.ranks !== "" && (
-              <img src={`data:image/png;base64,${college_graphs.ranks}`} />
+              <img
+                className="chart-img"
+                src={`data:image/png;base64,${college_graphs.ranks}`}
+              />
             )}
+          </div>
 
-            {/* <BarChart chartData={barChartData} chartOptions={barChartOptions} /> */}
-          </Box>
+          {/* <BarChart chartData={barChartData} chartOptions={barChartOptions} /> */}
         </Card>
         {/* <Card p="0px" maxW={{ sm: "320px", md: "100%" }}>
           <Flex direction="column">

@@ -253,208 +253,192 @@ function Survey() {
       </div>
 
       {tab === "TLR" ? (
-        <Grid templateColumns={{ sm: "1fr", xl: " 1fr" }} gap="22px">
-          <Card p="16px">
-            <div className="form">
-              <div className="opt-name">Teaching, Learining & Resources</div>
-              <div className="main-container">
-                <div className="subopt">
-                  <div className="subopt-txt">SS</div>
-                </div>
-                <div className="ip-section">
-                  <div>
-                    <div className="label-txt">
-                      Total UG&PG student enrolled (
-                      <div>
-                        N<sub>T</sub>
-                      </div>
-                      )
-                    </div>
-                    <input
-                      className="ip"
-                      type="number"
-                      placeholder="Enter value..."
-                      onChange={(e) =>
-                        handleInputChange("TLR", "SS", "NT", e.target.value)
-                      }
-                    />
-                  </div>
-                  <div>
-                    <div className="label-txt">
-                      Sanctioned approved intake in UG & PG
-                    </div>
-                    <input
-                      className="ip"
-                      type="number"
-                      placeholder="Enter value..."
-                      onChange={(e) =>
-                        handleInputChange(
-                          "TLR",
-                          "SS",
-                          "totalUGPG",
-                          e.target.value
-                        )
-                      }
-                    />
-                  </div>
-                  <div>
-                    <div className="label-txt">
-                      Total students enrolled in PhD (
-                      <div>
-                        N<sub>P</sub>
-                      </div>
-                      )
-                    </div>
-                    <input
-                      className="ip"
-                      type="number"
-                      placeholder="Enter value..."
-                      onChange={(e) =>
-                        handleInputChange("TLR", "SS", "NP", e.target.value)
-                      }
-                    />
-                  </div>
-                  <div>
-                    <div className="label-txt">
-                      Sanctioned approved intake in PhD
-                    </div>
-                    <input
-                      className="ip"
-                      type="number"
-                      placeholder="Enter value..."
-                      onChange={(e) =>
-                        handleInputChange("TLR", "SS", "totPhd", e.target.value)
-                      }
-                    />
-                  </div>
-                </div>
+        // <Grid templateColumns={{ sm: "1fr", xl: " 1fr" }} gap="22px">
+        <Card p="16px">
+          <div className="form">
+            <div className="opt-name">Teaching, Learining & Resources</div>
+            <div className="main-container">
+              <div className="subopt">
+                <div className="subopt-txt">SS</div>
               </div>
-
-              <div>
-                <div className="subopt">
-                  <div className="subopt-txt">FSR</div>
-                </div>
-                <div className="ip-section">
-                  <div>
-                    <div className="label-txt">Fulltime Faculty (F)</div>
-                    <input
-                      className="ip"
-                      type="number"
-                      placeholder="Enter value..."
-                      onChange={(e) =>
-                        handleInputChange("TLR", "FSR", "F", e.target.value)
-                      }
-                    />
+              <div className="ip-section">
+                <div>
+                  <div className="label-txt">
+                    Total UG&PG student enrolled (NT)
                   </div>
-                  <div>
-                    <div className="label-txt">Total students (N)</div>
-                    <input
-                      className="ip"
-                      type="number"
-                      placeholder="Enter value..."
-                      onChange={(e) =>
-                        handleInputChange("TLR", "FSR", "N", e.target.value)
-                      }
-                    />
+                  <input
+                    className="ip"
+                    type="number"
+                    placeholder="Enter value..."
+                    onChange={(e) =>
+                      handleInputChange("TLR", "SS", "NT", e.target.value)
+                    }
+                  />
+                </div>
+                <div>
+                  <div className="label-txt">
+                    Sanctioned approved intake in UG & PG
                   </div>
-                </div>
-              </div>
-              <div>
-                <div className="subopt">
-                  <div className="subopt-txt">FQE</div>
-                </div>
-                <div className="ip-section">
-                  <div>
-                    <div className="label-txt">
-                      Total PhD Faculty (
-                      <div>
-                        F<sub>RA</sub>
-                      </div>
+                  <input
+                    className="ip"
+                    type="number"
+                    placeholder="Enter value..."
+                    onChange={(e) =>
+                      handleInputChange(
+                        "TLR",
+                        "SS",
+                        "totalUGPG",
+                        e.target.value
                       )
-                    </div>
-                    <input
-                      className="ip"
-                      type="number"
-                      placeholder="Enter value..."
-                      onChange={(e) =>
-                        handleInputChange("TLR", "FQE", "FRA", e.target.value)
-                      }
-                    />
-                  </div>
-                  <div>
-                    <div className="label-txt">
-                      Faculty Exp upto 8 yrs. (F1)
-                    </div>
-                    <input
-                      className="ip"
-                      type="number"
-                      placeholder="Enter value..."
-                      onChange={(e) =>
-                        handleInputChange("TLR", "FQE", "F1", e.target.value)
-                      }
-                    />
-                  </div>
-                  <div>
-                    <div className="label-txt">
-                      Faculty Exp b/w 8-15 yrs. (F2)
-                    </div>
-                    <input
-                      className="ip"
-                      type="number"
-                      placeholder="Enter value..."
-                      onChange={(e) =>
-                        handleInputChange("TLR", "FQE", "F2", e.target.value)
-                      }
-                    />
-                  </div>
-                  <div>
-                    <div className="label-txt">
-                      Faculty Exp more than 15 yrs. (F3)
-                    </div>
-                    <input
-                      className="ip"
-                      type="number"
-                      placeholder="Enter value..."
-                      onChange={(e) =>
-                        handleInputChange("TLR", "FQE", "F3", e.target.value)
-                      }
-                    />
-                  </div>
+                    }
+                  />
                 </div>
-              </div>
-              <div>
-                <div className="subopt">
-                  <div className="subopt-txt">FRU</div>
+                <div>
+                  <div className="label-txt">
+                    Total students enrolled in PhD (NP)
+                  </div>
+                  <input
+                    className="ip"
+                    type="number"
+                    placeholder="Enter value..."
+                    onChange={(e) =>
+                      handleInputChange("TLR", "SS", "NP", e.target.value)
+                    }
+                  />
                 </div>
-                <div className="ip-section">
-                  <div>
-                    <div className="label-txt">BC</div>
-                    <input
-                      className="ip"
-                      type="number"
-                      placeholder="Enter value..."
-                      onChange={(e) =>
-                        handleInputChange("TLR", "FRU", "BC", e.target.value)
-                      }
-                    />
+                <div>
+                  <div className="label-txt">
+                    Sanctioned approved intake in PhD
                   </div>
-                  <div>
-                    <div className="label-txt">BO</div>
-                    <input
-                      className="ip"
-                      type="number"
-                      placeholder="Enter value..."
-                      onChange={(e) =>
-                        handleInputChange("TLR", "FRU", "BO", e.target.value)
-                      }
-                    />
-                  </div>
+                  <input
+                    className="ip"
+                    type="number"
+                    placeholder="Enter value..."
+                    onChange={(e) =>
+                      handleInputChange("TLR", "SS", "totPhd", e.target.value)
+                    }
+                  />
                 </div>
               </div>
             </div>
-          </Card>
-        </Grid>
+
+            <div>
+              <div className="subopt">
+                <div className="subopt-txt">FSR</div>
+              </div>
+              <div className="ip-section">
+                <div>
+                  <div className="label-txt">Fulltime Faculty (F)</div>
+                  <input
+                    className="ip"
+                    type="number"
+                    placeholder="Enter value..."
+                    onChange={(e) =>
+                      handleInputChange("TLR", "FSR", "F", e.target.value)
+                    }
+                  />
+                </div>
+                <div>
+                  <div className="label-txt">Total students (N)</div>
+                  <input
+                    className="ip"
+                    type="number"
+                    placeholder="Enter value..."
+                    onChange={(e) =>
+                      handleInputChange("TLR", "FSR", "N", e.target.value)
+                    }
+                  />
+                </div>
+              </div>
+            </div>
+            <div>
+              <div className="subopt">
+                <div className="subopt-txt">FQE</div>
+              </div>
+              <div className="ip-section">
+                <div>
+                  <div className="label-txt">Total PhD Faculty (FRA)</div>
+                  <input
+                    className="ip"
+                    type="number"
+                    placeholder="Enter value..."
+                    onChange={(e) =>
+                      handleInputChange("TLR", "FQE", "FRA", e.target.value)
+                    }
+                  />
+                </div>
+                <div>
+                  <div className="label-txt">Faculty Exp upto 8 yrs. (F1)</div>
+                  <input
+                    className="ip"
+                    type="number"
+                    placeholder="Enter value..."
+                    onChange={(e) =>
+                      handleInputChange("TLR", "FQE", "F1", e.target.value)
+                    }
+                  />
+                </div>
+                <div>
+                  <div className="label-txt">
+                    Faculty Exp b/w 8-15 yrs. (F2)
+                  </div>
+                  <input
+                    className="ip"
+                    type="number"
+                    placeholder="Enter value..."
+                    onChange={(e) =>
+                      handleInputChange("TLR", "FQE", "F2", e.target.value)
+                    }
+                  />
+                </div>
+                <div>
+                  <div className="label-txt">
+                    Faculty Exp more than 15 yrs. (F3)
+                  </div>
+                  <input
+                    className="ip"
+                    type="number"
+                    placeholder="Enter value..."
+                    onChange={(e) =>
+                      handleInputChange("TLR", "FQE", "F3", e.target.value)
+                    }
+                  />
+                </div>
+              </div>
+            </div>
+            <div>
+              <div className="subopt">
+                <div className="subopt-txt">FRU</div>
+              </div>
+              <div className="ip-section">
+                <div>
+                  <div className="label-txt">BC</div>
+                  <input
+                    className="ip"
+                    type="number"
+                    placeholder="Enter value..."
+                    onChange={(e) =>
+                      handleInputChange("TLR", "FRU", "BC", e.target.value)
+                    }
+                  />
+                </div>
+                <div>
+                  <div className="label-txt">BO</div>
+                  <input
+                    className="ip"
+                    type="number"
+                    placeholder="Enter value..."
+                    onChange={(e) =>
+                      handleInputChange("TLR", "FRU", "BO", e.target.value)
+                    }
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </Card>
       ) : (
+        // </Grid>
         ""
       )}
       {tab === "RPC" ? (
@@ -482,11 +466,7 @@ function Survey() {
                   </div>
                   <div>
                     <div className="label-txt">
-                      Maximum of nominal no. of Faculty (
-                      <div>
-                        F<sub>RQ</sub>
-                      </div>
-                      )
+                      Maximum of nominal no. of Faculty (FRQ)
                     </div>
                     <input
                       className="ip"
@@ -631,11 +611,7 @@ function Survey() {
 
                   <div>
                     <div className="label-txt">
-                      % UG&PG opted higher studies past 3yrs. (
-                      <div>
-                        N<sub>hs</sub>
-                      </div>
-                      )
+                      % UG&PG opted higher studies past 3yrs. (NHS)
                     </div>
                     <input
                       className="ip"
@@ -655,9 +631,7 @@ function Survey() {
                 <div className="ip-section">
                   <div>
                     <div className="label-txt">
-                      <div>
-                        N<sub>g</sub>
-                      </div>
+                      <div>Ng</div>
                     </div>
                     <input
                       className="ip"
@@ -697,11 +671,7 @@ function Survey() {
                 <div className="ip-section">
                   <div>
                     <div className="label-txt">
-                      Avg. no of PhD grads. past 3 yrs. (
-                      <div>
-                        N<sub>phd</sub>
-                      </div>
-                      )
+                      Avg. no of PhD grads. past 3 yrs. (NPHD)
                     </div>
                     <input
                       className="ip"
@@ -762,13 +732,7 @@ function Survey() {
                 </div>
                 <div className="ip-section">
                   <div>
-                    <div className="label-txt">
-                      No of women students (
-                      <div>
-                        N<sub>WS</sub>
-                      </div>
-                      )
-                    </div>
+                    <div className="label-txt">No of women students (NWS)</div>
                     <input
                       className="ip"
                       type="number"
@@ -781,9 +745,7 @@ function Survey() {
                   <div>
                     <div className="label-txt">
                       No of women faculty.
-                      <div>
-                        N<sub>WF</sub>
-                      </div>
+                      <div>NWF</div>
                     </div>
                     <input
                       className="ip"
@@ -803,11 +765,7 @@ function Survey() {
                 <div className="ip-section">
                   <div>
                     <div className="label-txt">
-                      UG students with full fee rembursement. (
-                      <div>
-                        N<sub>esc</sub>
-                      </div>
-                      )
+                      UG students with full fee rembursement. (NESC)
                     </div>
                     <input
                       className="ip"

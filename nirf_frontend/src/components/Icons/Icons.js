@@ -114,8 +114,8 @@ export const CreditIcon = createIcon({
   viewBox: "0 0 24 24",
   path: (
     <path
-      // fill='currentColor'
-      d={FaTrophy}
+      fill='currentColor'
+      d='M1.406 17.023a2.461 2.461 0 002.461 2.46h14.766a2.461 2.461 0 002.46-2.46v-6.768H1.407v6.768zm2.9-3.34a1.318 1.318 0 011.319-1.318h2.11a1.318 1.318 0 011.318 1.318v.879a1.318 1.318 0 01-1.319 1.318H5.625a1.318 1.318 0 01-1.318-1.318v-.879zM18.633 4.014H3.867a2.46 2.46 0 00-2.46 2.461v1.143h19.687V6.475a2.46 2.46 0 00-2.461-2.46z'
     />
   ),
 });
@@ -371,6 +371,20 @@ export const ProfileIcon = createIcon({
       <path
         fill='currentColor'
         d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v1c0 .55.45 1 1 1h14c.55 0 1-.45 1-1v-1c0-2.66-5.33-4-8-4z'
+      />
+    </g>
+  ),
+});
+ 
+export const LogoutIcon = createIcon({
+  displayName: "LogoutIcon",
+  viewBox: "0 0 24 24",
+  path: (
+    <g>
+      <path d='M0 0h24v24H0V0z' fill='transparent' />
+      <path
+        fill='currentColor'
+        d='M13 17h-2v-6h2V3h6v18h-6v-6zm-6-2H3v-1h4V6c0-1.1.9-2 2-2h4V2h-4C9.25 2 8 3.25 8 5v6zm2-4h2v4h-2z'
       />
     </g>
   ),

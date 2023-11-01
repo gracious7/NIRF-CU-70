@@ -16,14 +16,15 @@ def hello(request):
 @api_view(['POST'])
 def predict_rank(request):
   data = request.data
-  
+  form =  data['features']
+
   # to store all the scores of the five features
-  features = {}
-  features['TLR'] = data['ss'] + data['fsr'] + data['fqe'] + data['fru']
-  features['RPC'] = data['pu'] + data['qp'] + data['ipr'] + data['fppp']
-  features['GO'] = data['gph'] + data['gue'] + data['gms'] + data['gphd']
-  features['OI'] = data['rd'] + data['wd'] + data['escs'] + data['pcs']
-  features['PR'] = data['pr']
+  features = data['features']
+  # features['TLR'] = form['ss'] + form['fsr'] + form['fqe'] + form['fru']
+  # features['RPC'] = form['pu'] + form['qp'] + form['ipr'] + form['fppp']
+  # features['GO'] = form['gph'] + form['gue'] + form['gms'] + form['gphd']
+  # features['OI'] = form['rd'] + form['wd'] + form['escs'] + form['pcs']
+  # features['PR'] = form['pr']
   
   # predict rank based on previous year data
   rank = rank_prediction(features)
@@ -61,14 +62,14 @@ def login(request):
 def get_performance(request):
   data = request.data
   token = data['token']
-  try:
-    college_data = jwt.decode(token, os.environ.get('SECRET_KEY'), algorithms=["HS256"])
-    college_name = college_data['college']
+  # try:
+  college_data = jwt.decode(token, os.environ.get('SECRET_KEY'), algorithms=["HS256"])
+  college_name = college_data['college']
 
-    graphs = get_graphs(college_name)
-    return Response({'ok': True, 'message': "Graph fetched", 'graphs': graphs})
-  except:
-    return Response({'ok': False, 'message': "Unauthorized"})
+  graphs = get_graphs(college_name)
+  return Response({'ok': True, 'message': "Graph fetched", 'graphs': graphs})
+  # except:
+  #   return Response({'ok': False, 'message': "Unauthorized"})
 
 
 @api_view(['POST'])

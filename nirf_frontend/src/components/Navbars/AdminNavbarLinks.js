@@ -15,12 +15,12 @@ import avatar1 from "assets/img/avatars/avatar1.png";
 import avatar2 from "assets/img/avatars/avatar2.png";
 import avatar3 from "assets/img/avatars/avatar3.png";
 // Custom Icons
-import { ArgonLogoDark, ArgonLogoLight, ChakraLogoDark, ChakraLogoLight, ProfileIcon, SettingsIcon } from "components/Icons/Icons";
+import { LogoDark, ArgonLogoLight, ChakraLogoDark, ChakraLogoLight, ProfileIcon, SettingsIcon, ArgonLogoDark, LogoutIcon } from "components/Icons/Icons";
 // Custom Components
 import { ItemContent } from "components/Menu/ItemContent";
 import { SearchBar } from "components/Navbars/SearchBar/SearchBar";
 import { SidebarResponsive } from "components/Sidebar/Sidebar";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import routes from "routes.js";
 
@@ -46,6 +46,23 @@ export default function HeaderLinks(props) {
   if (secondary) {
     navbarIcon = "white";
   }
+  const [login, setLogin] = useState("");
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    const rank = localStorage.getItem('rank');
+    const score = localStorage.getItem('score');
+    if (token !== null && rank !== null && score !== null) {
+      setLogin("yes");
+    }
+  }, [])
+  function click() {
+    if (login === 'yes') {
+      localStorage.removeItem('token');
+      localStorage.removeItem('rank');
+      localStorage.removeItem('score');
+      window.location.href = '/landingpage';
+    }
+  }
   return (
     <Flex
       pe={{ sm: "0px", md: "16px" }}
@@ -64,40 +81,28 @@ export default function HeaderLinks(props) {
             document.documentElement.dir ? (
               ""
             ) : (
-              <ProfileIcon color={navbarIcon} w='22px' h='22px' me='0px' />
+              login == 'yes' ?
+                <LogoutIcon color={navbarIcon} w='22px' h='22px' me='0px' />
+                : <ProfileIcon color={navbarIcon} w='22px' h='22px' me='0px' />
+
             )
           }
           leftIcon={
             document.documentElement.dir ? (
-              <ProfileIcon color={navbarIcon} w='22px' h='22px' me='0px' />
+              login == 'yes' ?
+                <LogoutIcon color={navbarIcon} w='22px' h='22px' me='0px' />
+                : <ProfileIcon color={navbarIcon} w='22px' h='22px' me='0px' />
             ) : (
               ""
             )
-          }>
+          } onClick={click}>
           {/* <Text display={{ sm: "none", md: "flex" }}>Sign In</Text> */}
+
         </Button>
       </NavLink>
       <SidebarResponsive
         hamburgerColor={"white"}
-        logo={
-          <Stack direction='row' spacing='12px' align='center' justify='center'>
-            {colorMode === "dark" ? (
-              <ArgonLogoLight w='74px' h='27px' />
-            ) : (
-              <ArgonLogoDark w='74px' h='27px' />
-            )}
-            <Box
-              w='1px'
-              h='20px'
-              bg={colorMode === "dark" ? "white" : "gray.700"}
-            />
-            {colorMode === "dark" ? (
-              <ChakraLogoLight w='82px' h='21px' />
-            ) : (
-              <ChakraLogoDark w='82px' h='21px' />
-            )}
-          </Stack>
-        }
+
         colorMode={colorMode}
         secondary={props.secondary}
         routes={routes}
