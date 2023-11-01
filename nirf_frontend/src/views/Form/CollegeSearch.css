@@ -50,10 +50,12 @@
  }
  
  /* Show the list when hovering on the input field */
- .CollegeSearch input:hover + ul {
+ .CollegeSearch input:focus + ul {
    max-height: 200px; /* Adjust the max-height as needed */
    opacity: 1;
    z-index: 1;
+   animation-duration: 1000ms;
+   
  }
 
  

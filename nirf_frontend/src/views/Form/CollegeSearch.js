@@ -1,15 +1,14 @@
-import React, { useState } from "react";
-import "./CollegeSearch.css";
+import React, { useState } from 'react';
+import './CollegeSearch.css';
 
 const CollegeSearch = ({ colleges }) => {
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState('');
   const [filteredColleges, setFilteredColleges] = useState([]);
+  const [selectedCollege, setSelectedCollege] = useState(null);
 
   const handleSearch = (query) => {
-    const regex = new RegExp(query, "i"); // 'i' flag for case-insensitive search
-    const filteredColleges = colleges.filter((college) =>
-      regex.test(college.name)
-    );
+    const regex = new RegExp(query, 'i');
+    const filteredColleges = colleges.filter((college) => regex.test(college.name));
     setFilteredColleges(filteredColleges);
   };
 
@@ -19,22 +18,41 @@ const CollegeSearch = ({ colleges }) => {
     handleSearch(query);
   };
 
+  const handleSelectCollege = (college) => {
+    setSearchQuery(college.name);
+    setSelectedCollege(college);
+    setFilteredColleges([]); // Hide the suggestions
+  };
+
+  const handleSuggestionsClick = (event) => {
+    const selectedCollegeName = event.target.textContent;
+    const selectedCollege = colleges.find((college) => college.name === selectedCollegeName);
+    if (selectedCollege) {
+      handleSelectCollege(selectedCollege);
+    }
+  };
+
   return (
     <div className="CollegeSearch">
       <input
-        type="text"
         className="college-input"
-        placeholder="Search for colleges"
+        type="text"
+        placeholder="Select the College..."
         value={searchQuery}
         onChange={handleChange}
       />
       <ul className="college-ul">
         {filteredColleges.map((college) => (
-          <li className="college-li" key={college.id}>
+          <li
+            className="college-li"
+            key={college.id}
+            onClick={() => handleSelectCollege(college)}
+          >
             {college.name}
           </li>
         ))}
       </ul>
+      {selectedCollege && <p>Selected: {selectedCollege.name}</p>}
     </div>
   );
 };

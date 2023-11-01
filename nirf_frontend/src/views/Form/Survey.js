@@ -28,7 +28,7 @@ import Card from "components/Card/Card";
 // import searchicon from ".../assets/img/avatars/searchicon.png";
 import CardBody from "components/Card/CardBody";
 import CardHeader from "components/Card/CardHeader";
-import React from "react";
+import React, { useState } from "react";
 import "../../styles.css";
 import {
   FaCube,
@@ -41,6 +41,7 @@ import {
 import { IoDocumentsSharp } from "react-icons/io5";
 
 import CollegeSearch from "./CollegeSearch";
+import "./Survey.css";
 
 const colleges = [
   { id: 1, name: "Harvard University" },
@@ -63,7 +64,7 @@ function Survey() {
     alignItems: "center",
     justifyContent: "center",
     position: "relative",
-    maxWidth: "300px", // Set a maximum width for the input field
+    maxWidth: "300px", // Set a maximum width for the input   field
   };
 
   const searchIconStyles = {
@@ -75,243 +76,634 @@ function Survey() {
     paddingLeft: "30px", // Ensure some space for the search icon
     width: "100%",
   };
+
+  const [tab, setTab] = useState("TLR");
+
+  const handleTab = (opt) => {
+    setTab(opt);
+  };
+
+  const [formData, setFormData] = useState({
+    TLR: {},
+    RPC: {},
+    GO: {},
+    OI: {},
+    PR: {},
+  });
+
+  const handleInputChange = (category, subCategory, field, value) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      [category]: {
+        ...prevData[category],
+        [subCategory]: {
+          ...prevData[category][subCategory],
+          [field]: value,
+        },
+      },
+    }));
+  };
+
+  const handleSubmit = () => {
+    // You can access the formData object here and do whatever you want with it
+    console.log(formData);
+  };
+
   return (
     <Flex direction="column" pt={{ base: "120px", md: "75px", lg: "100px" }}>
-      {/* <div className="text-[red] font-bold texth1">Hello </div> */}
       <div>
         <CollegeSearch colleges={colleges} />
       </div>
+      <div className="toggle-nav">
+        <div
+          className={`tog-opt ${tab === "TLR" ? "on" : ""}`}
+          onClick={() => handleTab("TLR")}
+        >
+          TLR
+        </div>
+        <div
+          className={`tog-opt ${tab === "RPC" ? "on" : ""}`}
+          onClick={() => handleTab("RPC")}
+        >
+          RPC
+        </div>
+        <div
+          className={`tog-opt ${tab === "GO" ? "on" : ""}`}
+          onClick={() => handleTab("GO")}
+        >
+          GO
+        </div>
+        <div
+          className={`tog-opt ${tab === "OI" ? "on" : ""}`}
+          onClick={() => handleTab("OI")}
+        >
+          OI
+        </div>
+        <div
+          className={`tog-opt ${tab === "PR" ? "on" : ""}`}
+          onClick={() => handleTab("PR")}
+        >
+          PR
+        </div>
+      </div>
 
-      <Grid templateColumns={{ sm: "1fr", xl: "repeat(3, 1fr)" }} gap="22px">
-        <Card p="16px">
-          <CardHeader p="12px 5px" mb="12px">
-            <Text fontSize="lg" color={textColor} fontWeight="bold">
-              TLR
-            </Text>
-          </CardHeader>
-          <CardBody px="5px">
-            <Flex direction="column">
-              <Text fontSize="md" color="gray.600" fontWeight="600" mb="20px">
-                SS
-              </Text>
-              <Grid
-                templateColumns={{ sm: "1fr", xl: "repeat(2, 1fr)" }}
-                gap="1px"
-              >
-                <div>
-                  <Text
-                    noOfLines={1}
-                    fontSize="md"
-                    color="gray.600"
-                    fontWeight="500"
-                    w={600}
-                  >
-                    NT
-                  </Text>
-                  <input 
-                    className="survey-input"
-                    type="number"
-                    placeholder="Enter value.."
-                  />
+      {tab === "TLR" ? (
+        <Grid templateColumns={{ sm: "1fr", xl: " 1fr" }} gap="22px">
+          <Card p="16px">
+            <div className="form">
+              <div className="opt-name">Teaching, Learining & Resources</div>
+              <div>
+                <div className="subopt">
+                  <div className="subopt-txt">SS</div>
                 </div>
-                <div>
-                <Text
-                    noOfLines={1}
-                    fontSize="md"
-                    color="gray.600"
-                    fontWeight="500"
-                    w={600}
-                  >
-                    NP
-                  </Text>
-                  <input 
-                    className="survey-input"
-                    type="number"
-                    placeholder="Enter value.."
-                  />
+                <div className="ip-section">
+                  <div>
+                    <div className="label-txt">
+                      N<sub>T</sub>
+                    </div>
+                    <input
+                      className="ip"
+                      type="number"
+                      placeholder="Enter value..."
+                      onChange={(e) =>
+                        handleInputChange("TLR", "SS", "NT", e.target.value)
+                      }
+                    />
+                  </div>
+                  <div>
+                    <div className="label-txt">
+                      N<sub>P</sub>
+                    </div>
+                    <input
+                      className="ip"
+                      type="number"
+                      placeholder="Enter value..."
+                      onChange={(e) =>
+                        handleInputChange("TLR", "SS", "NP", e.target.value)
+                      }
+                    />
+                  </div>
                 </div>
-                
-                  
-                  
-                
-              </Grid>
-              <Text
-                    noOfLines={1}
-                    fontSize="md"
-                    color="gray.600"
-                    fontWeight="500"
-                    w={600}
-                    mt={4}
-                  >
-                    NT: Total number of UG and PG students.
-                  </Text>
-                <Text
-                    noOfLines={1}
-                    fontSize="md"
-                    color="gray.600"
-                    fontWeight="500"
-                    w={600}
-                  >
-                    NP: Total number of students enrolled for the doctoral program in the previous academic
-                  </Text>
-
-              <Flex align="center" mb="20px">
-
-                <input />
-                <input />
-              </Flex>
-              <Text
-                fontSize="sm"
-                color="gray.400"
-                fontWeight="600"
-                m="6px 0px 20px 0px"
-              >
-                APPLICATION
-              </Text>
-              <Flex align="center" mb="20px">
-                <Switch colorScheme="blue" me="10px" />
-              </Flex>
-              <Flex align="center" mb="20px">
-                <Switch colorScheme="blue" me="10px" />
-                <Text
-                  noOfLines={1}
-                  fontSize="md"
-                  color="gray.400"
-                  fontWeight="400"
+              </div>
+              <div>
+                <div className="subopt">
+                  <div className="subopt-txt">FSR</div>
+                </div>
+                <div className="ip-section">
+                  <div>
+                    <div className="label-txt">F</div>
+                    <input
+                      className="ip"
+                      type="number"
+                      placeholder="Enter value..."
+                      onChange={(e) =>
+                        handleInputChange("TLR", "FSR", "F", e.target.value)
+                      }
+                    />
+                  </div>
+                  <div>
+                    <div className="label-txt">N</div>
+                    <input
+                      className="ip"
+                      type="number"
+                      placeholder="Enter value..."
+                      onChange={(e) =>
+                        handleInputChange("TLR", "FSR", "N", e.target.value)
+                      }
+                    />
+                  </div>
+                </div>
+              </div>
+              <div>
+                <div className="subopt">
+                  <div className="subopt-txt">FQE</div>
+                </div>
+                <div className="ip-section">
+                  <div>
+                    <div className="label-txt">F1</div>
+                    <input
+                      className="ip"
+                      type="number"
+                      placeholder="Enter value..."
+                      onChange={(e) =>
+                        handleInputChange("TLR", "FQE", "F1", e.target.value)
+                      }
+                    />
+                  </div>
+                  <div>
+                    <div className="label-txt">F2</div>
+                    <input
+                      className="ip"
+                      type="number"
+                      placeholder="Enter value..."
+                      onChange={(e) =>
+                        handleInputChange("TLR", "FQE", "F2", e.target.value)
+                      }
+                    />
+                  </div>
+                  <div>
+                    <div className="label-txt">F3</div>
+                    <input
+                      className="ip"
+                      type="number"
+                      placeholder="Enter value..."
+                      onChange={(e) =>
+                        handleInputChange("TLR", "FQE", "F3", e.target.value)
+                      }
+                    />
+                  </div>
+                </div>
+              </div>
+              <div>
+                <div className="subopt">
+                  <div className="subopt-txt">FRU</div>
+                </div>
+                <div className="ip-section">
+                  <div>
+                    <div className="label-txt">BC</div>
+                    <input
+                      className="ip"
+                      type="number"
+                      placeholder="Enter value..."
+                      onChange={(e) =>
+                        handleInputChange("TLR", "FRU", "BC", e.target.value)
+                      }
+                    />
+                  </div>
+                  <div>
+                    <div className="label-txt">BO</div>
+                    <input
+                      className="ip"
+                      type="number"
+                      placeholder="Enter value..."
+                      onChange={(e) =>
+                        handleInputChange("TLR", "FRU", "BO", e.target.value)
+                      }
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Card>
+        </Grid>
+      ) : (
+        ""
+      )}
+      {tab === "RPC" ? (
+        <Grid templateColumns={{ sm: "1fr", xl: " 1fr" }} gap="22px">
+          <Card p="16px">
+            <div className="form">
+              <div className="opt-name">Research and Professional Practice</div>
+              <div>
+                <div className="subopt">
+                  <div className="subopt-txt">PU</div>
+                </div>
+                <div className="ip-section">
+                  <div>
+                    <div className="label-txt">P</div>
+                    <input
+                      className="ip"
+                      type="number"
+                      placeholder="Enter value..."
+                      onChange={(e) =>
+                        handleInputChange("RPC", "PU", "P", e.target.value)
+                      }
+                    />
+                  </div>
+                  <div>
+                    <div className="label-txt">
+                      F<sub>RQ</sub>
+                    </div>
+                    <input
+                      className="ip"
+                      type="number"
+                      placeholder="Enter value..."
+                      onChange={(e) =>
+                        handleInputChange("RPC", "PU", "FRQ", e.target.value)
+                      }
+                    />
+                  </div>
+                </div>
+              </div>
+              <div>
+                <div className="subopt">
+                  <div className="subopt-txt">QP</div>
+                </div>
+                <div className="ip-section">
+                  <div>
+                    <div className="label-txt">CC</div>
+                    <input
+                      className="ip"
+                      type="number"
+                      placeholder="Enter value..."
+                      onChange={(e) =>
+                        handleInputChange("RPC", "QP", "CC", e.target.value)
+                      }
+                    />
+                  </div>
+                  <div>
+                    <div className="label-txt">
+                      F<sub>RQ</sub>
+                    </div>
+                    <input
+                      className="ip"
+                      type="number"
+                      placeholder="Enter value..."
+                      onChange={(e) =>
+                        handleInputChange("RPC", "QP", "FRQ", e.target.value)
+                      }
+                    />
+                  </div>
+                  <div>
+                    <div className="label-txt">TOP25P/P</div>
+                    <input
+                      className="ip"
+                      type="number"
+                      placeholder="Enter value..."
+                      onChange={(e) =>
+                        handleInputChange(
+                          "RPC",
+                          "QP",
+                          "TOP25P/P",
+                          e.target.value
+                        )
+                      }
+                    />
+                  </div>
+                </div>
+              </div>
+              <div>
+                <div className="subopt">
+                  <div className="subopt-txt">IPR</div>
+                </div>
+                <div className="ip-section">
+                  <div>
+                    <div className="label-txt">PG</div>
+                    <input
+                      className="ip"
+                      type="number"
+                      placeholder="Enter value..."
+                      onChange={(e) =>
+                        handleInputChange("RPC", "IPR", "PG", e.target.value)
+                      }
+                    />
+                  </div>
+                  <div>
+                    <div className="label-txt">PP</div>
+                    <input
+                      className="ip"
+                      type="number"
+                      placeholder="Enter value..."
+                      onChange={(e) =>
+                        handleInputChange("RPC", "IPR", "PP", e.target.value)
+                      }
+                    />
+                  </div>
+                </div>
+              </div>
+              <div>
+                <div className="subopt">
+                  <div className="subopt-txt">FPPP</div>
+                </div>
+                <div className="ip-section">
+                  <div>
+                    <div className="label-txt">RF</div>
+                    <input
+                      className="ip"
+                      type="number"
+                      placeholder="Enter value..."
+                      onChange={(e) =>
+                        handleInputChange("RPC", "FPPP", "RF", e.target.value)
+                      }
+                    />
+                  </div>
+                  <div>
+                    <div className="label-txt">CF</div>
+                    <input
+                      className="ip"
+                      type="number"
+                      placeholder="Enter value..."
+                      onChange={(e) =>
+                        handleInputChange("RPC", "FPPP", "CF", e.target.value)
+                      }
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Card>
+        </Grid>
+      ) : (
+        ""
+      )}
+      {tab === "GO" ? (
+        <Grid templateColumns={{ sm: "1fr", xl: " 1fr" }} gap="22px">
+          <Card p="16px">
+            <div className="form">
+              <div className="opt-name">Graduation Outcome</div>
+              <div>
+                <div className="subopt">
+                  <div className="subopt-txt">GPH</div>
+                </div>
+                <div className="ip-section">
+                  <div>
+                    <div className="label-txt">NP</div>
+                    <input
+                      className="ip"
+                      type="number"
+                      placeholder="Enter value..."
+                      onChange={(e) =>
+                        handleInputChange("GO", "GPH", "NP", e.target.value)
+                      }
+                    />
+                  </div>
+                  <div>
+                    <div className="label-txt">
+                      N<sub>p</sub>
+                    </div>
+                    <input
+                      className="ip"
+                      type="number"
+                      placeholder="Enter value..."
+                      onChange={(e) =>
+                        handleInputChange("GO", "GPH", "NP2", e.target.value)
+                      }
+                    />
+                  </div>
+                  <div>
+                    <div className="label-txt">
+                      N<sub>hs</sub>
+                    </div>
+                    <input
+                      className="ip"
+                      type="number"
+                      placeholder="Enter value..."
+                      onChange={(e) =>
+                        handleInputChange("GO", "GPH", "NHS", e.target.value)
+                      }
+                    />
+                  </div>
+                </div>
+              </div>
+              <div>
+                <div className="subopt">
+                  <div className="subopt-txt">GUE</div>
+                </div>
+                <div className="ip-section">
+                  <div>
+                    <div className="label-txt">
+                      N<sub>g</sub>
+                    </div>
+                    <input
+                      className="ip"
+                      type="number"
+                      placeholder="Enter value..."
+                      onChange={(e) =>
+                        handleInputChange("GO", "GUE", "NG", e.target.value)
+                      }
+                    />
+                  </div>
+                </div>
+              </div>
+              <div>
+                <div className="subopt">
+                  <div className="subopt-txt">GMS</div>
+                </div>
+                <div className="ip-section">
+                  <div>
+                    <div className="label-txt">MS</div>
+                    <input
+                      className="ip"
+                      type="number"
+                      placeholder="Enter value..."
+                      onChange={(e) =>
+                        handleInputChange("GO", "GMS", "MS", e.target.value)
+                      }
+                    />
+                  </div>
+                </div>
+              </div>
+              <div>
+                <div className="subopt">
+                  <div className="subopt-txt">GPHD</div>
+                </div>
+                <div className="ip-section">
+                  <div>
+                    <div className="label-txt">
+                      N<sub>phd</sub>
+                    </div>
+                    <input
+                      className="ip"
+                      type="number"
+                      placeholder="Enter value..."
+                      onChange={(e) =>
+                        handleInputChange("GO", "GPHD", "NPHD", e.target.value)
+                      }
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Card>
+        </Grid>
+      ) : (
+        ""
+      )}
+      {tab === "OI" ? (
+        <Grid templateColumns={{ sm: "1fr", xl: " 1fr" }} gap="22px">
+          <Card p="16px">
+            <div className="form">
+              <div className="opt-name">Outreach and Inclusivity</div>
+              <div>
+                <div className="subopt">
+                  <div className="subopt-txt">RD</div>
+                </div>
+                <div className="ip-section">
+                  <div>
+                    <div className="label-txt">To calculate</div>
+                    <input
+                      className="ip"
+                      type="number"
+                      placeholder="Enter value..."
+                      onChange={(e) =>
+                        handleInputChange("OI", "RD", "TOCAL", e.target.value)
+                      }
+                    />
+                  </div>
+                  <div>
+                    <div className="label-txt">
+                      F<sub>RQ</sub>
+                    </div>
+                    <input
+                      className="ip"
+                      type="number"
+                      placeholder="Enter value..."
+                      onChange={(e) =>
+                        handleInputChange("OI", "RD", "FRQ", e.target.value)
+                      }
+                    />
+                  </div>
+                </div>
+              </div>
+              <div>
+                <div className="subopt">
+                  <div className="subopt-txt">WD</div>
+                </div>
+                <div className="ip-section">
+                  <div>
+                    <div className="label-txt">
+                      N<sub>WS</sub>
+                    </div>
+                    <input
+                      className="ip"
+                      type="number"
+                      placeholder="Enter value..."
+                      onChange={(e) =>
+                        handleInputChange("OI", "WD", "NWS", e.target.value)
+                      }
+                    />
+                  </div>
+                  <div>
+                    <div className="label-txt">
+                      N<sub>WF</sub>
+                    </div>
+                    <input
+                      className="ip"
+                      type="number"
+                      placeholder="Enter value..."
+                      onChange={(e) =>
+                        handleInputChange("OI", "WD", "NWF", e.target.value)
+                      }
+                    />
+                  </div>
+                </div>
+              </div>
+              <div>
+                <div className="subopt">
+                  <div className="subopt-txt">ESCS</div>
+                </div>
+                <div className="ip-section">
+                  <div>
+                    <div className="label-txt">
+                      N<sub>esc</sub>
+                    </div>
+                    <input
+                      className="ip"
+                      type="number"
+                      placeholder="Enter value..."
+                      onChange={(e) =>
+                        handleInputChange("OI", "ESCS", "NWS", e.target.value)
+                      }
+                    />
+                  </div>
+                </div>
+              </div>
+              <div>
+                <div className="subopt">
+                  <div className="subopt-txt">PCS</div>
+                </div>
+                <div className="ip-section">
+                  <div>
+                    <div className="label-txt">F</div>
+                    <input
+                      className="ip"
+                      type="number"
+                      placeholder="Enter value..."
+                      onChange={(e) =>
+                        handleInputChange("OI", "PCS", "F", e.target.value)
+                      }
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Card>
+        </Grid>
+      ) : (
+        ""
+      )}
+      {tab === "PR" ? (
+        <Grid templateColumns={{ sm: "1fr", xl: " 1fr" }} gap="22px">
+          <Card p="16px">
+            <div className="form">
+              <div className="opt-name">Research and Professional Practice</div>
+              <div>
+                <div className="subopt">
+                  <div className="subopt-txt">PU</div>
+                </div>
+                <div className="ip-section">
+                  <div>
+                    <div className="label-txt">Perception</div>
+                    <input
+                      className="ip"
+                      type="number"
+                      placeholder="Enter value..."
+                      onChange={(e) =>
+                        handleInputChange(
+                          "PR",
+                          "PU",
+                          "Perception",
+                          e.target.value
+                        )
+                      }
+                    />
+                  </div>
+                </div>
+              </div>
+              <div>
+                <button
+                  className="submit-btn"
+                  onClick={handleSubmit}
                 >
-                  Monthly product changes
-                </Text>
-              </Flex>
-              <Flex align="center" mb="20px">
-                <Switch colorScheme="blue" me="10px" />
-                <Text
-                  noOfLines={1}
-                  fontSize="md"
-                  color="gray.400"
-                  fontWeight="400"
-                >
-                  Subscribe to newsletter
-                </Text>
-              </Flex>
-            </Flex>
-          </CardBody>
-        </Card>
-        <Card p="16px" my={{ sm: "24px", xl: "0px" }}>
-          <CardHeader p="12px 5px" mb="12px">
-            <Text fontSize="lg" color={textColor} fontWeight="bold">
-              Profile Information
-            </Text>
-          </CardHeader>
-          <CardBody px="5px">
-            <Flex direction="column">
-              <Text fontSize="md" color="gray.400" fontWeight="400" mb="30px">
-                Hi, I’m Esthera Jackson, Decisions: If you can’t decide, the
-                answer is no. If two equally difficult paths, choose the one
-                more painful in the short term (pain avoidance is creating an
-                illusion of equality).
-              </Text>
-              <Flex align="center" mb="18px">
-                <Text
-                  fontSize="md"
-                  color={textColor}
-                  fontWeight="bold"
-                  me="10px"
-                >
-                  Full Name:{" "}
-                </Text>
-                <Text fontSize="md" color="gray.400" fontWeight="400">
-                  Esthera Jackson
-                </Text>
-              </Flex>
-              <Flex align="center" mb="18px">
-                <Text
-                  fontSize="md"
-                  color={textColor}
-                  fontWeight="bold"
-                  me="10px"
-                >
-                  Mobile:{" "}
-                </Text>
-                <Text fontSize="md" color="gray.400" fontWeight="400">
-                  (44) 123 1234 123
-                </Text>
-              </Flex>
-              <Flex align="center" mb="18px">
-                <Text
-                  fontSize="md"
-                  color={textColor}
-                  fontWeight="bold"
-                  me="10px"
-                >
-                  Email:{" "}
-                </Text>
-                <Text fontSize="md" color="gray.400" fontWeight="400">
-                  esthera@simmmple.com
-                </Text>
-              </Flex>
-              <Flex align="center" mb="18px">
-                <Text
-                  fontSize="md"
-                  color={textColor}
-                  fontWeight="bold"
-                  me="10px"
-                >
-                  Location:{" "}
-                </Text>
-                <Text fontSize="md" color="gray.400" fontWeight="400">
-                  United States
-                </Text>
-              </Flex>
-              <Flex align="center" mb="18px">
-                <Text
-                  fontSize="md"
-                  color={textColor}
-                  fontWeight="bold"
-                  me="10px"
-                >
-                  Social Media:{" "}
-                </Text>
-                <Flex>
-                  <Link
-                    href="#"
-                    color={iconColor}
-                    fontSize="lg"
-                    me="10px"
-                    _hover={{ color: "blue.500" }}
-                  >
-                    <Icon as={FaFacebook} />
-                  </Link>
-                  <Link
-                    href="#"
-                    color={iconColor}
-                    fontSize="lg"
-                    me="10px"
-                    _hover={{ color: "blue.500" }}
-                  >
-                    <Icon as={FaInstagram} />
-                  </Link>
-                  <Link
-                    href="#"
-                    color={iconColor}
-                    fontSize="lg"
-                    me="10px"
-                    _hover={{ color: "blue.500" }}
-                  >
-                    <Icon as={FaTwitter} />
-                  </Link>
-                </Flex>
-              </Flex>
-            </Flex>
-          </CardBody>
-        </Card>
-        <Card p="16px">
-          <CardHeader p="12px 5px" mb="12px">
-            <Text fontSize="lg" color={textColor} fontWeight="bold">
-              Conversations
-            </Text>
-          </CardHeader>
-        </Card>
-      </Grid>
+                  Submit
+                </button>
+              </div>
+            </div>
+          </Card>
+        </Grid>
+      ) : (
+        ""
+      )}
     </Flex>
   );
 }
