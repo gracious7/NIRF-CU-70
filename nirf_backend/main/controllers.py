@@ -18,7 +18,8 @@ weightage = {
 }
 
 def rank_prediction(features):
-  df = pd.read_csv('/backend/main/data/nirf/2022.csv')
+  file_path = os.path.join(BASE_DIR, 'main/data/nirf/2022.csv')
+  df = pd.read_csv(file_path)
   df['Weighted_Score'] = (
     df['TLR'] * weightage['TLR'] +
     df['RPC'] * weightage['RPC'] +
@@ -66,7 +67,8 @@ def find_college_data(college):
 
 def get_feature_scores(college):
   year = 2023
-  df = pd.read_csv(f'/backend/main/data/nirf/{year}.csv')
+  file_path = os.path.join(BASE_DIR, f'main/data/nirf/{year}.csv')
+  df = pd.read_csv(file_path)
 
   df['Name'] = df['Name'].str.upper()
   df['Name'] = df['Name'].str.replace(",", "")
@@ -105,7 +107,8 @@ def get_ranks(college):
   data = {type: [] for type in type_required}
 
   for y in years:
-    df = pd.read_csv(f'/backend/main/data/nirf/{y}.csv')
+    file_path = os.path.join(BASE_DIR, f'main/data/nirf/{y}.csv')
+    df = pd.read_csv(file_path)
     df['Name'] = df['Name'].str.upper()
     df['Name'] = df['Name'].str.replace(",", "")
     college = college.upper()
@@ -157,7 +160,8 @@ def get_overall_feature_scores(college, features):
   data = {type: [] for type in type_required}
 
   for y in years:
-    df = pd.read_csv(f'/backend/main/data/nirf/{y}.csv')
+    file_path = os.path.join(BASE_DIR, f'main/data/nirf/{y}.csv')
+    df = pd.read_csv(file_path)
     df['Name'] = df['Name'].str.upper()
     df['Name'] = df['Name'].str.replace(",", "")
     college = college.upper()
