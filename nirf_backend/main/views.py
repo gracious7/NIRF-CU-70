@@ -2,7 +2,7 @@ from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 import pandas as pd
-from .controllers import rank_prediction, find_college_data, get_graphs, get_overall_graphs, compare
+from .controllers import rank_prediction, find_college_data, get_graphs, get_overall_graphs, compare, get_recommendation
 from .models import College_Admin
 import os
 import jwt
@@ -99,4 +99,16 @@ def compare_college(request):
   college1 = college_data['college']
 
   comparison = compare(college1, data['compare'])
-  return Response({'ok': True, 'message': comparison})
+  return Response({'ok': True, 'message': comparison[0], 'graphs': comparison[1]})
+
+
+@api_view(['POST'])
+def recommend(request):
+  data = request.data
+  token = data['token']
+  college_data = jwt.decode(token, os.environ.get('SECRET_KEY'), algorithms=["HS256"])
+  college = college_data['college']
+  rank = data['rank']
+
+  recoms = get_recommendation(college, rank)
+  return Response({'ok': True, 'message': recoms})

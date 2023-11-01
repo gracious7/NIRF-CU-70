@@ -9,7 +9,8 @@ import {
   Thead,
   Tr,
   Button,
-  useColorModeValue
+  useColorModeValue,
+  useColorMode
 } from "@chakra-ui/react";
 // Custom components
 import Card from "components/Card/Card.js";
@@ -27,6 +28,7 @@ function Tables() {
   const textColor = useColorModeValue("gray.700", "white");
   const borderColor = useColorModeValue("gray.200", "gray.600");
   const history = useHistory();
+  const theme = useColorMode();
 
   const token = localStorage.getItem('token');
   const rank = localStorage.getItem('rank');
@@ -35,6 +37,7 @@ function Tables() {
   const [reqFeatures, setReqFeatures] = useState({ 'TLR': 0, 'RPC': 0, 'GO': 0, 'OI': 0, 'PR': 0 })
   const [compare, setCompare] = useState("");
   const [comparisonResult, setComparisonResult] = useState([]);
+  const [comparisonGraph, setComparisonGraph] = useState();
 
   const notAuth = !token || !rank || !score;
 
@@ -67,6 +70,24 @@ function Tables() {
     });
     console.log(response.data.message);
     setComparisonResult(response.data.message);
+    console.log(response.data.graphs);
+    setComparisonGraph(response.data.graphs);
+  }
+
+  const [reqRank, setReqRank] = useState();
+  const [recommendations, setRecommendation] = useState([]);
+  const handlerecommend = (e) => {
+    setReqRank(e.target.value);
+  }
+
+  const recommend = async () => {
+    const response = await axios.post('http://localhost:8000/api/recommend', {token: token, rank: reqRank}, {
+      headers: {
+        "Content-type": "application/json"
+      }
+    });
+    console.log(response);
+    setRecommendation(response.data.message)
   }
 
   return (
@@ -93,6 +114,8 @@ function Tables() {
               <Button onClick={compare_college}>Compare</Button>
             </div>
           </Flex>
+          <Flex direction="column">
+            <div>
           <ul>
             {comparisonResult.map(result => (
               <li>
@@ -100,6 +123,11 @@ function Tables() {
               </li>
             ))}
           </ul>
+          </div>
+          <div>
+              {comparisonGraph && <img src={`data:image/png;base64,${comparisonGraph}`} />}
+          </div>
+          </Flex>
         </CardBody>
       </Card>
       <Card
@@ -110,22 +138,22 @@ function Tables() {
         <CardHeader p="6px 0px 22px 0px">
           <Flex direction="column">
             <Text fontSize="lg" color={textColor} fontWeight="bold" pb=".5rem">
-              Compare your college
+              Get Recommendation
             </Text>
           </Flex>
         </CardHeader>
         <CardBody>
           <Flex direction="row">
             <div>
-              Your College VS
-              <CollegeSearch setClgName={setCompare} />
+              <input style={{backgroundColor: theme.colorMode === "light" ? 'white' : '#0f183c', color: theme.colorMode === "light" ? 'black' : 'white'}} type="text" onChange={(e) => handlerecommend(e)} placeholder="Required Rank" />
             </div>
             <div>
-              <Button onClick={compare_college}>Compare</Button>
+              <Button onClick={recommend}>Get Recommendation</Button>
             </div>
           </Flex>
+          {recommendations.length !== 0 && "Your recommendations in priority order: "}
           <ul>
-            {comparisonResult.map(result => (
+            {recommendations.map(result => (
               <li>
                 {result}
               </li>
