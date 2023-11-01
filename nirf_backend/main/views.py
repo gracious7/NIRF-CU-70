@@ -2,7 +2,7 @@ from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 import pandas as pd
-from .controllers import rank_prediction, find_college_data
+from .controllers import rank_prediction, find_college_data, get_graphs, get_overall_graphs
 from .models import College_Admin
 import os
 import jwt
@@ -55,3 +55,36 @@ def login(request):
     return Response({"ok": True, "message": "Logged in", "college_data": college_data, "token": encoded_jwt})
   else:
     return Response({"ok": False, "message": "Wrong Password"})
+  
+
+@api_view(["POST"])
+def get_performance(request):
+  data = request.data
+  token = data['token']
+  try:
+    college_data = jwt.decode(token, os.environ.get('SECRET_KEY'), algorithms=["HS256"])
+    college_name = college_data['college']
+
+    graphs = get_graphs(college_name)
+    return Response({'ok': True, 'message': "Graph fetched", 'graphs': graphs})
+  except:
+    return Response({'ok': False, 'message': "Unauthorized"})
+
+
+@api_view(['POST'])
+def get_overall_performance(request):
+  data = request.data
+  token = data['token']
+  try:
+    college_data = jwt.decode(token, os.environ.get('SECRET_KEY'), algorithms=["HS256"])
+    college_name = college_data['college']
+    reqFeatures = []
+    print(data['reqFeatures'])
+    for i in data['reqFeatures'].keys():
+      if data['reqFeatures'][i] == 1:
+        reqFeatures.append(i)
+
+    graphs = get_overall_graphs(college_name, reqFeatures)
+    return Response({'ok': True, 'message': "Graph fetched", 'graphs': graphs})
+  except:
+    return Response({'ok': False, 'message': "Unauthorized"})

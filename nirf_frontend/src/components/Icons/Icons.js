@@ -1,6 +1,6 @@
 import { createIcon } from "@chakra-ui/icons";
 import React, { Component }  from 'react';
-
+import { FaTrophy } from 'react-icons/fa';
 export const AdobexdLogo = createIcon({
   displayName: "AdobexdLogo",
   viewBox: "0 0 24 24",
@@ -114,8 +114,8 @@ export const CreditIcon = createIcon({
   viewBox: "0 0 24 24",
   path: (
     <path
-      fill='currentColor'
-      d='M1.406 17.023a2.461 2.461 0 002.461 2.46h14.766a2.461 2.461 0 002.46-2.46v-6.768H1.407v6.768zm2.9-3.34a1.318 1.318 0 011.319-1.318h2.11a1.318 1.318 0 011.318 1.318v.879a1.318 1.318 0 01-1.319 1.318H5.625a1.318 1.318 0 01-1.318-1.318v-.879zM18.633 4.014H3.867a2.46 2.46 0 00-2.46 2.461v1.143h19.687V6.475a2.46 2.46 0 00-2.461-2.46z'
+      // fill='currentColor'
+      d={FaTrophy}
     />
   ),
 });

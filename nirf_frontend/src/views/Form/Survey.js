@@ -123,11 +123,18 @@ function Survey() {
   };
 
   const handleSubmit = () => {
+<<<<<<< HEAD
     // You can access the formData object here and do whatever you want with it
     console.log(formData);
     const computedMetrics = calculateMetrics(formData);
     console.log("Matrices are: ");
     console.log(computedMetrics);
+=======
+    console.log(formData.RPC);
+    formData.RPC.PU = 35 * parseFloat(formData.RPC.PU.P) / parseFloat(formData.RPC.PU.FRQ)
+    formData.RPC.QP = 20 * parseFloat(formData.RPC.PU.P) / parseFloat(formData.RPC.PU.FRQ)
+    console.log(formData.RPC);
+>>>>>>> 6c255ed15b508eaa5edf85e246c4a6c6b5b4cdfc
   };
 
   function calculateMetrics(formData) {

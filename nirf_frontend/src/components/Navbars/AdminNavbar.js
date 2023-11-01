@@ -123,7 +123,7 @@ export default function AdminNavbar(props) {
         <Box mb={{ sm: "8px", md: "0px" }}>
           <Breadcrumb>
             <BreadcrumbItem color={mainText}>
-              <BreadcrumbLink href="#" color={secondaryText}>
+              <BreadcrumbLink href="/" color={secondaryText}>
                  {/* Pages */}
                  <center>
                   <h1>NIRF 2.0</h1>
