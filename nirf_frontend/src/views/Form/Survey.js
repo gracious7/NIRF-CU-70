@@ -43,12 +43,7 @@ import { IoDocumentsSharp } from "react-icons/io5";
 import CollegeSearch from "./CollegeSearch";
 import "./Survey.css";
 
-const colleges = [
-  { id: 1, name: "Harvard University" },
-  { id: 2, name: "Stanford University" },
-  { id: 3, name: "MIT" },
-  // Add more colleges to the array
-];
+import colleges from '../../assets/data/colleges.json';
 
 function Survey() {
   const { colorMode } = useColorMode();
@@ -112,7 +107,7 @@ function Survey() {
   return (
     <Flex direction="column" pt={{ base: "120px", md: "75px", lg: "100px" }}>
       <div>
-        <CollegeSearch colleges={colleges} />
+        <CollegeSearch/>
       </div>
       <div className="toggle-nav">
         <div
@@ -152,14 +147,14 @@ function Survey() {
           <Card p="16px">
             <div className="form">
               <div className="opt-name">Teaching, Learining & Resources</div>
-              <div>
+              <div className="main-container">
                 <div className="subopt">
                   <div className="subopt-txt">SS</div>
                 </div>
                 <div className="ip-section">
                   <div>
                     <div className="label-txt">
-                      N<sub>T</sub>
+                      <div>N<sub>T</sub></div>
                     </div>
                     <input
                       className="ip"
@@ -172,7 +167,7 @@ function Survey() {
                   </div>
                   <div>
                     <div className="label-txt">
-                      N<sub>P</sub>
+                      <div>N<sub>P</sub></div>
                     </div>
                     <input
                       className="ip"
@@ -185,6 +180,7 @@ function Survey() {
                   </div>
                 </div>
               </div>
+              
               <div>
                 <div className="subopt">
                   <div className="subopt-txt">FSR</div>
@@ -312,7 +308,7 @@ function Survey() {
                   </div>
                   <div>
                     <div className="label-txt">
-                      F<sub>RQ</sub>
+                      <div>F<sub>RQ</sub></div>
                     </div>
                     <input
                       className="ip"
@@ -343,7 +339,7 @@ function Survey() {
                   </div>
                   <div>
                     <div className="label-txt">
-                      F<sub>RQ</sub>
+                      <div>F<sub>RQ</sub></div>
                     </div>
                     <input
                       className="ip"
@@ -459,7 +455,7 @@ function Survey() {
                   </div>
                   <div>
                     <div className="label-txt">
-                      N<sub>p</sub>
+                      <div>N<sub>p</sub></div>
                     </div>
                     <input
                       className="ip"
@@ -472,7 +468,7 @@ function Survey() {
                   </div>
                   <div>
                     <div className="label-txt">
-                      N<sub>hs</sub>
+                      <div>N<sub>hs</sub></div>
                     </div>
                     <input
                       className="ip"
@@ -492,7 +488,7 @@ function Survey() {
                 <div className="ip-section">
                   <div>
                     <div className="label-txt">
-                      N<sub>g</sub>
+                      <div>N<sub>g</sub></div>
                     </div>
                     <input
                       className="ip"
@@ -530,7 +526,7 @@ function Survey() {
                 <div className="ip-section">
                   <div>
                     <div className="label-txt">
-                      N<sub>phd</sub>
+                      <div>N<sub>phd</sub></div>
                     </div>
                     <input
                       className="ip"
@@ -572,7 +568,7 @@ function Survey() {
                   </div>
                   <div>
                     <div className="label-txt">
-                      F<sub>RQ</sub>
+                      <div>F<sub>RQ</sub></div>
                     </div>
                     <input
                       className="ip"
@@ -592,7 +588,7 @@ function Survey() {
                 <div className="ip-section">
                   <div>
                     <div className="label-txt">
-                      N<sub>WS</sub>
+                      <div>N<sub>WS</sub></div>
                     </div>
                     <input
                       className="ip"
@@ -605,7 +601,7 @@ function Survey() {
                   </div>
                   <div>
                     <div className="label-txt">
-                      N<sub>WF</sub>
+                      <div>N<sub>WF</sub></div>
                     </div>
                     <input
                       className="ip"
@@ -625,7 +621,7 @@ function Survey() {
                 <div className="ip-section">
                   <div>
                     <div className="label-txt">
-                      N<sub>esc</sub>
+                      <div>N<sub>esc</sub></div>
                     </div>
                     <input
                       className="ip"

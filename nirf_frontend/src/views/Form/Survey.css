@@ -8,6 +8,7 @@
  .tab-buttons {
    display: flex;
    justify-content: space-between;
+
    margin-bottom: 20px;
  }
  
@@ -92,8 +93,9 @@
 
  .opt-name{
    color:rgb(62, 62, 62);
-   font-size: 18px;
+   font-size: 26px;
    font-weight: 600;
+   margin-bottom: 1.5rem;
  }
 
  .tooltip {
@@ -130,20 +132,23 @@
    font-weight: 600;
    margin-left: 4rem;
  }
+ .subopt-txt{
+   font-size: 18px;
+ }
  
  .ip-section{
-   margin-top: 2rem;
    margin-bottom: 2rem;
    display: flex;
-   justify-content: space-between;
+   /* justify-content: space-between; */
    margin-left: 4rem;
    margin-right: 4rem;
+   
 }
 
 .label-txt{
    display: flex;
    font-size: 14px;
-   color:#555;
+   color:#6a6a6a;
    font-weight: 600;
    justify-self: flex-start;
    margin-left: 1rem;
@@ -155,7 +160,8 @@
    border-radius: 7px;
    border:#c1c1c1 solid 1px;
    padding: 0.5rem;
-   width: 20rem;
+   width: 30rem;
+   margin-right: 3rem;
    
    
  }

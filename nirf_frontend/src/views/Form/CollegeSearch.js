@@ -1,58 +1,72 @@
-import React, { useState } from 'react';
-import './CollegeSearch.css';
+import React, { useState, useRef, useEffect } from "react";
+import collegesData from "../../assets/data/colleges.json"; // Import your college data
+import "./CollegeSearch.css";
 
-const CollegeSearch = ({ colleges }) => {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [filteredColleges, setFilteredColleges] = useState([]);
-  const [selectedCollege, setSelectedCollege] = useState(null);
+const CollegeSearch = () => {
+  const [searchText, setSearchText] = useState("");
+  const [suggestions, setSuggestions] = useState([]);
+  const inputRef = useRef(null);
+  const containerRef = useRef(null);
 
-  const handleSearch = (query) => {
-    const regex = new RegExp(query, 'i');
-    const filteredColleges = colleges.filter((college) => regex.test(college.name));
-    setFilteredColleges(filteredColleges);
+  const handleInputChange = (e) => {
+    const text = e.target.value;
+    setSearchText(text);
+
+    const regex = new RegExp(text, "i");
+    const filteredColleges = collegesData.filter((college) =>
+      regex.test(college.name)
+    );
+
+    // Show only the first 5 suggestions
+    const limitedSuggestions = filteredColleges.slice(0, 5);
+    setSuggestions(limitedSuggestions);
   };
 
-  const handleChange = (event) => {
-    const query = event.target.value;
-    setSearchQuery(query);
-    handleSearch(query);
+  const handleSuggestionClick = (college) => {
+    setSearchText(college.name);
+    setSuggestions([]);
   };
 
-  const handleSelectCollege = (college) => {
-    setSearchQuery(college.name);
-    setSelectedCollege(college);
-    setFilteredColleges([]); // Hide the suggestions
-  };
-
-  const handleSuggestionsClick = (event) => {
-    const selectedCollegeName = event.target.textContent;
-    const selectedCollege = colleges.find((college) => college.name === selectedCollegeName);
-    if (selectedCollege) {
-      handleSelectCollege(selectedCollege);
+  const handleClickOutside = (event) => {
+    if (
+      containerRef.current &&
+      !containerRef.current.contains(event.target) &&
+      inputRef.current !== event.target
+    ) {
+      setSuggestions([]);
     }
   };
 
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
-    <div className="CollegeSearch">
+    <div className="search-container CollegeSearch" ref={containerRef}>
       <input
         className="college-input"
         type="text"
-        placeholder="Select the College..."
-        value={searchQuery}
-        onChange={handleChange}
+        placeholder="Search for a college"
+        value={searchText}
+        onChange={handleInputChange}
+        ref={inputRef}
       />
-      <ul className="college-ul">
-        {filteredColleges.map((college) => (
-          <li
-            className="college-li"
-            key={college.id}
-            onClick={() => handleSelectCollege(college)}
-          >
-            {college.name}
-          </li>
-        ))}
-      </ul>
-      {selectedCollege && <p>Selected: {selectedCollege.name}</p>}
+      {suggestions.length > 0 && (
+        <div className="suggestions">
+          {suggestions.map((college) => (
+            <div
+              key={college.id}
+              className="suggestion"
+              onClick={() => handleSuggestionClick(college)}
+            >
+              {college.name}
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
