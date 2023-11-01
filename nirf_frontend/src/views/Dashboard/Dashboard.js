@@ -32,6 +32,7 @@ import {
   WalletIcon,
 } from "components/Icons/Icons.js";
 import React from "react";
+import { useHistory } from "react-router-dom";
 // Variables
 import {
   barChartData,
@@ -55,6 +56,15 @@ export default function Dashboard() {
 
   const parameter = ["College Name", "State", "City", "NIRF", "Score"];
 
+  const token = localStorage.getItem('token');
+  const rank = localStorage.getItem('rank');
+  const score = localStorage.getItem('score');
+  const history = useHistory()
+
+  if (!token || !rank || !score) {
+    history.push('/auth/signin');
+  }
+
   return (
     <Flex flexDirection="column" pt={{ base: "120px", md: "75px" }}>
       <SimpleGrid columns={{ sm: 1, md: 2, xl: 4 }} spacing="24px" mb="20px">
@@ -74,11 +84,11 @@ export default function Dashboard() {
                   fontWeight="bold"
                   textTransform="uppercase"
                 >
-                  Today's Users
+                  Latest NIRF Rank
                 </StatLabel>
                 <Flex>
                   <StatNumber fontSize="lg" color={textColor} fontWeight="bold">
-                    $3,200
+                    {rank}
                   </StatNumber>
                 </Flex>
               </Stat>
@@ -92,12 +102,12 @@ export default function Dashboard() {
                 <GlobeIcon h={"24px"} w={"24px"} color={iconBoxInside} />
               </IconBox>
             </Flex>
-            <Text color="gray.400" fontSize="sm">
+            {/* <Text color="gray.400" fontSize="sm">
               <Text as="span" color="green.400" fontWeight="bold">
                 +5.2%{" "}
               </Text>
               Since last month
-            </Text>
+            </Text> */}
           </Flex>
         </Card>
         <Card minH="125px">
@@ -116,11 +126,11 @@ export default function Dashboard() {
                   fontWeight="bold"
                   textTransform="uppercase"
                 >
-                  New Clients
+                  Latest NIRF Score
                 </StatLabel>
                 <Flex>
                   <StatNumber fontSize="lg" color={textColor} fontWeight="bold">
-                    +2,503
+                    {score}
                   </StatNumber>
                 </Flex>
               </Stat>
@@ -134,15 +144,15 @@ export default function Dashboard() {
                 <DocumentIcon h={"24px"} w={"24px"} color={iconBoxInside} />
               </IconBox>
             </Flex>
-            <Text color="gray.400" fontSize="sm">
+            {/* <Text color="gray.400" fontSize="sm">
               <Text as="span" color="red.500" fontWeight="bold">
                 -2.82%{" "}
               </Text>
               Since last month
-            </Text>
+            </Text> */}
           </Flex>
         </Card>
-        <Card minH="125px">
+        {/* <Card minH="125px">
           <Flex direction="column">
             <Flex
               flexDirection="row"
@@ -183,7 +193,7 @@ export default function Dashboard() {
               Since last month
             </Text>
           </Flex>
-        </Card>
+        </Card> */}
       </SimpleGrid>
       <Grid
         templateColumns={{ sm: "1fr", lg: "2fr 1fr" }}

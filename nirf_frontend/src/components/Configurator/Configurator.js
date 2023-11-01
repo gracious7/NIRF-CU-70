@@ -30,7 +30,7 @@ export default function Configurator(props) {
   } = props;
   const [switched, setSwitched] = useState(props.isChecked);
 
-  const { colorMode, toggleColorMode } = useColorMode();
+  const { colorMode, toggleColorMode } = useColorMode("dark");
 
   let bgButton = useColorModeValue(
     "linear-gradient(81.62deg, #313860 2.25%, #151928 79.87%)",

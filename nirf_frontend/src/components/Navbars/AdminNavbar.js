@@ -130,7 +130,7 @@ export default function AdminNavbar(props) {
                  </center>
               </BreadcrumbLink>
             </BreadcrumbItem>
-
+            
             <BreadcrumbItem color={mainText}>
               <BreadcrumbLink href="#" color={mainText}>
                 {brandText}

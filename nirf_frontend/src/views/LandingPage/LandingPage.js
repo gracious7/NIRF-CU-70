@@ -14,6 +14,9 @@ import {
   useColorMode,
   useColorModeValue,
 } from "@chakra-ui/react";
+import axios from 'axios';
+import { useHistory } from 'react-router-dom';
+
 // Assets
 import avatar2 from "assets/img/avatars/avatar2.png";
 import avatar3 from "assets/img/avatars/avatar3.png";
@@ -23,9 +26,10 @@ import avatar6 from "assets/img/avatars/avatar6.png";
 import ImageArchitect1 from "assets/img/ImageArchitect1.png";
 import ImageArchitect2 from "assets/img/ImageArchitect2.png";
 import ImageArchitect3 from "assets/img/ImageArchitect3.png";
+import GraphImage from "assets/img/graph-img.png";
+import "../LandingPage/LandingPage.css"
 // Custom components
 import Card from "components/Card/Card";
-// import searchicon from ".../assets/img/avatars/searchicon.png";
 import CardBody from "components/Card/CardBody";
 import CardHeader from "components/Card/CardHeader";
 import React from "react";
@@ -39,9 +43,15 @@ import {
   FaTwitter,
 } from "react-icons/fa";
 import { IoDocumentsSharp } from "react-icons/io5";
+import SearchBar from "./LandingSb";
 
 function LandingPage() {
   const { colorMode } = useColorMode();
+  let cardColor = "#ffffff";
+
+  if (colorMode === "dark") {
+    cardColor = "#0f183c";
+  }
 
   // Chakra color mode
   const textColor = useColorModeValue("gray.700", "white");
@@ -49,470 +59,116 @@ function LandingPage() {
   const bgProfile = useColorModeValue("hsla(0,0%,100%,.8)", "navy.800");
   const borderProfileColor = useColorModeValue("white", "transparent");
   const emailColor = useColorModeValue("gray.400", "gray.300");
-  const searchBoxStyles = {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    position: 'relative',
-    maxWidth: '300px', // Set a maximum width for the input field
-  };
 
-  const searchIconStyles = {
-    position: 'absolute',
-    left: '10px', // Adjust the left position of the search icon
-  };
+  //College Array
+  const colleges = [
+    { id: 1, name: 'Harvard University' },
+    { id: 2, name: 'Stanford University' },
+    { id: 3, name: 'MIT' },
+    // Add more colleges to the array
+  ];
 
-  const inputStyles = {
-    paddingLeft: '30px', // Ensure some space for the search icon
-    width: '100%',
-  };
+  //Academic Years for NIRF Ranking 
+  const dateAndLink = [
+    {
+      date: "2016",
+      link: "#"
+    },
+    {
+      date: "2017",
+      link: "#"
+    },
+    {
+      date: "2018",
+      link: "#"
+    },
+    {
+      date: "2019",
+      link: "#"
+    },
+    {
+      date: "2020",
+      link: "#"
+    },
+    {
+      date: "2021",
+      link: "#"
+    },
+    {
+      date: "2022",
+      link: "#"
+    },
+    {
+      date: "2023",
+      link: "#"
+    },
+  ];
+
+  const history = useHistory();
+  const getRank = async (year) => {
+    console.log(year);
+    const response = await axios.get(`http://localhost:8000/api/get_ranks?year=${year}`);
+    const rows = response.data.message;
+    history.push('/table', { rows: rows, name: year });
+  }
+
   return (
     <Flex direction="column" pt={{ base: "120px", md: "75px", lg: "100px" }}>
-      {/* <div className="text-[red] font-bold texth1">Hello </div> */}
-     
-        <Flex
-          direction={{ sm: "column", md: "row" }}
-          mb="24px"
-          maxH="330px"
-          justifyContent={{ sm: "center", md: "space-between" }}
-          align="center"
-          backdropFilter="blur(21px)"
-          boxShadow="0px 2px 5.5px rgba(0, 0, 0, 0.02)"
-          border="1.5px solid"
-          borderColor={borderProfileColor}
-          bg={bgProfile}
-          p="24px"
-          borderRadius="20px"
-        >
-          <Flex
-            align="center"
-            mb={{ sm: "10px", md: "0px" }}
-            direction={{ sm: "column", md: "row" }}
-            w={{ sm: "100%" }}
-            textAlign={{ sm: "center", md: "start" }}
-          >
+      <Flex
+        mb="24px"
+        maxH="330px"
+        justifyContent={{ sm: "center", md: "space-between" }}
+        align="center"
+        backdropFilter="blur(21px)"
+        boxShadow="0px 2px 5.5px rgba(0, 0, 0, 0.02)"
+        border="1.5px solid"
+        borderColor={borderProfileColor}
+        bg={bgProfile}
+        p="24px"
+        borderRadius="20px"
+      >
+        <SearchBar />
+        <button>Search</button>
+      </Flex>
+      <div className="year-heading">NIRF Rankings by Academic Year</div>
+      <Grid templateColumns={{ sm: "1fr", md: "repeat(3, 1fr)", xl: "repeat(4, 1fr)" }} gap="22px">
+        {dateAndLink.map((el, key) => {
+          return (
+            <a key={key} style={{cursor: 'pointer'}}>
+              <Card
+                p="16px"
+                bg={`url(${GraphImage}), ${cardColor}`}
 
-            <div style={{ textAlign: 'center', marginLeft: '500px' }}>
-              <div style={searchBoxStyles}>
-                {/* <img  alt="Search Icon" style={searchIconStyles} /> */}
-                <input className="search-bar" type="text" placeholder="Institute Name" style={inputStyles} />
-              </div>
-            </div>
-           
-            {/* <Avatar
-            me={{ md: "22px" }}
-            src={avatar5}
-            w="80px"
-            h="80px"
-            borderRadius="15px"
-          /> */}
-            {/* <Flex direction="column" maxWidth="100%" my={{ sm: "14px" }}>
-            <Text
-              fontSize={{ sm: "lg", lg: "xl" }}
-              color={textColor}
-              fontWeight="bold"
-              ms={{ sm: "8px", md: "0px" }}
-            >
-              Alec Thompson
-            </Text>
-            <Text
-              fontSize={{ sm: "sm", md: "md" }}
-              color={emailColor}
-              fontWeight="semibold"
-            >
-              alec@simmmple.com
-            </Text>
-          </Flex> */}
-          </Flex>
-          <Flex
-            direction={{ sm: "column", lg: "row" }}
-            w={{ sm: "100%", md: "50%", lg: "auto" }}
-          >
-            {/* <Button p="0px" bg="transparent" variant="no-effects">
-            <Flex
-              align="center"
-              w={{ sm: "100%", lg: "135px" }}
-              bg={colorMode === "dark" ? "navy.900" : "#fff"}
-              borderRadius="8px"
-              justifyContent="center"
-              py="10px"
-              boxShadow="0px 2px 5.5px rgba(0, 0, 0, 0.06)"
-              cursor="pointer"
-            >
-              <Icon color={textColor} as={FaCube} me="6px" />
-              <Text fontSize="xs" color={textColor} fontWeight="bold">
-                OVERVIEW
-              </Text>
-            </Flex>
-          </Button> */}
-            {/* <Button p="0px" bg="transparent" variant="no-effects">
-            <Flex
-              align="center"
-              w={{ lg: "135px" }}
-              borderRadius="15px"
-              justifyContent="center"
-              py="10px"
-              mx={{ lg: "1rem" }}
-              cursor="pointer"
-            >
-              <Icon color={textColor} as={IoDocumentsSharp} me="6px" />
-              <Text fontSize="xs" color={textColor} fontWeight="bold">
-                TEAMS
-              </Text>
-            </Flex>
-          </Button> */}
-            {/* <Button p="0px" bg="transparent" variant="no-effects">
-            <Flex
-              align="center"
-              w={{ lg: "135px" }}
-              borderRadius="15px"
-              justifyContent="center"
-              py="10px"
-              cursor="pointer"
-            >
-              <Icon color={textColor} as={FaPenFancy} me="6px" />
-              <Text fontSize="xs" color={textColor} fontWeight="bold">
-                PROJECTS
-              </Text>
-            </Flex>
-          </Button> */}
-          </Flex>
-        </Flex>
+                backgroundSize="contain" // Set the background size to contain
+                backgroundRepeat="no-repeat" // Prevent background image from repeating
+                // You can also set a fixed height for the Card to control its size
+                minHeight="20px"
+                transition="transform 0.2s, box-shadow 0.2s" // Add a transition effect
 
-        <Grid templateColumns={{ sm: "1fr", xl: "repeat(3, 1fr)" }} gap="22px">
-        <Card p="16px">
-          <CardHeader p="12px 5px" mb="12px">
-            <Text fontSize="lg" color={textColor} fontWeight="bold">
-              Platform Settings
-            </Text>
-          </CardHeader>
-          <CardBody px="5px">
-            <Flex direction="column">
-              <Text fontSize="sm" color="gray.400" fontWeight="600" mb="20px">
-                ACCOUNT
-              </Text>
-
-              <Flex align="center" mb="20px">
-                <Switch colorScheme="blue" me="10px" />
-                <Text
-                  noOfLines={1}
-                  fontSize="md"
-                  color="gray.400"
-                  fontWeight="400"
-                >
-                  Email me when someone mentions me
-                </Text>
-              </Flex>
-              <Text
-                fontSize="sm"
-                color="gray.400"
-                fontWeight="600"
-                m="6px 0px 20px 0px"
+                _hover={{
+                  transform: "scale(1.05)", // Increase size on hover
+                  boxShadow: "0px 8px 20px rgba(0, 0, 0, 0.2)", // Increase shadow on hover
+                }}
+                onClick={() => getRank(el.date)}
               >
-                APPLICATION
-              </Text>
-              <Flex align="center" mb="20px">
-                <Switch colorScheme="blue" me="10px" />
-                <Text
-                  noOfLines={1}
-                  fontSize="md"
-                  color="gray.400"
-                  fontWeight="400"
-                >
-                  New launches and projects
-                </Text>
-              </Flex>
-              <Flex align="center" mb="20px">
-                <Switch colorScheme="blue" me="10px" />
-                <Text
-                  noOfLines={1}
-                  fontSize="md"
-                  color="gray.400"
-                  fontWeight="400"
-                >
-                  Monthly product changes
-                </Text>
-              </Flex>
-              <Flex align="center" mb="20px">
-                <Switch colorScheme="blue" me="10px" />
-                <Text
-                  noOfLines={1}
-                  fontSize="md"
-                  color="gray.400"
-                  fontWeight="400"
-                >
-                  Subscribe to newsletter
-                </Text>
-              </Flex>
-            </Flex>
-          </CardBody>
-        </Card>
-        <Card p="16px" my={{ sm: "24px", xl: "0px" }}>
-          <CardHeader p="12px 5px" mb="12px">
-            <Text fontSize="lg" color={textColor} fontWeight="bold">
-              Profile Information
-            </Text>
-          </CardHeader>
-          <CardBody px="5px">
-            <Flex direction="column">
-              <Text fontSize="md" color="gray.400" fontWeight="400" mb="30px">
-                Hi, I’m Esthera Jackson, Decisions: If you can’t decide, the
-                answer is no. If two equally difficult paths, choose the one
-                more painful in the short term (pain avoidance is creating an
-                illusion of equality).
-              </Text>
-              <Flex align="center" mb="18px">
-                <Text
-                  fontSize="md"
-                  color={textColor}
-                  fontWeight="bold"
-                  me="10px"
-                >
-                  Full Name:{" "}
-                </Text>
-                <Text fontSize="md" color="gray.400" fontWeight="400">
-                  Esthera Jackson
-                </Text>
-              </Flex>
-              <Flex align="center" mb="18px">
-                <Text
-                  fontSize="md"
-                  color={textColor}
-                  fontWeight="bold"
-                  me="10px"
-                >
-                  Mobile:{" "}
-                </Text>
-                <Text fontSize="md" color="gray.400" fontWeight="400">
-                  (44) 123 1234 123
-                </Text>
-              </Flex>
-              <Flex align="center" mb="18px">
-                <Text
-                  fontSize="md"
-                  color={textColor}
-                  fontWeight="bold"
-                  me="10px"
-                >
-                  Email:{" "}
-                </Text>
-                <Text fontSize="md" color="gray.400" fontWeight="400">
-                  esthera@simmmple.com
-                </Text>
-              </Flex>
-              <Flex align="center" mb="18px">
-                <Text
-                  fontSize="md"
-                  color={textColor}
-                  fontWeight="bold"
-                  me="10px"
-                >
-                  Location:{" "}
-                </Text>
-                <Text fontSize="md" color="gray.400" fontWeight="400">
-                  United States
-                </Text>
-              </Flex>
-              <Flex align="center" mb="18px">
-                <Text
-                  fontSize="md"
-                  color={textColor}
-                  fontWeight="bold"
-                  me="10px"
-                >
-                  Social Media:{" "}
-                </Text>
-                <Flex>
-                  <Link
-                    href="#"
-                    color={iconColor}
-                    fontSize="lg"
-                    me="10px"
-                    _hover={{ color: "blue.500" }}
-                  >
-                    <Icon as={FaFacebook} />
-                  </Link>
-                  <Link
-                    href="#"
-                    color={iconColor}
-                    fontSize="lg"
-                    me="10px"
-                    _hover={{ color: "blue.500" }}
-                  >
-                    <Icon as={FaInstagram} />
-                  </Link>
-                  <Link
-                    href="#"
-                    color={iconColor}
-                    fontSize="lg"
-                    me="10px"
-                    _hover={{ color: "blue.500" }}
-                  >
-                    <Icon as={FaTwitter} />
-                  </Link>
-                </Flex>
-              </Flex>
-            </Flex>
-          </CardBody>
-        </Card>
-        <Card p="16px">
-          <CardHeader p="12px 5px" mb="12px">
-            <Text fontSize="lg" color={textColor} fontWeight="bold">
-              Conversations
-            </Text>
-          </CardHeader>
-          <CardBody px="5px">
-            <Flex direction="column" w="100%">
-              <Flex justifyContent="space-between" mb="21px">
-                <Flex align="center">
-                  <Avatar
-                    src={avatar2}
-                    w="50px"
-                    h="50px"
-                    borderRadius="15px"
-                    me="10px"
-                  />
-                  <Flex direction="column">
-                    <Text fontSize="sm" color={textColor} fontWeight="bold">
-                      Sophie B.{" "}
+                <CardHeader p="12px 5px">
+                  <div className="year">
+                    <Text fontSize="2xl" color={colorMode === "light" ? "#555555": "#ffffff"} fontWeight="bold">
+                      {el.date}
                     </Text>
-                    <Text fontSize="xs" color="gray.400" fontWeight="400">
-                      Hi! I need more information...
-                    </Text>
-                  </Flex>
-                </Flex>
-                <Button p="0px" bg="transparent" variant="no-effects">
-                  <Text
-                    fontSize="10px"
-                    fontWeight="700"
-                    color={iconColor}
-                    alignSelf="center"
-                  >
-                    REPLY
-                  </Text>
-                </Button>
-              </Flex>
-              <Flex justifyContent="space-between" mb="21px">
-                <Flex align="center">
-                  <Avatar
-                    src={avatar3}
-                    w="50px"
-                    h="50px"
-                    borderRadius="15px"
-                    me="10px"
-                  />
-                  <Flex direction="column">
-                    <Text fontSize="sm" color={textColor} fontWeight="bold">
-                      Sophie B.{" "}
-                    </Text>
-                    <Text fontSize="xs" color="gray.400" fontWeight="400">
-                      Awesome work, can you change...
-                    </Text>
-                  </Flex>
-                </Flex>
-                <Button p="0px" bg="transparent" variant="no-effects">
-                  <Text
-                    fontSize="10px"
-                    fontWeight="700"
-                    color={iconColor}
-                    alignSelf="center"
-                  >
-                    REPLY
-                  </Text>
-                </Button>
-              </Flex>
-              <Flex justifyContent="space-between" mb="21px">
-                <Flex align="center">
-                  <Avatar
-                    src={avatar4}
-                    w="50px"
-                    h="50px"
-                    borderRadius="15px"
-                    me="10px"
-                  />
-                  <Flex direction="column">
-                    <Text fontSize="sm" color={textColor} fontWeight="bold">
-                      Sophie B.{" "}
-                    </Text>
-                    <Text fontSize="xs" color="gray.400" fontWeight="400">
-                      Have a great afternoon...
-                    </Text>
-                  </Flex>
-                </Flex>
-                <Button p="0px" bg="transparent" variant="no-effects">
-                  <Text
-                    fontSize="10px"
-                    fontWeight="700"
-                    color={iconColor}
-                    alignSelf="center"
-                  >
-                    REPLY
-                  </Text>
-                </Button>
-              </Flex>
-              <Flex justifyContent="space-between" mb="21px">
-                <Flex align="center">
-                  <Avatar
-                    src={avatar5}
-                    w="50px"
-                    h="50px"
-                    borderRadius="15px"
-                    me="10px"
-                  />
-                  <Flex direction="column">
-                    <Text fontSize="sm" color={textColor} fontWeight="bold">
-                      Sophie B.{" "}
-                    </Text>
-                    <Text fontSize="xs" color="gray.400" fontWeight="400">
-                      About files I can...
-                    </Text>
-                  </Flex>
-                </Flex>
-                <Button p="0px" bg="transparent" variant="no-effects">
-                  <Text
-                    fontSize="10px"
-                    fontWeight="700"
-                    color={iconColor}
-                    alignSelf="center"
-                  >
-                    REPLY
-                  </Text>
-                </Button>
-              </Flex>
-              <Flex justifyContent="space-between" mb="21px">
-                <Flex align="center">
-                  <Avatar
-                    src={avatar6}
-                    w="50px"
-                    h="50px"
-                    borderRadius="15px"
-                    me="10px"
-                  />
-                  <Flex direction="column">
-                    <Text fontSize="sm" color={textColor} fontWeight="bold">
-                      Sophie B.{" "}
-                    </Text>
-                    <Text fontSize="xs" color="gray.400" fontWeight="400">
-                      About files I can...
-                    </Text>
-                  </Flex>
-                </Flex>
-                <Button p="0px" bg="transparent" variant="no-effects">
-                  <Text
-                    fontSize="10px"
-                    fontWeight="700"
-                    color={iconColor}
-                    alignSelf="center"
-                  >
-                    REPLY
-                  </Text>
-                </Button>
-              </Flex>
-            </Flex>
-          </CardBody>
-        </Card>
+                  </div>
+                </CardHeader>
+                {/* <CardBody px="5px">
+                
+            </CardBody> */}
+              </Card>
+            </a>
+          )
+
+        })}
+
       </Grid>
-        {/* <Card p="16px" my="24px">
+      <Card p="16px" my="24px">
         <CardHeader p="12px 5px" mb="12px">
           <Flex direction="column">
             <Text fontSize="lg" color={textColor} fontWeight="bold">
@@ -668,7 +324,7 @@ function LandingPage() {
             </Button>
           </Grid>
         </CardBody>
-      </Card> */}
+      </Card>
     </Flex>
   );
 }
