@@ -1,5 +1,5 @@
 // import
-import React, { Component, useEffect } from "react";
+import React, { Component } from "react";
 import Dashboard from "views/Dashboard/Dashboard.js";
 import Tables from "views/Dashboard/Tables.js";
 import Billing from "views/Dashboard/Billing.js";
@@ -7,9 +7,9 @@ import RTLPage from "views/RTL/RTLPage.js";
 import Profile from "views/Dashboard/Profile.js";
 import SignIn from "views/Pages/SignIn.js";
 import SignUp from "views/Pages/SignUp.js";
+
 import Survey from "views/Form/Survey.js";
 
-import RankPredictor from "views/Dashboard/RankPredictor";
 import {
   HomeIcon,
   StatsIcon,
@@ -24,7 +24,7 @@ import LandingPage from "views/LandingPage/LandingPage";
 var dashRoutes = [
   {
     path: "/landingpage",
-    name: "LandingPage",
+    name: "Home",
     rtlName: "لوحة القيادة",
     icon: <HomeIcon color="inherit" />,
     component: LandingPage,
@@ -39,19 +39,27 @@ var dashRoutes = [
     layout: "/admin",
   },
   {
-    path: "/overall-performance",
-    name: "Overall Performance",
+    path: "/tables",
+    name: "Tables",
     rtlName: "لوحة القيادة",
     icon: <StatsIcon color="inherit" />,
     component: Tables,
     layout: "/admin",
   },
   {
-    path: "/rank-predictor",
-    name: "Rank Predictor",
+    path: "/survey",
+    name: "Survey",
+    rtlName: "Hehe",
+    icon: <CreditIcon color="inherit" />,
+    component: Survey,
+    layout: "/admin",
+  },
+  {
+    path: "/billing",
+    name: "Billing",
     rtlName: "لوحة القيادة",
-    icon: <StatsIcon color="inherit" />,
-    component: RankPredictor,
+    icon: <CreditIcon color="inherit" />,
+    component: Billing,
     layout: "/admin",
   },
   {
@@ -96,5 +104,17 @@ var dashRoutes = [
     ],
   },
 ];
-
 export default dashRoutes;
+
+// var AllRoutes = [
+//   {
+//     path: "/F",
+//     name: "Sign Up",
+//     rtlName: "لوحة القيادة",
+//     icon: <RocketIcon color="inherit" />,
+//     component: SignUp,
+//     layout: "/auth",
+//   }
+// ];
+
+// export default AllRoutes;

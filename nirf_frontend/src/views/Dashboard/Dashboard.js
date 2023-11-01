@@ -25,7 +25,7 @@ import BarChart from "components/Charts/BarChart";
 import LineChart from "components/Charts/LineChart";
 import IconBox from "components/Icons/IconBox";
 import { jwtDecode } from "react-jwt";
-import axios from 'axios';
+import axios from "axios";
 
 // Custom icons
 import {
@@ -58,27 +58,34 @@ export default function Dashboard() {
   const { colorMode } = useColorMode();
 
   const parameter = ["College Name", "State", "City", "NIRF", "Score"];
-  const [college_graphs, setCollegeGraphs] = useState({ features_scores: "", ranks: "" });
+  const [college_graphs, setCollegeGraphs] = useState({
+    features_scores: "",
+    ranks: "",
+  });
 
-  const token = localStorage.getItem('token');
-  const rank = localStorage.getItem('rank');
-  const score = localStorage.getItem('score');
-  const history = useHistory()
+  const token = localStorage.getItem("token");
+  const rank = localStorage.getItem("rank");
+  const score = localStorage.getItem("score");
+  const history = useHistory();
 
   if (!token || !rank || !score) {
-    history.push('/auth/signin');
+    history.push("/auth/signin");
   }
 
   useEffect(() => {
     const getPerformance = async () => {
-      const response = await axios.post("http://localhost:8000/api/get_performance", { token: token }, {
-        headers: {
-          'Content-type': 'application/json'
+      const response = await axios.post(
+        "http://localhost:8000/api/get_performance",
+        { token: token },
+        {
+          headers: {
+            "Content-type": "application/json",
+          },
         }
-      });
+      );
       setCollegeGraphs(response.data.graphs);
       console.log(response);
-    }
+    };
     getPerformance();
   }, []);
 
@@ -238,7 +245,11 @@ export default function Dashboard() {
             </Text> */}
           </Flex>
           <Box minH="300px">
-            {college_graphs.features_scores !== "" && <img src={`data:image/png;base64,${college_graphs.features_scores}`} />}
+            {college_graphs.features_scores !== "" && (
+              <img
+                src={`data:image/png;base64,${college_graphs.features_scores}`}
+              />
+            )}
             {/* <LineChart
               chartData={lineChartData}
               chartOptions={lineChartOptions}
@@ -255,7 +266,9 @@ export default function Dashboard() {
             </Text> */}
           </Flex>
           <Box minH="300px">
-            {college_graphs.ranks !== "" && <img src={`data:image/png;base64,${college_graphs.ranks}`} />}
+            {college_graphs.ranks !== "" && (
+              <img src={`data:image/png;base64,${college_graphs.ranks}`} />
+            )}
 
             {/* <BarChart chartData={barChartData} chartOptions={barChartOptions} /> */}
           </Box>
