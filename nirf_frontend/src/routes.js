@@ -1,5 +1,5 @@
 // import
-import React, { Component } from "react";
+import React, { Component, useEffect } from "react";
 import Dashboard from "views/Dashboard/Dashboard.js";
 import Tables from "views/Dashboard/Tables.js";
 import Billing from "views/Dashboard/Billing.js";
@@ -7,7 +7,6 @@ import RTLPage from "views/RTL/RTLPage.js";
 import Profile from "views/Dashboard/Profile.js";
 import SignIn from "views/Pages/SignIn.js";
 import SignUp from "views/Pages/SignUp.js";
-
 import Survey from "views/Form/Survey.js";
 
 import {
@@ -39,8 +38,8 @@ var dashRoutes = [
     layout: "/admin",
   },
   {
-    path: "/tables",
-    name: "Tables",
+    path: "/overall-performance",
+    name: "Overall Performance",
     rtlName: "لوحة القيادة",
     icon: <StatsIcon color="inherit" />,
     component: Tables,
@@ -104,6 +103,7 @@ var dashRoutes = [
     ],
   },
 ];
+
 export default dashRoutes;
 
 // var AllRoutes = [

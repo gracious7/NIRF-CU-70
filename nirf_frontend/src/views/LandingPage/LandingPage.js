@@ -1,4 +1,3 @@
-// Chakra imports
 import {
   Avatar,
   AvatarGroup,
@@ -26,6 +25,7 @@ import avatar6 from "assets/img/avatars/avatar6.png";
 import ImageArchitect1 from "assets/img/ImageArchitect1.png";
 import ImageArchitect2 from "assets/img/ImageArchitect2.png";
 import ImageArchitect3 from "assets/img/ImageArchitect3.png";
+import nirflogo from "../../assets/img/avatars/nirf_logo.png"
 import GraphImage from "assets/img/graph-img.png";
 import "../LandingPage/LandingPage.css"
 // Custom components
@@ -130,11 +130,31 @@ function LandingPage() {
         <SearchBar />
         <button>Search</button>
       </Flex>
+      <div style={{ marginTop: "20px" }}>
+        <Card p="4">
+          <Flex alignItems="center">
+            <Image src={nirflogo} alt="About NIRF" boxSize="200px" objectFit="contain" mr="8" ml="4" />
+
+            <Box>
+              <Text fontSize="lg" color={textColor} style={{fontWeight: "bold", fontSize: "25px"}}>
+                ABOUT NIRF
+              </Text>
+              <Text fontSize="sm" color="gray.400" fontWeight="400">
+                Education Excellence Index
+              </Text>
+
+              <Text mt="4">
+                The National Institutional Ranking Framework (NIRF) is an initiative by the Government of India to rank higher education institutions in the country. Launched in 2015, NIRF evaluates institutions based on parameters like teaching, learning, research, and overall excellence. It aims to provide valuable insights to students, parents, and policymakers, helping them make informed decisions about educational institutions. NIRF rankings cover various categories such as universities, engineering, management, pharmacy, and overall institutions. By promoting healthy competition among institutions, NIRF encourages academic excellence, fosters innovation, and contributes to the overall growth and quality enhancement of higher education in India.
+              </Text>
+            </Box>
+          </Flex>
+        </Card>
+      </div>
       <div className="year-heading">NIRF Rankings by Academic Year</div>
       <Grid templateColumns={{ sm: "1fr", md: "repeat(3, 1fr)", xl: "repeat(4, 1fr)" }} gap="22px">
         {dateAndLink.map((el, key) => {
           return (
-            <a key={key} style={{cursor: 'pointer'}}>
+            <a key={key} style={{ cursor: 'pointer' }}>
               <Card
                 p="16px"
                 bg={`url(${GraphImage}), ${cardColor}`}
@@ -153,7 +173,7 @@ function LandingPage() {
               >
                 <CardHeader p="12px 5px">
                   <div className="year">
-                    <Text fontSize="2xl" color={colorMode === "light" ? "#555555": "#ffffff"} fontWeight="bold">
+                    <Text fontSize="2xl" color={colorMode === "light" ? "#555555" : "#ffffff"} fontWeight="bold">
                       {el.date}
                     </Text>
                   </div>

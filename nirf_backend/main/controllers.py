@@ -95,6 +95,7 @@ def get_feature_scores(college):
   fig1.savefig(my_stringIObytes, format='jpg')
   my_stringIObytes.seek(0)
   features_scores = base64.b64encode(my_stringIObytes.read()).decode()
+  plt.close(fig1)
   return features_scores
 
 
@@ -139,11 +140,61 @@ def get_ranks(college):
   fig2.savefig(my_stringIObytes, format='jpg')
   my_stringIObytes.seek(0)
   ranks = base64.b64encode(my_stringIObytes.read()).decode()
+  plt.close(fig2)
   return ranks
+
 
 def get_graphs(college):
   graphs = {}
   graphs['features_scores'] = get_feature_scores(college)
   graphs['ranks'] = get_ranks(college)
+  return graphs
 
+
+def get_overall_feature_scores(college, features):
+  years = [2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023]
+  type_required = features
+  data = {type: [] for type in type_required}
+
+  for y in years:
+    df = pd.read_csv(f'/backend/main/data/nirf/{y}.csv')
+    df['Name'] = df['Name'].str.upper()
+    df['Name'] = df['Name'].str.replace(",", "")
+    college = college.upper()
+    college = college.replace(",", "")
+    df = df[df['Name'] == college].to_dict(orient='records')
+    flag = 0
+    if len(df) == 0:
+      flag = 1
+    
+    if not flag:
+      df = df[0]
+
+    for type in type_required:
+      if not flag:
+        data[type].append(df[type])
+      else:
+        data[type].append(0)
+
+  fig3, ax3 = plt.subplots()
+  for type in data.keys():
+    ax3.plot(years, data[type], label=type, marker='o')
+
+  ax3.set_title(college)
+  ax3.set_ylabel("Score")
+  ax3.set_xlabel("Year")
+  ax3.legend()
+
+  my_stringIObytes = io.BytesIO()
+  fig3.savefig(my_stringIObytes, format='jpg')
+  my_stringIObytes.seek(0)
+  all_features = base64.b64encode(my_stringIObytes.read()).decode()
+  plt.close(fig3)
+
+  return all_features
+
+
+def get_overall_graphs(college, features):
+  graphs = {}
+  graphs['all_features'] = get_overall_feature_scores(college, features)
   return graphs
