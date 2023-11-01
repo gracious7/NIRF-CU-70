@@ -45,6 +45,7 @@ import {
 } from "react-icons/fa";
 import { IoDocumentsSharp } from "react-icons/io5";
 import SearchBar from "./LandingSb";
+import colleges from "../../assets/data/colleges.json"
 
 function LandingPage() {
   const { colorMode } = useColorMode();
@@ -60,14 +61,10 @@ function LandingPage() {
   const bgProfile = useColorModeValue("hsla(0,0%,100%,.8)", "navy.800");
   const borderProfileColor = useColorModeValue("white", "transparent");
   const emailColor = useColorModeValue("gray.400", "gray.300");
+  
 
   //College Array
-  const colleges = [
-    { id: 1, name: 'Harvard University' },
-    { id: 2, name: 'Stanford University' },
-    { id: 3, name: 'MIT' },
-    // Add more colleges to the array
-  ];
+
 
   //Academic Years for NIRF Ranking 
   const dateAndLink = [
@@ -128,7 +125,7 @@ function LandingPage() {
         p="24px"
         borderRadius="20px"
       >
-        <SearchBar />
+        <SearchBar colleges={colleges} />
         <button>Search</button>
       </Flex>
       <div style={{ marginTop: "20px" }}>
@@ -159,6 +156,7 @@ function LandingPage() {
               <Card
                 p="16px"
                 bg={`url(${GraphImage}), ${cardColor}`}
+                zIndex={-10}
 
                 backgroundSize="contain" // Set the background size to contain
                 backgroundRepeat="no-repeat" // Prevent background image from repeating
