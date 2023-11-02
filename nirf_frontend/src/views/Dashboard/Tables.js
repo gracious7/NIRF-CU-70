@@ -84,17 +84,53 @@ function Tables() {
 
   const recommend = async () => {
     setRecommendation([]);
-    const response = await axios.post('http://localhost:8000/api/recommend', {token: token, rank: reqRank}, {
+    const response = await axios.post('http://localhost:8000/api/recommend', { token: token, rank: reqRank }, {
       headers: {
         "Content-type": "application/json"
       }
     });
-    console.log(response);
+    console.log(response.data.message);
     setRecommendation(response.data.message)
   }
 
   return (
     <Flex direction="column" pt={{ base: "120px", md: "75px" }}>
+      <Card
+        my="22px"
+        // overflowX={{ sm: "scroll", xl: "hidden" }}
+        pb="0px"
+      >
+        <CardHeader p="6px 0px 22px 0px">
+          <Flex direction="column">
+            <Text fontSize="lg" color={textColor} fontWeight="bold" pb=".5rem">
+              Get Recommendation
+            </Text>
+          </Flex>
+        </CardHeader>
+        <CardBody>
+          <Flex direction="row">
+            <div>
+              <input style={{ backgroundColor: theme.colorMode === "light" ? 'white' : '#0f183c', color: theme.colorMode === "light" ? 'black' : 'white' }} type="text" onChange={(e) => handlerecommend(e)} placeholder="Required Rank" />
+            </div>
+            <div>
+              <Button onClick={recommend}>Get Recommendation</Button>
+            </div>
+          </Flex>
+          <h2>{recommendations.length !== 0 && "Your recommendations in priority order: "}</h2>
+          <p />
+          <ul style={{ listStyle: 'circle' }}>
+            {recommendations.map(result => (
+              <>
+                <li style={{ marginBottom: '10px' }}>
+                  <span style={{textDecoration: 'underline'}}>{result[0]}</span>
+                  <p />
+                  -&gt; Solution: {result[1]}
+                </li>
+              </>
+            ))}
+          </ul>
+        </CardBody>
+      </Card>
       <Card
         my="22px"
         // overflowX={{ sm: "scroll", xl: "hidden" }}
@@ -119,52 +155,28 @@ function Tables() {
           </Flex>
           <Flex direction="column">
             <div>
-          <ul>
-            {comparisonResult.map(result => (
-              <li>
-                {result}
-              </li>
-            ))}
-          </ul>
-          </div>
-          <div>
+              <ul style={{ listStyle: 'circle' }}>
+                {comparisonResult.map(result => (
+                  <li>
+                    {result}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
               {comparisonGraph && <img src={`data:image/png;base64,${comparisonGraph}`} />}
-          </div>
-          </Flex>
-        </CardBody>
-      </Card>
-      <Card
-        my="22px"
-        // overflowX={{ sm: "scroll", xl: "hidden" }}
-        pb="0px"
-      >
-        <CardHeader p="6px 0px 22px 0px">
-          <Flex direction="column">
-            <Text fontSize="lg" color={textColor} fontWeight="bold" pb=".5rem">
-              Get Recommendation
-            </Text>
-          </Flex>
-        </CardHeader>
-        <CardBody>
-          <Flex direction="row">
-            <div>
-              <input style={{backgroundColor: theme.colorMode === "light" ? 'white' : '#0f183c', color: theme.colorMode === "light" ? 'black' : 'white'}} type="text" onChange={(e) => handlerecommend(e)} placeholder="Required Rank" />
-            </div>
-            <div>
-              <Button onClick={recommend}>Get Recommendation</Button>
             </div>
           </Flex>
-          {recommendations.length !== 0 && "Your recommendations in priority order: "}
-          <ul>
-            {recommendations.map(result => (
-              <li>
-                {result}
-              </li>
-            ))}
-          </ul>
         </CardBody>
       </Card>
       <Card pb="0px">
+        <CardHeader p="6px 0px 22px 0px">
+          <Flex direction="column">
+            <Text fontSize="lg" color={textColor} fontWeight="bold" pb=".5rem">
+              Overall Performance
+            </Text>
+          </Flex>
+        </CardHeader>
         <CardHeader p="6px 0px 22px 0px">
           <div style={{ display: "flex", gap: '50px', flexWrap: 'wrap' }}>
             <div>
@@ -184,8 +196,8 @@ function Tables() {
             </div>
             {type_required.map(type => (
               <div>
-              <input type="checkbox" onChange={(e) => handle(e)} name="features" value={type} /> {type}
-            </div>
+                <input type="checkbox" onChange={(e) => handle(e)} name="features" value={type} /> {type}
+              </div>
             ))}
           </div>
           <div>
