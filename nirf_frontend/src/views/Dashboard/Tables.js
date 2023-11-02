@@ -45,6 +45,8 @@ function Tables() {
     history.push('/auth/signin');
   }
 
+  const type_required = ['SS', 'FSR', 'FQE', 'FRU', 'PU', 'QP', 'IPR', 'FPPP', 'GPH', 'GUE', 'GMS', 'GPHD', 'RD', 'WD', 'ESCS', 'PCS', 'PR']
+
   const get_overall_performance = async (features) => {
     const response = await axios.post('http://localhost:8000/api/get_overall_performance', { token: token, reqFeatures: features });
     setGraphs(response.data.graphs);
@@ -81,6 +83,7 @@ function Tables() {
   }
 
   const recommend = async () => {
+    setRecommendation([]);
     const response = await axios.post('http://localhost:8000/api/recommend', {token: token, rank: reqRank}, {
       headers: {
         "Content-type": "application/json"
@@ -163,7 +166,7 @@ function Tables() {
       </Card>
       <Card pb="0px">
         <CardHeader p="6px 0px 22px 0px">
-          <div style={{ display: "flex", gap: '100px' }}>
+          <div style={{ display: "flex", gap: '50px', flexWrap: 'wrap' }}>
             <div>
               <input type="checkbox" onChange={(e) => handle(e)} name="features" value="TLR" /> TLR
             </div>
@@ -179,6 +182,11 @@ function Tables() {
             <div>
               <input type="checkbox" onChange={(e) => handle(e)} name="features" value="PR" /> PR
             </div>
+            {type_required.map(type => (
+              <div>
+              <input type="checkbox" onChange={(e) => handle(e)} name="features" value={type} /> {type}
+            </div>
+            ))}
           </div>
           <div>
             <Button onClick={plot}>Plot</Button>

@@ -62,14 +62,14 @@ var dashRoutes = [
     component: RankPredictor,
     layout: "/admin",
   },
-  {
-    path: "/rtl-support-page",
-    name: "RTL",
-    rtlName: "آرتيإل",
-    icon: <SupportIcon color="inherit" />,
-    component: RTLPage,
-    layout: "/rtl",
-  },
+  // {
+  //   path: "/rtl-support-page",
+  //   name: "RTL",
+  //   rtlName: "آرتيإل",
+  //   icon: <SupportIcon color="inherit" />,
+  //   component: RTLPage,
+  //   layout: "/rtl",
+  // },
   {
     name: "ACCOUNT PAGES",
     category: "account",
@@ -77,7 +77,7 @@ var dashRoutes = [
     state: "pageCollapse",
     views: [
       {
-        path: "/profile",
+        path: "/dashboard",
         name: "Profile",
         rtlName: "لوحة القيادة",
         icon: <PersonIcon color="inherit" />,
@@ -93,14 +93,14 @@ var dashRoutes = [
         component: SignIn,
         layout: "/auth",
       },
-      {
-        path: "/signup",
-        name: "Sign Up",
-        rtlName: "لوحة القيادة",
-        icon: <RocketIcon color="inherit" />,
-        component: SignUp,
-        layout: "/auth",
-      },
+      // {
+      //   path: "/signup",
+      //   name: "Sign Up",
+      //   rtlName: "لوحة القيادة",
+      //   icon: <RocketIcon color="inherit" />,
+      //   component: SignUp,
+      //   layout: "/auth",
+      // },
     ],
   },
 ];

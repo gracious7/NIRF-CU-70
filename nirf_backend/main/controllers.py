@@ -356,6 +356,9 @@ def get_recommendation(college, rank):
   data1 = {type: [] for type in type_required}
   data2 = {type: [] for type in type_required}
 
+  df1 = pd.read_csv(os.path.join(BASE_DIR, 'main/data/nirf/2023.csv'))
+  college2 = df1[df1['Rank'] == rank].to_dict(orient='records')[0]['Name']
+
   avg_changes = {'SS': [0, 0], 'FSR': [0, 0], 'FQE': [0, 0], 'FRU': [0, 0], 'PU': [0, 0], 'QP': [0, 0], 'IPR': [0, 0], 'FPPP': [0, 0], 'GPH': [0, 0], 'GUE': [0, 0], 'GMS': [0, 0], 'GPHD': [0, 0], 'RD': [0, 0], 'WD': [0, 0], 'ESCS': [0, 0], 'PCS': [0, 0], 'PR': [0, 0]}
 
   for y in years:
@@ -365,8 +368,12 @@ def get_recommendation(college, rank):
     df['Name'] = df['Name'].str.replace(",", "")
     college = college.upper()
     college = college.replace(",", "")
+
+    college2 = college2.upper()
+    college2 = college2.replace(",", "")
     
     df_dict1 = df[df['Name'] == college].to_dict(orient='records')
+    # df_dict2 = df[df['Name'] == college2].to_dict(orient='records')
     df_dict2 = df[df['Rank'] == rank].to_dict(orient='records')
 
     flag1 = 0

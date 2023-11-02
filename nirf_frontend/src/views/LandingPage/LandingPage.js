@@ -136,7 +136,7 @@ function LandingPage() {
             <Image src={nirflogo} alt="About NIRF" boxSize="200px" objectFit="contain" mr="8" ml="4" />
 
             <Box>
-              <Text fontSize="lg" color={textColor} style={{fontWeight: "bold", fontSize: "25px"}}>
+              <Text fontSize="lg" color={textColor} style={{ fontWeight: "bold", fontSize: "25px" }}>
                 ABOUT NIRF
               </Text>
               <Text fontSize="sm" color="gray.400" fontWeight="400">
@@ -188,8 +188,8 @@ function LandingPage() {
         })}
 
       </Grid>
-     
-      <Card p="16px" my="24px">
+
+      {/* <Card p="16px" my="24px">
         <CardHeader p="12px 5px" mb="12px">
           <Flex direction="column">
             <Text fontSize="lg" color={textColor} fontWeight="bold">
@@ -345,7 +345,7 @@ function LandingPage() {
             </Button>
           </Grid>
         </CardBody>
-      </Card>
+      </Card> */}
     </Flex>
   );
 }
