@@ -20,6 +20,7 @@ import {
   SupportIcon,
 } from "components/Icons/Icons";
 import LandingPage from "views/LandingPage/LandingPage";
+import RankPredictor from "views/Dashboard/RankPredictor";
 
 var dashRoutes = [
   {
@@ -59,7 +60,7 @@ var dashRoutes = [
     name: "Rank Predictor",
     rtlName: "لوحة القيادة",
     icon: <CreditIcon color="inherit" />,
-    component: Billing,
+    component: RankPredictor,
     layout: "/admin",
   },
   {

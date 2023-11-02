@@ -23,3 +23,11 @@
    color: rgb(61, 61, 61);
    background-color: #fff;
 }
+
+.clg-compare{
+   display: flex;
+}
+.clg-compare Button{
+   margin-top: 1.3rem;
+   padding: 22px;
+}

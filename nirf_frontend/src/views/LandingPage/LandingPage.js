@@ -25,7 +25,7 @@ import avatar6 from "assets/img/avatars/avatar6.png";
 import ImageArchitect1 from "assets/img/ImageArchitect1.png";
 import ImageArchitect2 from "assets/img/ImageArchitect2.png";
 import ImageArchitect3 from "assets/img/ImageArchitect3.png";
-import GraphImage from "assets/img/graph-img.png";
+import GraphImage from "assets/img/gra0.png";
 import "../LandingPage/LandingPage.css";
 import nirflogo from "../../assets/img/avatars/nirf_logo.png";
 // Custom components
@@ -49,6 +49,7 @@ function LandingPage() {
   const { colorMode } = useColorMode();
   let cardColor = "#ffffff";
 
+  const [clgName, setClgName] = useState("");
   if (colorMode === "dark") {
     cardColor = "#0f183c";
   }
@@ -61,12 +62,6 @@ function LandingPage() {
   const emailColor = useColorModeValue("gray.400", "gray.300");
 
   //College Array
-  const colleges = [
-    { id: 1, name: "Harvard University" },
-    { id: 2, name: "Stanford University" },
-    { id: 3, name: "MIT" },
-    // Add more colleges to the array
-  ];
 
   //Academic Years for NIRF Ranking
   const dateAndLink = [
@@ -114,32 +109,31 @@ function LandingPage() {
     history.push("/table", { rows: rows, name: year });
   };
 
-  const [clgName, setClgName] = useState("oj");
-  const handleSearch = () => {
-    console.log(clgName);
-  };
-
   return (
-    <Flex direction="column" pt={{ base: "120px", md: "75px", lg: "100px" }}>
+    <Flex
+      direction="column"
+      pt={{ base: "120px", md: "75px", lg: "100px" }}
+      fontFamily="poppins"
+    >
       <Flex
-        mb="24px"
-        maxH="330px"
-        justifyContent={{ sm: "center", md: "space-between" }}
+        m="24px 0px"
+        maxH="50px"
+        justifyContent="space-between"
         align="center"
         backdropFilter="blur(21px)"
         boxShadow="0px 2px 5.5px rgba(0, 0, 0, 0.02)"
         border="1.5px solid"
         borderColor={borderProfileColor}
         bg={bgProfile}
-        p="24px"
         borderRadius="20px"
+        gap="3px"
       >
-        <SearchBar setClgName={setClgName} />
-        <button onClick={adshandleSearch}>Search</button>
+        <SearchBar className="collegeSearch" setClgName={setClgName} />
+        <button className="search-btn">Search</button>
       </Flex>
-      <div style={{ marginTop: "20px" }}>
+      <div style={{ marginTop: "20px", zIndex: "-8" }}>
         <Card p="4">
-          <Flex alignItems="center">
+          <Flex alignItems="center" direction={{ md: "row", sm: "column" }}>
             <Image
               src={nirflogo}
               alt="About NIRF"
@@ -151,17 +145,21 @@ function LandingPage() {
 
             <Box>
               <Text
-                fontSize="lg"
                 color={textColor}
-                style={{ fontWeight: "bold", fontSize: "25px" }}
+                style={{ fontWeight: "bold", fontSize: "36px" }}
+                textAlign={{ sm: "center", md: "left" }}
               >
                 ABOUT NIRF
               </Text>
-              <Text fontSize="sm" color="gray.400" fontWeight="400">
+              <Text
+                fontSize="16px"
+                color="gray.400"
+                fontWeight="400"
+                textAlign={{ sm: "center", md: "left" }}
+              >
                 Education Excellence Index
               </Text>
-
-              <Text mt="4">
+              <Text mt="4" fontSize="16px" lineHeight="8">
                 The National Institutional Ranking Framework (NIRF) is an
                 initiative by the Government of India to rank higher education
                 institutions in the country. Launched in 2015, NIRF evaluates
@@ -180,51 +178,54 @@ function LandingPage() {
           </Flex>
         </Card>
       </div>
-      <div className="year-heading">NIRF Rankings by Academic Year</div>
-      <Grid
-        templateColumns={{
-          sm: "1fr",
-          md: "repeat(3, 1fr)",
-          xl: "repeat(4, 1fr)",
-        }}
-        gap="22px"
-      >
-        {dateAndLink.map((el, key) => {
-          return (
-            <a key={key} style={{ cursor: "pointer" }}>
-              <Card
-                p="16px"
-                bg={`url(${GraphImage}), ${cardColor}`}
-                backgroundSize="contain" // Set the background size to contain
-                backgroundRepeat="no-repeat" // Prevent background image from repeating
-                // You can also set a fixed height for the Card to control its size
-                minHeight="20px"
-                transition="transform 0.2s, box-shadow 0.2s" // Add a transition effect
-                _hover={{
-                  transform: "scale(1.05)", // Increase size on hover
-                  boxShadow: "0px 8px 20px rgba(0, 0, 0, 0.2)", // Increase shadow on hover
-                }}
-                onClick={() => getRank(el.date)}
-              >
-                <CardHeader p="12px 5px">
-                  <div className="year">
-                    <Text
-                      fontSize="2xl"
-                      color={colorMode === "light" ? "#555555" : "#ffffff"}
-                      fontWeight="bold"
-                    >
-                      {el.date}
-                    </Text>
-                  </div>
-                </CardHeader>
-                {/* <CardBody px="5px">
-                
-            </CardBody> */}
-              </Card>
-            </a>
-          );
-        })}
-      </Grid>
+      <div className="year--container">
+        <div className="year-heading">NIRF Rankings by Academic Year</div>
+        <Grid
+          templateColumns={{
+            sm: "1fr",
+            md: "repeat(3, 1fr)",
+            xl: "repeat(4, 1fr)",
+          }}
+          gap="22px"
+        >
+          {dateAndLink.map((el, key) => {
+            return (
+              <a key={key} style={{ cursor: "pointer" }}>
+                <Card
+                  p="18px"
+                  bg={`url(${GraphImage}), ${cardColor}`}
+                  backgroundSize="cover" // Set the background size to contain
+                  backgroundRepeat="no-repeat" // Prevent background image from repeating
+                  backgroundPosition="center"
+                  // You can also set a fixed height for the Card to control its size
+                  minHeight="20px"
+                  transition="transform 0.2s, box-shadow 0.2s" // Add a transition effect
+                  _hover={{
+                    transform: "scale(1.05)", // Increase size on hover
+                    boxShadow: "0px 8px 20px rgba(0, 0, 0, 0.2)", // Increase shadow on hover
+                  }}
+                  onClick={() => getRank(el.date)}
+                >
+                  <CardHeader p="12px 5px">
+                    <div className="year">
+                      <Text
+                        fontSize="3xl"
+                        color={colorMode === "light" ? "#555555" : "#ffffff"}
+                        fontWeight="semibold"
+                      >
+                        {el.date}
+                      </Text>
+                    </div>
+                  </CardHeader>
+                  {/* <CardBody px="5px">
+                    
+                </CardBody> */}
+                </Card>
+              </a>
+            );
+          })}
+        </Grid>
+      </div>
 
       <Card p="16px" my="24px">
         <CardHeader p="12px 5px" mb="12px">

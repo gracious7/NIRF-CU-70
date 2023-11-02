@@ -35,7 +35,8 @@ def predict_rank(request):
 @api_view(['GET'])
 def get_ranks(request):
   year = request.GET.get('year')
-  df = pd.read_csv(f'/backend/main/data/nirf/{year}.csv')
+  file_path = os.path.join(BASE_DIR, f'main/data/nirf/{year}.csv')
+  df = pd.read_csv(file_path)
   df = df.drop(columns=['TLR', 'RPC', 'GO', 'OI', 'PR', 'SS', 'FSR', 'FQE', 'FRU', 'PU', 'QP', 'IPR', 'FPPP', 'GPH', 'GUE', 'GMS', 'GPHD', 'RD', 'WD', 'ESCS', 'PCS'])
   df = df.to_dict(orient='records')
   return Response({"ok": True, "message": df})

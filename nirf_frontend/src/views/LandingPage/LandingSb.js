@@ -1,8 +1,9 @@
 import React, { useState, useRef, useEffect } from "react";
 import collegesData from "../../assets/data/colleges.json"; // Import your college data
-import "../Form/CollegeSearch.css";
+import "./LandingPage.css";
+import LandingPage from "./LandingPage";
 
-const CollegeSearch = ({ setClgName }) => {
+const LandingSb = ({ setClgName }) => {
   const [searchText, setSearchText] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const inputRef = useRef(null);
@@ -46,9 +47,9 @@ const CollegeSearch = ({ setClgName }) => {
   }, []);
 
   return (
-    <div className="search-container CollegeSearch" ref={containerRef}>
+    <div className="collegeSearch1" ref={containerRef}>
       <input
-        className="college-input"
+        className="college-input1"
         type="text"
         placeholder="Search for a college"
         value={searchText}
@@ -72,4 +73,4 @@ const CollegeSearch = ({ setClgName }) => {
   );
 };
 
-export default CollegeSearch;
+export default LandingSb;
