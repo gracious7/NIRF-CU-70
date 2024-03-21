@@ -52,14 +52,21 @@ const CollegeSearch = ({ setClgName }) => {
       <input
         className="college-input"
         type="text"
-        placeholder="Search for a college"
+        placeholder="Select your college.."
         value={searchText}
         onChange={handleInputChange}
         ref={inputRef}
-        style={{backgroundColor: theme.colorMode === 'light' ? 'white' : '#0f183c'}}
+        style={{
+          backgroundColor: theme.colorMode === "light" ? "white" : "#0f183c",
+        }}
       />
       {suggestions.length > 0 && (
-        <div className="suggestions" style={{backgroundColor: theme.colorMode === 'light' ? 'white' : '#0f183c'}}>
+        <div
+          className="suggestions"
+          style={{
+            backgroundColor: theme.colorMode === "light" ? "white" : "#0f183c",
+          }}
+        >
           {suggestions.map((college) => (
             <div
               key={college.id}

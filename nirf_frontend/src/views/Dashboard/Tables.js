@@ -124,12 +124,77 @@ function Tables() {
         },
       }
     );
-    console.log(response);
+    console.log(response.data.message);
     setRecommendation(response.data.message);
   };
 
   return (
     <Flex direction="column" pt={{ base: "120px", md: "75px" }}>
+      <Card
+        my="22px"
+        // overflowX={{ sm: "scroll", xl: "hidden" }}
+        pb="0px"
+      >
+        <CardHeader p="6px 0px 22px 0px">
+          <Flex direction="column">
+            <Text fontSize="lg" color={textColor} fontWeight="bold" pb=".5rem">
+              Get Recommendation
+            </Text>
+          </Flex>
+        </CardHeader>
+        <CardBody>
+          <Flex direction="row">
+            <div>
+              <input
+                style={{
+                  backgroundColor:
+                    theme.colorMode === "light" ? "white" : "#0f183c",
+                  color: theme.colorMode === "light" ? "black" : "white",
+                }}
+                type="text"
+                onChange={(e) => handlerecommend(e)}
+                placeholder="Required Rank"
+              />
+            </div>
+            <div>
+              <Button onClick={recommend}>Get Recommendation</Button>
+            </div>
+          </Flex>
+          <h2 style={{ fontWeight: 600 }}>
+            {recommendations.length !== 0 &&
+              "Your recommendations in priority order: "}
+          </h2>
+          <p />
+          <ul style={{ listStyle: "circle" }}>
+            {recommendations.map((result) => (
+              <>
+                <li
+                  style={{
+                    listStyle: "none",
+                    marginBottom: "10px",
+                    borderRadius: "5px",
+                    border: `${
+                      theme.colorMode === "dark"
+                        ? "1px solid white"
+                        : "1px solid grey"
+                    }`,
+                    padding: "4px",
+                  }}
+                >
+                  <span
+                    style={{ textDecoration: "underline", fontWeight: 600 }}
+                  >
+                    {result[0]}
+                  </span>
+                  <p />
+                  <span style={{ fontWeight: 600 }}> Solution:</span>{" "}
+                  <span> {result[1]}</span>
+                </li>
+              </>
+            ))}
+          </ul>
+        </CardBody>
+      </Card>
       <Card
         my="22px"
         // overflowX={{ sm: "scroll", xl: "hidden" }}
@@ -152,13 +217,32 @@ function Tables() {
           </Flex>
           <Flex direction="column">
             <div>
-              <ul>
+              <ul style={{ listStyle: "circle" }}>
                 {comparisonResult.map((result) => (
-                  <li>{result}</li>
+                  <div
+                    style={{
+                      marginBottom: "10px",
+                      borderRadius: "5px",
+                      border: `${
+                        theme.colorMode === "dark"
+                          ? "1px solid white"
+                          : "1px solid grey"
+                      }`,
+                      padding: "4px",
+                    }}
+                  >
+                    <li style={{ listStyle: "none" }}>{result}</li>
+                  </div>
                 ))}
               </ul>
             </div>
-            <div>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                margin: "2rem",
+              }}
+            >
               {comparisonGraph && (
                 <img src={`data:image/png;base64,${comparisonGraph}`} />
               )}
@@ -166,47 +250,14 @@ function Tables() {
           </Flex>
         </CardBody>
       </Card>
-      <Card
-        my="22px"
-        // overflowX={{ sm: "scroll", xl: "hidden" }}
-        pb="0px"
-      >
+      <Card pb="0px">
         <CardHeader p="6px 0px 22px 0px">
           <Flex direction="column">
             <Text fontSize="lg" color={textColor} fontWeight="bold" pb=".5rem">
-              Get Recommendation
+              Overall Performance
             </Text>
           </Flex>
         </CardHeader>
-        <div>Your College VS</div>
-        <CardBody>
-          <Flex direction="row">
-            <div>
-              <input
-                style={{
-                  backgroundColor:
-                    theme.colorMode === "light" ? "white" : "#0f183c",
-                  color: theme.colorMode === "light" ? "black" : "white",
-                }}
-                type="text"
-                onChange={(e) => handlerecommend(e)}
-                placeholder="Required Rank"
-              />
-            </div>
-            <div>
-              <Button onClick={recommend}>Get Recommendation</Button>
-            </div>
-          </Flex>
-          {recommendations.length !== 0 &&
-            "Your recommendations in priority order: "}
-          <ul>
-            {recommendations.map((result) => (
-              <li>{result}</li>
-            ))}
-          </ul>
-        </CardBody>
-      </Card>
-      <Card pb="0px">
         <CardHeader p="6px 0px 22px 0px">
           <div style={{ display: "flex", gap: "50px", flexWrap: "wrap" }}>
             <div>
@@ -274,11 +325,17 @@ function Tables() {
           </Text>
         </CardHeader>
         <CardBody>
-          <Box minH="300px" width="fit-content">
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              margin: "2rem",
+            }}
+          >
             {graphs.all_features !== "" && (
               <img src={`data:image/png;base64,${graphs.all_features}`} />
             )}
-          </Box>
+          </div>
         </CardBody>
       </Card>
     </Flex>

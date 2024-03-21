@@ -15,7 +15,10 @@ const buttonStyles = {
   borderRadius: "5px",
 };
 
+import { useColorMode } from "@chakra-ui/system";
+
 function RankPredictor() {
+  const theme = useColorMode();
   const [form, setForm] = useState({
     ss: 0,
     fsr: 0,

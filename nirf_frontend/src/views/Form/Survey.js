@@ -46,7 +46,7 @@ import "./Survey.css";
 import colleges from "../../assets/data/colleges.json";
 
 function Survey() {
-  const { colorMode } = useColorMode();
+  const theme = useColorMode();
 
   // Chakra color mode
   const textColor = useColorModeValue("gray.700", "white");
@@ -219,7 +219,10 @@ function Survey() {
       <div>
         <CollegeSearch setClgName={setClgName} />
       </div>
-      <div className="toggle-nav">
+      <div
+        className="toggle-nav"
+        style={{ color: `${theme.colorMode === "dark" ? "black" : ""}` }}
+      >
         <div
           className={`tog-opt ${tab === "TLR" ? "on" : ""}`}
           onClick={() => handleTab("TLR")}
@@ -255,10 +258,15 @@ function Survey() {
       {tab === "TLR" ? (
         // <Grid templateColumns={{ sm: "1fr", xl: " 1fr" }} gap="22px">
         <Card p="16px">
-          <div className="form">
-            <div className="opt-name">Teaching, Learining & Resources</div>
+          <div className={theme.colorMode === "dark" ? "dark" : "form"}>
+            <div className={`opt-name`}>Teaching, Learining & Resources</div>
             <div className="main-container">
-              <div className="subopt">
+              <div
+                className="subopt"
+                style={{
+                  color: `${theme.colorMode === "dark" ? "white" : ""}`,
+                }}
+              >
                 <div className="subopt-txt">SS</div>
               </div>
               <div className="ip-section">
@@ -444,7 +452,7 @@ function Survey() {
       {tab === "RPC" ? (
         <Grid templateColumns={{ sm: "1fr", xl: " 1fr" }} gap="22px">
           <Card p="16px">
-            <div className="form">
+            <div className={theme.colorMode === "dark" ? "dark" : "form"}>
               <div className="opt-name">Research and Professional Practice</div>
               <div>
                 <div className="subopt">
@@ -588,7 +596,7 @@ function Survey() {
       {tab === "GO" ? (
         <Grid templateColumns={{ sm: "1fr", xl: " 1fr" }} gap="22px">
           <Card p="16px">
-            <div className="form">
+            <div className={theme.colorMode === "dark" ? "dark" : "form"}>
               <div className="opt-name">Graduation Outcome</div>
               <div>
                 <div className="subopt">
@@ -693,7 +701,7 @@ function Survey() {
       {tab === "OI" ? (
         <Grid templateColumns={{ sm: "1fr", xl: " 1fr" }} gap="22px">
           <Card p="16px">
-            <div className="form">
+            <div className={theme.colorMode === "dark" ? "dark" : "form"}>
               <div className="opt-name">Outreach and Inclusivity</div>
               <div>
                 <div className="subopt">
@@ -807,7 +815,7 @@ function Survey() {
       {tab === "PR" ? (
         <Grid templateColumns={{ sm: "1fr", xl: " 1fr" }} gap="22px">
           <Card p="16px">
-            <div className="form">
+            <div className={theme.colorMode === "dark" ? "dark" : "form"}>
               <div className="opt-name">Research and Professional Practice</div>
               <div>
                 <div className="subopt">

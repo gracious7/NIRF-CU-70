@@ -352,7 +352,7 @@ def get_recommendation(college, rank):
   rank = int(rank)
   years = [2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023]
   type_required = ['SS', 'FSR', 'FQE', 'FRU', 'PU', 'QP', 'IPR', 'FPPP', 'GPH', 'GUE', 'GMS', 'GPHD', 'RD', 'WD', 'ESCS', 'PCS', 'PR']
-
+  
   data1 = {type: [] for type in type_required}
   data2 = {type: [] for type in type_required}
 
@@ -373,8 +373,8 @@ def get_recommendation(college, rank):
     college2 = college2.replace(",", "")
     
     df_dict1 = df[df['Name'] == college].to_dict(orient='records')
-    # df_dict2 = df[df['Name'] == college2].to_dict(orient='records')
-    df_dict2 = df[df['Rank'] == rank].to_dict(orient='records')
+    df_dict2 = df[df['Name'] == college2].to_dict(orient='records')
+    # df_dict2 = df[df['Rank'] == rank].to_dict(orient='records')
 
     flag1 = 0
     flag2 = 0
@@ -414,23 +414,39 @@ def get_recommendation(college, rank):
   response = []
 
   ff = {
-    'PR': 'Perception',
-    'QP': 'Combined metric for Quality of Publications',
-    'GPH': 'Combined metric for Placement and Higher Studies',
-    'PU': 'Combined metric for Publications',
-    'FRU': 'Financial Resources and their Utilisation',
-    'FSR': 'Faculty-student ratio with emphasis on permanent faculty',
-    'RD': 'Percentage of Students from other States/Countries',
-    'WD': 'Percentage of Women',
-    'GMS': 'Median Salary',
-    'FQE': 'Combined metric for Faculty with PhD & Experience',
-    'SS': 'Student Strength including Doctoral Students',
-    'GPHD': 'Metric for Number of Ph.D. Students Graduated',
-    'PCS': 'Facilities for Physically Challenged Students',
-    'ESCS': 'Economically and Socially Challenged Students',
-    'IPR': 'Patents: Published and Granted',
-    'GUE': 'Metric for University Examinations',
-    'FPPP': 'Footprint of Projects and Professional Practice'
+    'PR': ['Perception', 'Enhance PR score by conducting regular, diverse, and updated surveys involving employers and academics. Include various sectors, regions, and organizations to reflect accurate preferences and improve institution reputation.'],
+
+    'QP': ['Combined metric for Quality of Publications', 'To improve the Quality of Publications (QP) metric , focus on increasing Citation Count (CC) and Frequency of Research Questions (FRQ) while enhancing the percentage of publications in Top 25% Journals (TOP25P/P). Prioritize impactful research and target high-ranking journals for greater QP score.'],
+
+    'GPH': ['Combined metric for Placement and Higher Studies', 'To improve the Combined Metric for Placement and Higher Studies , institutions can enhance placement services, strengthen industry connections for job opportunities, and provide career guidance. Encouraging students to pursue higher studies through scholarships, research opportunities, and mentorship can also boost the GPH score.'],
+
+    'PU': ['Combined metric for Publications', 'Combined metric for Publications by increasing the ratio of weighted number of publications as acertained from suitable third party sources to  the maximun of nominal number of faculty members as calculated on the basis of a required FSR.'],
+
+    'FRU': ['Financial Resources and their Utilisation', 'Financial Resources and their utilisation can be imrpoved by increasing  average Annual Capital Expenditure per student for previous three years pertaining to engineering discipline only and Average Annual Operational(or Recurring) Expenditure per student for previous three years pertaining to engineering discipline only.'],
+
+    'FSR': ['Faculty-student ratio with emphasis on permanent faculty', 'Faculty-Student Ratio can be improved by increasing total sanctioned approved intake in the institution, total number of students enrolled for the doctoral program and full time regular faculty in the institution in the previous year.'],
+
+    'RD': ['Percentage of Students from other States/Countries', 'Improve Region Diversity (RD) score , focus on attracting students nationally and internationally. Enhance marketing efforts, scholarships, and cultural exchange programs to increase enrollment from diverse regions and countries.'],
+
+    'WD': ['Percentage of Women', 'To improve Women Diversity, prioritize recruitment and retention of women students and faculty. Implement targeted initiatives, mentorship programs, and equal opportunity policies to achieve the desired 50% women students and 20% women faculty, enhancing the WD score.'],
+
+    'GMS': ['Median Salary', 'To improve the Median Salary Metric , institutions should focus on strengthening industry connections, offering specialized training programs, and supporting internships. Encourage students to participate in networking events and career fairs, preparing them for competitive job placements, thereby increasing the median salary and enhancing the GMS score.'],
+
+    'FQE': ['Combined metric for Faculty with PhD & Experience', 'Combined Metric for Faculty with PhD can be improved by increasing the percentage of Faculty with Ph.D. (or equivalent qualification) with respect to the total no. of faculty required.'],
+
+    'SS': ['Student Strength including Doctoral Students', 'Student Strength can be improved by increasing total sanctioned approved intake in the institution ,total number of students enrolled in the institution and  total number of students enrolled for the doctoral program .'],
+
+    'GPHD': ['Metric for Number of Ph.D. Students Graduated', 'Metric for Number of Ph.D Students Graduated can be imrpoved by strengthening Ph.D. programs with quality mentorship, research resources, and funding. Encourage timely completion, leading to an increased average number of Ph.D. graduates and higher GPHD score.'],
+
+    'PCS': ['Facilities for Physically Challenged Students', 'Enhance PCS score by ensuring comprehensive accessibility, adaptive technologies, and support services for physically challenged students. Provide verifiable responses demonstrating improved facilities and inclusivity.'],
+
+    'ESCS': ['Economically and Socially Challenged Students', 'Improve ESCS score by expanding financial aid programs, scholarships, and support services to economically disadvantaged students, ensuring equitable access to education and enhancing the Nesc percentage.'],
+
+    'IPR': ['Patents: Published and Granted', 'To enhance Patents Published (PP) for a better IPR score, focus on increasing the quantity and quality of research output. Collaborate with experts, explore niche areas, invest in R&D, and maintain a proactive approach to patent applications, ensuring timely submissions and strategic innovations,'],
+
+    'GUE': ['Metric for University Examinations', 'To improve the University Examinations Metric, focus on enhancing teaching methods, providing academic support, and fostering a positive learning environment. Encourage student engagement, offer remedial classes, and provide timely feedback to ensure a higher percentage of students pass examinations within the stipulated time, ultimately improving the GUE score.'],
+
+    'FPPP': ['Footprint of Projects and Professional Practice', 'To enhance the Footprint of Projects and Professional Practice (FPPP) score , institutions can focus on increasing research funding (RF) by securing grants, collaborating with industries, and pursuing competitive funding opportunities. Additionally, strengthening consultancy efforts (CF) through industry partnerships and effective project management can further elevate the FPPP metric.']
   }
 
 
@@ -445,6 +461,6 @@ def get_recommendation(college, rank):
 
   for property_name, diff in properties_to_improve.items():
     diff = abs(diff)
-    response.append(f'{ff[property_name]}')
+    response.append(ff[property_name])
 
   return response
